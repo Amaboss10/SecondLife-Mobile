@@ -1,4 +1,12 @@
 {
-  "name": "SecondLife",
-  "displayName": "SecondLife"
+  "name": "SecondLife-Mobile",
+  "displayName": "SecondLife-Mobile",
+  "expo": {
+    "name": "SecondLife-Mobile",
+    "slug": "SecondLife-Mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
 }
