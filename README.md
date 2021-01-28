@@ -15,7 +15,7 @@ Suivre les instructions suivantes: https://www.tutorialspoint.com/react_native/r
 ## Lancer l'application sur machine
 Vérifiez que `npm` est bien installé sinon le télecharger sur le site: `https://nodejs.org/`
 
-
+***
 Il faut installer le module expo via la commande: `npm install expo`.
 
 > Etape 0: Installer expo sur votre smartphone.
@@ -23,5 +23,5 @@ Il faut installer le module expo via la commande: `npm install expo`.
 > Etape 2: Executer: expo start.
 > Etape 3: Brancher le smartphone et scanner le code QR qui apparait sur le terminale.
 
-
+***
 
