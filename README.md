@@ -25,3 +25,4 @@ Il faut installer le module expo via la commande: `npm install expo`.
 
 ***
 
+
