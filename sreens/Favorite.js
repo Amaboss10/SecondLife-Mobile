@@ -3,9 +3,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function Favorite() {
+const Favorite = () => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text>
                 FavoriteScreen
             </Text>
@@ -22,3 +22,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+export default Favorite;
