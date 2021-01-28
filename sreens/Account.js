@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function Account() {
+const Account = () => {
     return (
         <View style={styles.container}>
             <Text>Acount</Text>
@@ -20,3 +20,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+
+export default Account
