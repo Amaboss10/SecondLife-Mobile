@@ -3,11 +3,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-export default function AddAnnonce() {
+const AddAnnonce = () => {
     return (
         <View style={styles.container}>
             <Text>AddAnnonce</Text>
-            <StatusBar style="auto" />
         </View>
     );
 }
@@ -20,3 +19,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+
+export default AddAnnonce;
