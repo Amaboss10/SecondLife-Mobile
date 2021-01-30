@@ -25,4 +25,11 @@ Il faut installer le module expo via la commande: `npm install expo`.
 
 ***
 
+## Package du nav bar
+
+`npm install @react-navigation/native`
+
+`expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view`
+
+`npm @react-navigatioerial-bottom-tabs`
 
