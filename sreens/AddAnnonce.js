@@ -14,7 +14,7 @@ const AddAnnonce = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#00f',
+        backgroundColor: '#0000',
         alignItems: 'center',
         justifyContent: 'center',
     },
