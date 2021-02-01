@@ -8,6 +8,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <BottomNavigation />
+      <Test></Test>
     </NavigationContainer>
   );
 }
