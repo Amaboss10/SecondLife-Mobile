@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const AddAnnonce = () => {
     return (
         <View style={styles.container}>
-            <Text>AddAnnonce</Text>
+        
         </View>
     );
 }
