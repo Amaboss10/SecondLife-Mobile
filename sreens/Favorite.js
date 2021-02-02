@@ -1,14 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { StyleSheet, Image , Text,View} from 'react-native';
+// import React from 'react';
+import {  Image } from 'react-native';
 //import { Button } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SearchBar} from "react-native-elements";
-import { Ionicons } from '@expo/vector-icons';
-//import { SliderBox } from "react-native-image-slider-box";
+// import { Ionicons } from '@expo/vector-icons';
+// //import { SliderBox } from "react-native-image-slider-box";
 import { LinearGradient } from 'expo-linear-gradient';
 
 

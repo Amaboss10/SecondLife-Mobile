@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Image , Text,View} from 'react-native';
 //import { Button } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SearchBar} from "react-native-elements";
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 //import { SliderBox } from "react-native-image-slider-box";
 import { LinearGradient } from 'expo-linear-gradient';
 
