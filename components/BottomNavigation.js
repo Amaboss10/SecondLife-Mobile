@@ -1,76 +1,51 @@
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Home from '../sreens/Home';
-import Favorite from '../sreens/Favorite';
-import AddAnnonce from '../sreens/AddAnnonce';
-import Account from '../sreens/Account';
-import Category from '../sreens/Category';
+import HomeScreen from '../sreens/Home';
+import FavorisScreen from '../sreens/Favorite';
+import AjoutScreen from '../sreens/AddAnnonce';
+import ComptesScreen from '../sreens/Account';
+import CategorieScreen from '../sreens/Category';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
     return (
-        <Tab.Navigator
-            initialRouteName="Home"
-            activeColor="#e91e63"
-            labelStyle={{ fontSize: 12 }}
-            style={{ backgroundColor: 'tomato' }}
-        >
-            <Tab.Screen
-                name="Home"
-                component={Home}
-                options={{
-                    tabBarLabel: 'Home',
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={26} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Favoris"
-                component={Favorite}
-                options={{
-                    tabBarLabel: 'Favoris',
-                    tabBarIcon: ({ color }) => (
-                        <Ionicons name="md-heart-sharp" size={24} color={color} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="AjouterAnnonce"
-                component={AddAnnonce}
-                options={{
-                    // tabBarLabel: '',
-                    tabBarIcon: ({ color }) => (
-                        <AntDesign name="pluscircleo" size={24} color={color} />
-                        // <Ionicons name="md-heart-outline" size={24} color="black" />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Account"
-                component={Account}
-                options={{
-                    tabBarLabel: 'Compte',
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={26} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Categories"
-                component={Category}
-                options={{
-                    tabBarLabel: 'Categorie',
-                    tabBarIcon: ({ color }) => (
-                        <Entypo name="menu" size={24} color={color} />
-                    ),
-                }}
-            />
-        </Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Favoris') {
+              iconName = focused ? 'heart-circle' : 'heart-circle-outline';
+            }
+            else if (route.name === 'Annonce') {
+              iconName = focused ? 'add-circle' : 'add-circle-outline';
+            }
+            else if (route.name === 'Compte') {
+              iconName = focused ? 'person' : 'person-outline';
+            }
+            else if (route.name === 'Categories') {
+              iconName = focused ? 'ios-list' : 'ios-list';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Favoris" component={FavorisScreen} />
+        <Tab.Screen name="Annonce" component={AjoutScreen}        />
+        <Tab.Screen name="Compte" component={ComptesScreen} />
+        <Tab.Screen name="Categories" component={CategorieScreen} />
+      </Tab.Navigator>
     );
 }
 
