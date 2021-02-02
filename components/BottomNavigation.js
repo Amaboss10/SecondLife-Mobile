@@ -16,7 +16,7 @@ const BottomNavigation = () => {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Home') {
+            if (route.name === 'Accueil') {
               iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'Favoris') {
               iconName = focused ? 'heart-circle' : 'heart-circle-outline';
@@ -40,7 +40,7 @@ const BottomNavigation = () => {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Accueil" component={HomeScreen} />
         <Tab.Screen name="Favoris" component={FavorisScreen} />
         <Tab.Screen name="Annonce" component={AjoutScreen}        />
         <Tab.Screen name="Compte" component={ComptesScreen} />
