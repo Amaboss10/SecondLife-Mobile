@@ -16,7 +16,7 @@ Suivre les instructions suivantes: https://www.tutorialspoint.com/react_native/r
 Vérifiez que `npm` est bien installé sinon le télecharger sur le site: `https://nodejs.org/`
 
 ***
-Il faut installer le module expo via la commande: `npm install expo`.
+Il faut installer le module expo via la commande: `npm install --global expo-cli`.
 
 > Etape 0: Installer expo sur votre smartphone.
 > Etape 1: Ouvrir l'invite de commande sur le repertoir du projet.
