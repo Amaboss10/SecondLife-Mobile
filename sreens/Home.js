@@ -1,39 +1,38 @@
-// import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View , ScrollView} from 'react-native';
-// import React from 'react';
-import {  Image } from 'react-native';
-//import { Button } from 'native-base';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SearchBar} from "react-native-elements";
-// import { Ionicons } from '@expo/vector-icons';
+import * as React from 'react';
+import { Image,StyleSheet, Text, View , ScrollView , Button} from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { colors, SearchBar} from "react-native-elements";
 import { SliderBox } from "react-native-image-slider-box";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Divider } from "react-native-elements";
 import { Card} from "react-native-elements";
+import { TouchableOpacity } from 'react-native-gesture-handler';
+//import Icon from 'react-native-vector-icons/FontAwesome';
+
+
+
 
 
 const img ={
-    images: [
-      'https://media.discordapp.net/attachments/697960252011970600/806052472250302484/Publicite.png?width=1191&height=670',
-      'https://media.discordapp.net/attachments/697960252011970600/806053134199291914/Publicite_1.png?width=1191&height=670',
-      'https://media.discordapp.net/attachments/697960252011970600/806053377254752286/Publicite_2.png?width=1191&height=670'
-    ]
-  }
-  
-  const logo = {
-    uri: 'https://reactnative.dev/img/tiny_logo.png',
-    width: 64,
-    height: 64
-  };
+  images: [
+    'https://media.discordapp.net/attachments/697960252011970600/806052472250302484/Publicite.png?width=1191&height=670',
+    'https://media.discordapp.net/attachments/697960252011970600/806053134199291914/Publicite_1.png?width=1191&height=670',
+    'https://media.discordapp.net/attachments/697960252011970600/806053377254752286/Publicite_2.png?width=1191&height=670'
+  ]
+}
+
+const logo = {
+  uri: 'https://reactnative.dev/img/tiny_logo.png',
+  width: 64,
+  height: 64
+};
 
 
-const Home = () => {
-        const [value, setValue] = React.useState("");
+
+function HomeScreen({ navigation }) {
+  const [value, setValue] = React.useState("");
   return (
-   
-      <LinearGradient
+    <LinearGradient
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
        style={styles.background}
       >
@@ -81,10 +80,10 @@ const Home = () => {
       </View>
     </View>
     <Divider style={{ width: "80%", margin: 20 }} />
-
     <View style={{ flexDirection:'row'}}>
-    <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}}>
-      <Card.Title style={{ textAlign:'left' , fontSize:15}}>100 EUR </Card.Title>
+    <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+    <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}} >
+      <Card.Title style={{ textAlign:'left' , fontSize:15}} >100 EUR </Card.Title>
       <View
         style={{
           position: "relative",
@@ -105,6 +104,7 @@ const Home = () => {
         <Text style={{fontSize:10}}>Date :</Text>
       </View>
     </Card>
+   </TouchableOpacity>
 
     <Card containerStyle={{width:180 , height:290 }} wrapperStyle={{}}>
       <Card.Title style={{ textAlign:'left' , fontSize:15}}>500 EUR</Card.Title>
@@ -129,7 +129,7 @@ const Home = () => {
       </View>
     </Card>
     </View>
-
+    
     <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}}>
       <Card.Title style={{ textAlign:'left' , fontSize:15}}>30 EUR</Card.Title>
       <View
@@ -152,49 +152,128 @@ const Home = () => {
         <Text style={{fontSize:10}}>Date :</Text>
       </View>
     </Card>
+    
     </ScrollView>
-   <View style={{height: 120}}>
+   <View style={{height: 185}}>
        {/* navbar  */}
    </View>
     </LinearGradient>
-    )
+    
+  );
 }
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+function DetailsAnnonce({ navigation }) {
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{ flex: 1, alignItems: 'center'}}>
+     
+      <Card containerStyle={{width:390 , height:700  }} wrapperStyle={{}}>
+      <Card.Title style={{ textAlign:'left' , fontSize:20}}>Titre Annonce</Card.Title>
+      <View
+        style={{
+          position: "relative",
+        }}
+      >
+          <View style={{ alignItems:'center' , alignContent:'center'}}>
+          <Image
+          style={{ width: 350, height: 200 }}
+          resizeMode="contain"
+          source={{
+            uri:
+              "https://www.numerama.com/content/uploads/2020/10/img_5310.jpg"
+          }}
+        />
+        </View>
+        <Card.Divider />
+        <Text style={{fontSize:20 , fontWeight:'700' ,color:'#FF6347', textAlign:'right'}}>100 EUR</Text>
+     
+        <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Categorie :</Text>
+      
+        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Reference :</Text>
+      
+        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Lieu :</Text>
+      
+        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Date :</Text>
+        <Card.Divider/>
+      <Card.Title  style={{ textAlign:'left' , fontSize:20}}>Information du vendeur</Card.Title>
+     
+     <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Nom :</Text>
+   
+     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Prenom :</Text>
+   
+     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Pays - Ville :</Text>
+   
+     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Nombre d'annonces publiees :</Text>
+    
+     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Moyens de contact :</Text>  
         
-    },
-      cont : { 
-        flex: 1,
-        justifyContent: 'center',
-        marginTop: 16,
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        borderWidth: 4,
-        borderColor: "#20232a",
-        borderRadius: 6,
-        backgroundColor: "#70EE9C",
-        color: "#20232a",
-        textAlign: "center",
-        fontSize: 30,
-        fontWeight: "bold" 
-      },
-      background: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: 800,
+        </View>
        
-      },
-});
+        <Text style = {{borderWidth: 1, borderColor: 'grey', backgroundColor: '#FF6347', width:100,height:36,justifyContent:'center' , marginLeft:260}}>
+        <Button
+         title = "Contacter"
+         color='#FFFFFF'
+      />
+      </Text>
+    </Card>
+    
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function Home() {
+  return (
+   
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Accueil" component={HomeScreen} />
+        <Stack.Screen name="Annonce" component={DetailsAnnonce} />
+      </Stack.Navigator>
+   
+  );
+}
 
 export default Home;
 
 
 
-
-
-
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      
+  },
+    cont : { 
+      flex: 1,
+      justifyContent: 'center',
+      marginTop: 16,
+      paddingVertical: 8,
+      paddingHorizontal: 10,
+      borderWidth: 4,
+      borderColor: "#20232a",
+      borderRadius: 6,
+      backgroundColor: "#70EE9C",
+      color: "#20232a",
+      textAlign: "center",
+      fontSize: 30,
+      fontWeight: "bold" 
+    },
+    background: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 800,
+     
+    },
+    
+});
