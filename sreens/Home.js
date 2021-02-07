@@ -187,6 +187,8 @@ function DetailsAnnonce({ navigation }) {
               "https://www.numerama.com/content/uploads/2020/10/img_5310.jpg"
           }}
         />
+
+        
         </View>
         <Card.Divider />
         <Text style={{fontSize:20 , fontWeight:'700' ,color:'#FF6347', textAlign:'right'}}>100 EUR</Text>
