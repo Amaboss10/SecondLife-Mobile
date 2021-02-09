@@ -5,8 +5,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const Account = () => {
     return (
+        <View></View>
 
-    //     <View>
+        // <View>
      
     //     <View >
     //       <Text style={styles.nomm} > {Perso.nom} {Perso.prenom} </Text>
@@ -77,7 +78,7 @@ const Account = () => {
             
         
     //   </View>
-    // );
+    );
 }
 
 const styles = StyleSheet.create({
