@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Image,StyleSheet, Text, View , ScrollView , Button} from 'react-native';
+import { useState } from 'react';
+import { Image,StyleSheet ,  SafeAreaView, Text, View , ScrollView , Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { colors, SearchBar} from "react-native-elements";
 import { SliderBox } from "react-native-image-slider-box";
@@ -163,6 +164,7 @@ function HomeScreen({ navigation }) {
 }
 
 function DetailsAnnonce({ navigation }) {
+  const [shouldShow, setShouldShow] = useState(false);
   return (
     <LinearGradient
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
@@ -191,6 +193,8 @@ function DetailsAnnonce({ navigation }) {
         
         </View>
         <Card.Divider />
+       
+        
         <Text style={{fontSize:20 , fontWeight:'700' ,color:'#FF6347', textAlign:'right'}}>100 EUR</Text>
      
         <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Categorie :</Text>
@@ -221,7 +225,91 @@ function DetailsAnnonce({ navigation }) {
          color='#FFFFFF'
       />
       </Text>
+
     </Card>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        {/*Here we will return the view when state is true 
+        and will return false if state is false*/}
+        {shouldShow ? (
+          <View style={{padding:15}}>
+          <View>
+          <View>
+              <SliderBox
+                    images={img.images}
+                    onCurrentImagePressed={index =>
+                      console.warn(`image ${index} pressed`)
+                    }
+                  />
+          </View>
+        </View>
+        <Divider style={{ width: "80%", margin: 20 }} />
+        <View style={{ flexDirection:'row'}}>
+        <Card containerStyle={{width:180 , height:290 }} wrapperStyle={{}}>
+          <Card.Title style={{ textAlign:'left' , fontSize:15}}>500 EUR</Card.Title>
+          <View
+            style={{
+              position: "relative",
+            }}
+          >
+               <View style={{ alignItems:'center' , alignContent:'center'}}>
+            <Image
+              style={{ width: 160, height: 190 }}
+              resizeMode="contain"
+              source={{
+                uri:
+                  "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
+              }}
+            />
+            </View>
+            <Card.Divider />
+            <Text style={{fontSize:10}}>Lieu :</Text>
+            <Text style={{fontSize:10}}>Date :</Text>
+          </View>
+        </Card>
+       
+        
+        <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}}>
+          <Card.Title style={{ textAlign:'left' , fontSize:15}}>30 EUR</Card.Title>
+          <View
+            style={{
+              position: "relative",
+            }}
+          >
+              <View style={{ alignItems:'center' , alignContent:'center'}}>
+            <Image
+              style={{ width: 160, height: 190 }}
+              resizeMode="contain"
+              source={{
+                uri:
+                  "https://global-img.gamergen.com/razer-cynosa-test-note-avis-review-photo-gamergen-com-clint008-2_0190000000886876.jpg"
+              }}
+            />
+            </View>
+            <Card.Divider />
+            <Text style={{fontSize:10}}>Lieu :</Text>
+            <Text style={{fontSize:10}}>Date :</Text>
+          </View>
+        </Card>
+        </View>
+        </View>
+        ) : null}
+        <TouchableOpacity  onPress={() => setShouldShow(!shouldShow)}>
+        <View style={{alignItems:'center' , alignContent:'center'}}>
+        <Text style={{textAlign:'center', color:'#0066CC' ,fontSize:15}}>Plus d'annonces</Text>
+        <Image
+              style={{ width: 20, height: 20 , paddingTop:20}}
+             
+              source={{
+                uri:
+                  "https://home.edurio.com/wp-content/uploads/2019/02/arrow-down-icon-png-3.png"
+              }}
+            />
+            </View>
+        </TouchableOpacity>
+
+      </View>
+    </SafeAreaView>
     
     </View>
     </ScrollView>
@@ -231,6 +319,11 @@ function DetailsAnnonce({ navigation }) {
     </LinearGradient>
   );
 }
+
+
+
+
+
 
 const Stack = createStackNavigator();
 
