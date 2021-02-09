@@ -8,14 +8,25 @@ import {  Image } from 'react-native';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SearchBar} from "react-native-elements";
 // import { Ionicons } from '@expo/vector-icons';
-// //import { SliderBox } from "react-native-image-slider-box";
+import { SliderBox } from "react-native-image-slider-box";
 import { LinearGradient } from 'expo-linear-gradient';
+import { Divider } from "react-native-elements";
 
 
 
 
 
-const Favorite = () => {
+const img ={
+    images: [
+      'https://media.discordapp.net/attachments/697960252011970600/806052472250302484/Publicite.png?width=1191&height=670',
+      'https://media.discordapp.net/attachments/697960252011970600/806053134199291914/Publicite_1.png?width=1191&height=670',
+      'https://media.discordapp.net/attachments/697960252011970600/806053377254752286/Publicite_2.png?width=1191&height=670'
+    ]
+  }
+  
+
+
+const Home = () => {
         const [value, setValue] = React.useState("");
   return (
     <View>
@@ -53,10 +64,18 @@ const Favorite = () => {
     <Text style={{color:'#000000' , fontWeight:'500' , fontSize:'20'}} >Les Favoris :</Text>
     </View>
     </View>
-    </LinearGradient>
-     <View style={{width: 150, height: 150}}> 
-      
+    <View>
+      <View>
+          <SliderBox
+                images={img.images}
+                onCurrentImagePressed={index =>
+                  console.warn(`image ${index} pressed`)
+                }
+              />
       </View>
+    </View>
+    <Divider style={{ width: "80%", margin: 20 }} />
+    </LinearGradient>
     </View>
     )
 }
@@ -65,10 +84,35 @@ const Favorite = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#00f',
-        alignItems: 'center',
-        justifyContent: 'center',
+        
     },
+      cont : { 
+        flex: 1,
+        justifyContent: 'center',
+        marginTop: 16,
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        borderWidth: 4,
+        borderColor: "#20232a",
+        borderRadius: 6,
+        backgroundColor: "#70EE9C",
+        color: "#20232a",
+        textAlign: "center",
+        fontSize: 30,
+        fontWeight: "bold" 
+      },
+      background: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 800,
+       
+      },
 });
 
-export default Favorite;
+export default Home;
+
+
+
+
