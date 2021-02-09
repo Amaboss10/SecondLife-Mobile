@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#70EE9C",
         color: "#20232a",
         textAlign: "center",
-        fontSize: 30,
+        fontSize: '30',
         fontWeight: "bold" 
       },
       background: {
@@ -118,3 +118,4 @@ export default Home;
 
 
 
+// teeesssttt 
