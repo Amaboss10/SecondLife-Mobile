@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { SectionList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CategoryItem from '../components/CategoryItem';
 import CategoryTitleItem from '../components/CategoryTitleItem';
@@ -10,12 +10,13 @@ const list = [
     { title: 'Jeux', data: ['Console', 'Câbles', 'Manettes'] },
 ]
 
-const CategoryScreen = () => {
+const CategoryScreen = ({ navigation }) => {
+
     return (
         <SafeAreaView>
             <SectionList
                 sections={list}
-                renderItem={({ item }) => <CategoryItem title={item} />}
+                renderItem={({ item }) => <CategoryItem title={item} navigation={navigation} />}
                 renderSectionHeader={({ section }) => <CategoryTitleItem title={section.title} />}
                 keyExtractor={(item, index) => index}
             />
