@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import HomeScreen from '../screens/Home';
-import FavorisScreen from '../screens/Favorite';
-import AjoutScreen from '../screens/AddAnnonce';
-import ComptesScreen from '../screens/Account';
-import CategorieScreen from '../screens/Category';
+import HomeScreen from '../screens/HomeScreen';
+import FavorisScreen from '../screens/FavorisScreen';
+import AjoutScreen from '../screens/AddAnnonceScreen';
+import ComptesScreen from '../screens/AccountScreen';
+import CategorieScreen from '../screens/CategoryScreen';
 
 const Tab = createBottomTabNavigator();
 
