@@ -1,13 +1,16 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import FavorisScreen from '../screens/FavorisScreen';
 import AjoutScreen from '../screens/AddAnnonceScreen';
 import ComptesScreen from '../screens/AccountScreen';
+import EditProScreen from '../components/EditAccount';
 import CategorieScreen from '../screens/CategoryScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const BottomNavigation = () => {
   return (
@@ -43,7 +46,20 @@ const BottomNavigation = () => {
       <Tab.Screen name="Accueil" component={HomeScreen} />
       <Tab.Screen name="Favoris" component={FavorisScreen} />
       <Tab.Screen name="Annonce" component={AjoutScreen} />
-      <Tab.Screen name="Compte" component={ComptesScreen} />
+
+      <Tab.Screen name="Compte"  >
+          {() => (
+            <Stack.Navigator screenOptions={{
+              headerShown: false
+            }}>
+              <Stack.Screen
+                name="Compte"
+                component={ComptesScreen}
+              />
+              <Stack.Screen name="Edit" component={EditProScreen} />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
       <Tab.Screen name="Categories" component={CategorieScreen} />
     </Tab.Navigator>
   );

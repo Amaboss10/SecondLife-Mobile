@@ -5,6 +5,13 @@
     "name": "SecondLife-Mobile",
     "slug": "SecondLife-Mobile",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/Logo_SL.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
