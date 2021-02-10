@@ -1,4 +1,4 @@
-import { Icon, ListItem, Text, View } from 'native-base'
+import { Icon, Text, View } from 'native-base'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -7,11 +7,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 
-const CategoryItem = (props) => {
+const CategoryItem = ({ title, navigation }) => {
+    // console.log(navigation)
+
+
     return (
-        <TouchableOpacity onPress={() => { console.log("LALAL") }}>
-            <View style={localStyles.container} onclick={() => { }}>
-                <Text style={localStyles.title}>{props.title}</Text>
+        <TouchableOpacity onPress={() => {
+            navigation.navigate(title, { screenTitle: title })
+        }}>
+            <View style={localStyles.container} >
+                <Text style={localStyles.title}>{title}</Text>
                 <Icon style={localStyles.icon} name="chevron-forward-outline" />
             </View>
         </TouchableOpacity>
