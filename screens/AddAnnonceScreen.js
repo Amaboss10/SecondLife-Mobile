@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput,Text, TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 
 
 const AddAnnonceScreen = () => {
+ 
     const [image, setImage] = useState(null);
 
     useEffect(() => {
@@ -36,6 +37,7 @@ const AddAnnonceScreen = () => {
             setImage(result.uri);
         }
     };
+    
 
     return (
         <SafeAreaView style={styles.main_container}>
@@ -45,11 +47,18 @@ const AddAnnonceScreen = () => {
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce"></TextInput>
-                <TextInput style={styles.input} placeholder="Référence"></TextInput>
-                <TextInput style={styles.input} placeholder="Catégorie"></TextInput>
-                <TextInput style={styles.input} placeholder="Lieu"></TextInput>
-                <TextInput style={styles.input} placeholder="Prix"></TextInput>
+                <TextInput style={styles.input} placeholder="Titre de l'annonce"/>
+                <TextInput style={styles.input} placeholder="Référence"/>
+                <TextInput style={styles.input} placeholder="Catégorie"/>
+                <TextInput style={styles.input} placeholder="Lieu"/>
+                <TextInput style={styles.input}
+                 placeholder="Prix"
+                 keyboardType= 'numeric'
+
+                 />
+               
+               
+
                 {/* <TextInput style={styles.input} placeholder=""> </TextInput> */}
 
                 {/* iconName = focused ? 'add-circle' : 'add-circle-outline'; */}
