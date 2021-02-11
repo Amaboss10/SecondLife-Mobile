@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { Text } from 'native-base';
+import { Image, Button, Icon } from 'react-native-elements'
+import ImagePlaceHolder from '../components/ImagePlaceHolder';
 
 
 const AddAnnonceScreen = () => {
@@ -37,38 +38,34 @@ const AddAnnonceScreen = () => {
     };
 
     return (
-        // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <SafeAreaView>
-
-            <ScrollView>
-                <View style={{ flexDirection: 'row' }}>
-                    <Button style={styles.Text} title="Annuler" onPress={() => this._onCancel()} />
-                    {/* <Button style={styles.Text} title="Annuler" /> */}
-                    <Text style={styles.Text1}>Ajoutez une annonce </Text>
+        <SafeAreaView style={styles.main_container}>
+            <TouchableOpacity onPress={pickImage}>
+                <View style={styles.image_container}>
+                    <Image style={styles.image} source={{ uri: image }} PlaceholderContent={<ImagePlaceHolder />} />
                 </View>
-                <View style={styles.main_container}>
-                    <Text style={styles.title_text}>Titre de l'annonce </Text>
-                    <TouchableOpacity onPress={pickImage}>
-                        <Image style={styles.image} source={{ uri: image }} />
-                    </TouchableOpacity>
-                    <View style={styles.content_container}>
-                        <View style={styles.header_container}>
-                            <TextInput style={styles.title_text1} placeholder="Titre de l'Annonce" />
-                        </View>
-                        <View style={styles.header_container2}>
-                            <TextInput style={styles.title_text2} placeholder="Prix" />
-                        </View>
-                        <View style={styles.header_container}>
-                            <TextInput style={styles.title_text1} placeholder="Catégorie" />
-                            <TextInput style={styles.title_text1} placeholder="Ref" />
-                            <TextInput style={styles.title_text1} placeholder="Lieu/Date" />
-                        </View>
+            </TouchableOpacity>
+            <View style={styles.body_container}>
+                <TextInput style={styles.input} placeholder="Titre de l'annonce"></TextInput>
+                <TextInput style={styles.input} placeholder="Référence"></TextInput>
+                <TextInput style={styles.input} placeholder="Catégorie"></TextInput>
+                <TextInput style={styles.input} placeholder="Lieu"></TextInput>
+                <TextInput style={styles.input} placeholder="Prix"></TextInput>
+                {/* <TextInput style={styles.input} placeholder=""> </TextInput> */}
 
-                    </View>
+                {/* iconName = focused ? 'add-circle' : 'add-circle-outline'; */}
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Button style={styles.addButton} type="clear"
+                        icon={
+                            <Icon
+                                name="add-circle"
+                                size={50}
+                                color="orange"
+                            />
+                        }
+                    />
                 </View>
-            </ScrollView>
-            {/* // </View> */}
-        </SafeAreaView >
+            </View>
+        </SafeAreaView>
     );
 }
 
@@ -76,12 +73,35 @@ const AddAnnonceScreen = () => {
 export default AddAnnonceScreen;
 
 const styles = StyleSheet.create({
+    main_container: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: 'white'
+    },
+    image_container: {
+    },
+    body_container: {
+        flex: 1,
+        marginTop: 30,
+    },
     image: {
-        width: 150,
-        height: 100,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: 'gray',
-        flex: 1
+        height: 200,
+        borderWidth: 1,
+        borderRadius: 15,
+    },
+    input: {
+        height: 50,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: 'gray',
+        paddingLeft: 10,
+        marginTop: 5
+    },
+    addButton: {
+        backgroundColor: 'white',
+        width: 100,
+        justifyContent: 'center'
     }
 })
