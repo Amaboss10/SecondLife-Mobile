@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet,TextInput, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'native-base';
 
-let sizee = 30
+let sizee = 30;
+
+
+fetch('http://localhost:3000/utilisateur')
+.then(res => res. json())
+.then((out) => {
+console.log('Checkout this JSON! ', out);
+})
+
 
 const Perso = ({
     nom: "AZIZI",
@@ -17,7 +26,7 @@ const Perso = ({
 
 function AccountScreen ({ navigation }) {
     return (
-
+      
         <View>
 
             <View >
@@ -27,7 +36,7 @@ function AccountScreen ({ navigation }) {
                 <Image
                   style={styles.prf}
                   source={require('../assets/prf.jpg')} 
-                  />
+                />
                   {/* source={require(Perso.profile)} /> */}
 
               <Image
@@ -91,6 +100,7 @@ function AccountScreen ({ navigation }) {
 
 
           </View>
+
     );
 }
 
