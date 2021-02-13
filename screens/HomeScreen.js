@@ -64,7 +64,7 @@ function HomeScreen({ navigation }) {
           </View>
 
           <View style={{ textAlign: 'left', margin: 20 }}>
-            <Text style={{ color: '#000000', fontWeight: '500', fontSize: '20' }} >Les Annonces :</Text>
+            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 20 }} >Les Annonces :</Text>
           </View>
         </View>
         <ScrollView>
