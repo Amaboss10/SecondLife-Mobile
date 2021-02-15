@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput,Text, TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
+import { PickerComponent} from '../components/Picker'
 
 
 const AddAnnonceScreen = () => {
@@ -49,7 +50,9 @@ const AddAnnonceScreen = () => {
             <View style={styles.body_container}>
                 <TextInput style={styles.input} placeholder="Titre de l'annonce"/>
                 <TextInput style={styles.input} placeholder="Référence"/>
-                <TextInput style={styles.input} placeholder="Catégorie"/>
+                <View>
+                    <PickerComponent/>
+                </View>
                 <TextInput style={styles.input} placeholder="Lieu"/>
                 <TextInput style={styles.input}
                  placeholder="Prix"
@@ -114,4 +117,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 })
-// export { styles }
