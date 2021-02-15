@@ -47,7 +47,7 @@ const BottomNavigation = () => {
     >
 
       
-      <Tab.Screen name="Accueil" component={Register} />
+      <Tab.Screen name="Accueil" component={HomeScreen} />
       <Tab.Screen name="Favoris" component={FavorisScreen} />
       <Tab.Screen name="Annonce" component={AjoutScreen} />
 
