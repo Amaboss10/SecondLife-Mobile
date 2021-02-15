@@ -2,6 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
+import Login from '../screens/Auth/Login';
+import Register from '../screens/Auth/Register';
 import HomeScreen from '../screens/HomeScreen';
 import FavorisScreen from '../screens/FavorisScreen';
 import AjoutScreen from '../screens/AddAnnonceScreen';
@@ -31,7 +33,7 @@ const BottomNavigation = () => {
             iconName = focused ? 'person' : 'person-outline';
           }
           else if (route.name === 'Categories') {
-            iconName = focused ? 'ios-list' : 'ios-list';
+            iconName = focused ? 'ios-list' : 'ios-list-outline';
           }
 
           // You can return any component that you like here!
@@ -43,7 +45,9 @@ const BottomNavigation = () => {
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name="Accueil" component={HomeScreen} />
+
+      
+      <Tab.Screen name="Accueil" component={Register} />
       <Tab.Screen name="Favoris" component={FavorisScreen} />
       <Tab.Screen name="Annonce" component={AjoutScreen} />
 

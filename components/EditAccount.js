@@ -16,6 +16,11 @@ const Perso = ({
 });
 
 function EditProScreen({navigation}) {
+    const [nom, setNom] = React.useState('');
+    const [prenom, setPrenom] = React.useState('');
+    const [mail, setMail] = React.useState('');
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
     return (
      <View >
       
@@ -26,7 +31,6 @@ function EditProScreen({navigation}) {
              style={styles.prf}
              source={require('../assets/prf.jpg')} 
              />
-             {/* source={require(Perso.profile)} /> */}
  
          <Image
          style={styles.logo}
@@ -41,12 +45,18 @@ function EditProScreen({navigation}) {
            <Ionicons name='mail-open' size={sizee} color='tomato' />
          </View>
          <View style={{width: 220, height: 60}} >
-           <Text style={{ opacity:0.5 }}>Mail </Text>
-           <TextInput
+           {/* <Text style={{ opacity:0.5 }}>Mail </Text> */}
+              <TextInput 
+                  style={styles.input} 
+                  placeholder="Mail"  
+                  value={Perso.email}
+                  onChangeText={setMail}
+              />
+           {/* <TextInput
              style={{ height: 40, borderColor: 'gray', borderBottomWidth: 1 }}
              // onChangeText={text => onChangeText(text)}
              value={Perso.email}
-           />
+           /> */}
          </View>
        </View>
  
@@ -58,10 +68,12 @@ function EditProScreen({navigation}) {
          </View>
          <View style={{width: 220, height: 60}} >
            <Text style={{ opacity:0.5 }}>Telephone </Text>
-           <TextInput
-             style={{ height: 40, borderColor: 'gray', borderBottomWidth: 1 }}
-             value={Perso.tel}
-           />
+           <TextInput 
+                style={styles.input} 
+                placeholder="Tel"  
+                value={Perso.email}
+                onChangeText={setMail}
+            />
          </View>
        </View>
  
@@ -185,5 +197,14 @@ const styles = StyleSheet.create({
       shadowRadius: 16.00,
   
       elevation: 24,
-    }
+    }, 
+    input: {
+      height: 50,
+      width:290,
+      borderWidth: 1,
+      borderRadius: 5,
+      borderColor: 'gray',
+      paddingLeft: 10,
+      marginTop: 10,
+  }
   });
