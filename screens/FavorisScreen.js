@@ -60,8 +60,8 @@ const FavorisScreen = () => {
               value={value}
             />
           </View>
-          <View style={{ textAlign: 'left', margin: 20 }}>
-            <Text >Les Favoris :</Text>
+          <View style={{ textAlign: 'left',margin: 20}}>
+            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }}>Les Favoris :</Text>
           </View>
         </View>
         <View>
@@ -113,9 +113,3 @@ const styles = StyleSheet.create({
 
 export default FavorisScreen;
 
-
-//simone 
-
-
-
-// teeesssttt 

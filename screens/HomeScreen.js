@@ -1,6 +1,11 @@
+
+
 import * as React from 'react';
+//import Component from 'react';
+//import SearchInput, { createFilter } from 'react-native-search-filter';
 import { useState } from 'react';
-import { Image,StyleSheet ,  SafeAreaView, Text, View , ScrollView , Button} from 'react-native';
+import { Ionicons as Icon } from '@expo/vector-icons';
+import { Image,StyleSheet , FlatList, SafeAreaView,Text, View , ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SearchBar} from "react-native-elements";
 import { SliderBox } from "react-native-image-slider-box";
@@ -8,9 +13,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Divider } from "react-native-elements";
 import { Card} from "react-native-elements";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+//import { OptionsButton } from 'react-native-options-button'
+import { List, Button } from 'react-native-paper';
+import RNPickerSelect from 'react-native-picker-select';
+import ModalDropdown from 'react-native-modal-dropdown';
+
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
-
+const data = [1,2];
 
 const img ={
   images: [
@@ -62,14 +72,13 @@ function HomeScreen({ navigation }) {
               value={value}
             />
           </View>
-
-          <View style={{ textAlign: 'left', margin: 20 }}>
-            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 20 }} >Les Annonces :</Text>
+          <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 , height:7}}>
+           
           </View>
         </View>
         <ScrollView>
           <View>
-            <View>
+            <View style={{marginTop:25}}>
               <SliderBox
                 images={img.images}
                 onCurrentImagePressed={index =>
@@ -78,82 +87,130 @@ function HomeScreen({ navigation }) {
               />
       </View>
     </View>
-    <Divider style={{ width: "80%", margin: 20 }} />
-    <View style={{ flexDirection:'row'}}>
-    <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
-    <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}} >
-      <Card.Title style={{ textAlign:'left' , fontSize:15}} >100 EUR </Card.Title>
-      <View
-        style={{
-          position: "relative",
-        }}
-      >
-        <View style={{ alignItems:'center' , alignContent:'center'}}>
-        <Image
-          style={{ width: 150, height: 190 }}
-          resizeMode="contain"
-          source={{
-            uri:
-              "https://www.numerama.com/content/uploads/2020/10/img_5310.jpg"
-          }}
-        />
-        </View>
-        <Card.Divider />
-        <Text style={{fontSize:10}}>Lieu :</Text>
-        <Text style={{fontSize:10}}>Date :</Text>
-      </View>
-    </Card>
-   </TouchableOpacity>
+    
 
-    <Card containerStyle={{width:180 , height:290 }} wrapperStyle={{}}>
-      <Card.Title style={{ textAlign:'left' , fontSize:15}}>500 EUR</Card.Title>
-      <View
-        style={{
-          position: "relative",
-        }}
-      >
-           <View style={{ alignItems:'center' , alignContent:'center'}}>
-        <Image
+    <View style={{flexDirection:'row' }}>
+              <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Les Annonces :</Text>
+            
+          </View>
+
+<View style={{paddingTop:10 ,  paddingLeft:135 , flexDirection:'row'}}>
+  <Text style={{fontSize:16 , fontWeight:'500' , color:'#000000'}}>Filtrer avec :  </Text>
+          <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+              {
+                label: 'Pertinence',
+                value: 'pertinence',
+            },
+                {
+                    label: 'Prix croissant',
+                    value: 'croissant',
+                },
+                {
+                    label: 'Prix décroissant',
+                    value: 'decroissant',
+                },
+                {
+                    label: 'Les dernières nouveautés',
+                    value: 'nouveautes',
+                },
+            ]}
+            style={{ ...pickerSelectStyles }}
+        />
+</View>
+</View>
+
+          <Divider style={{ width: "80%", margin: 20  }} />
+    
+    <View style={{ flex: 1, paddingTop: 5 , backgroundColor: 'rgba(242, 250, 250, 42)'}}>
+    <FlatList 
+    data={data}
+    renderItem ={(item) =>   
+    <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
+             <View style={{flexDirection:'row'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+             <Image
           style={{ width: 160, height: 190 }}
-          resizeMode="contain"
+          resizeMode='cover'
           source={{
             uri:
               "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
           }}
         />
-        </View>
-        <Card.Divider />
-        <Text style={{fontSize:10}}>Lieu :</Text>
-        <Text style={{fontSize:10}}>Date :</Text>
+             </TouchableOpacity>
+              <List.Item              
+              title={""}
+              onPress={() => navigation.navigate('Annonce')}
+              left={props =>
+              <View style={{ justifyContent: 'center',
+              alignItems: 'center' }}> 
+             
+              </View>
+              }
+              right={props =>
+              <View>
+                <View style={{}}>
+                  <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:20 , fontWeight:'500'}}>
+                PRIX
+                </Text>
+
+                
+                <ModalDropdown style={{fontSize:20}} options={['Consulter', 'Contacter','Favoris','Signaler']}>
+         
+                <View style={styles.quizAttrRight}>
+                  <View style={{paddingLeft:150}}>
+                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                    <Text style={styles.infoText}>{item.NumberQuestions}</Text>
+                  </View>
+                </View>
+               
+               </ModalDropdown>
+                
+                </View>
+                <Text style={{textAlign:'left'}}>
+                  Lieu :
+                </Text>
+                <Text>
+                  Date :
+                </Text>
+                </View>
+                <View style={{paddingTop:40  ,flexDirection:'row'}}>
+                  <View style={{flexDirection:'row'}}>
+              <Button style={{ marginTop: 38 , paddingRight:-10   }}
+              color="#7cd1e0" 
+              icon="eye" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Annonce')}>
+              Contacter
+              </Button>
+                <View style={{paddingLeft:7}}>
+              <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
+              color="#faff79"
+              icon="star" 
+              mode='contained' 
+              onPress={() => alert("favoris")}>
+              </Button>
+              </View>
+              </View>
+              </View>
+              </View>
+              }
+            />
+
+            </View>
+           
       </View>
-    </Card>
-    </View>
+  }
+    />
     
-    <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}}>
-      <Card.Title style={{ textAlign:'left' , fontSize:15}}>30 EUR</Card.Title>
-      <View
-        style={{
-          position: "relative",
-        }}
-      >
-          <View style={{ alignItems:'center' , alignContent:'center'}}>
-        <Image
-          style={{ width: 160, height: 190 }}
-          resizeMode="contain"
-          source={{
-            uri:
-              "https://global-img.gamergen.com/razer-cynosa-test-note-avis-review-photo-gamergen-com-clint008-2_0190000000886876.jpg"
-          }}
-        />
-        </View>
-        <Card.Divider />
-        <Text style={{fontSize:10}}>Lieu :</Text>
-        <Text style={{fontSize:10}}>Date :</Text>
-      </View>
-    </Card>
+  </View>
+  
     
     </ScrollView>
-   <View style={{height: 185}}>
+   <View style={{height: 177}}>
        {/* navbar  */}
    </View>
     </LinearGradient>
@@ -217,12 +274,12 @@ function DetailsAnnonce({ navigation }) {
         
         </View>
        
-        <Text style = {{borderWidth: 1, borderColor: 'grey', backgroundColor: '#FF6347', width:100,height:36,justifyContent:'center' , marginLeft:260}}>
+        <View style = {{borderWidth: 1, borderColor: 'grey', backgroundColor: '#FF6347', width:100,height:36,justifyContent:'center' , marginLeft:260}}>
         <Button
-         title = "Contacter"
+         title = 'Contacter'
          color='#FFFFFF'
       />
-      </Text>
+      </View>
 
     </Card>
     <SafeAreaView style={{ flex: 1 }}>
@@ -241,60 +298,91 @@ function DetailsAnnonce({ navigation }) {
                   />
           </View>
         </View>
+        <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Plus d'annonces :</Text>
+          </View>
         <Divider style={{ width: "80%", margin: 20 }} />
-        <View style={{ flexDirection:'row'}}>
-        <Card containerStyle={{width:180 , height:290 }} wrapperStyle={{}}>
-          <Card.Title style={{ textAlign:'left' , fontSize:15}}>500 EUR</Card.Title>
-          <View
-            style={{
-              position: "relative",
-            }}
-          >
-               <View style={{ alignItems:'center' , alignContent:'center'}}>
-            <Image
-              style={{ width: 160, height: 190 }}
-              resizeMode="contain"
-              source={{
-                uri:
-                  "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
-              }}
+        <View style={{ flex: 1, paddingTop: 5 , backgroundColor: 'rgba(242, 250, 250, 42)'}}>
+    <FlatList 
+    data={data}
+    renderItem ={(item) =>   
+    <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
+             <View style={{flexDirection:'row'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+             <Image
+          style={{ width: 160, height: 190 }}
+          resizeMode='cover'
+          source={{
+            uri:
+              "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
+          }}
+        />
+             </TouchableOpacity>
+              <List.Item              
+              title={""}
+              onPress={() => navigation.navigate('Annonce')}
+              left={props =>
+              <View style={{ justifyContent: 'center',
+              alignItems: 'center' }}> 
+             
+              </View>
+              }
+              right={props =>
+              <View>
+                <View style={{}}>
+                  <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize:20 , fontWeight:'500'}}>
+                PRIX
+                </Text>
+                <View style={styles.quizAttrRight}>
+                  <View style={{paddingLeft:150}}>
+                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                    <Text style={styles.infoText}>{item.NumberQuestions}</Text>
+                  </View>
+                </View>
+                </View>
+                <Text style={{textAlign:'left'}}>
+                  Lieu :
+                </Text>
+                <Text>
+                  Date :
+                </Text>
+                </View>
+                <View style={{paddingTop:40  ,flexDirection:'row'}}>
+                  <View style={{flexDirection:'row'}}>
+              <Button style={{ marginTop: 38 , paddingRight:-10  }}
+              color="#7cd1e0" 
+              icon="call" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Annonce')}>
+              Contacter
+              </Button>
+                <View style={{paddingLeft:7}}>
+              <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
+              color="#faff79"
+              icon="star" 
+              mode='contained' 
+              onPress={() => alert("favoris")}>
+              </Button>
+              </View>
+              </View>
+              </View>
+              </View>
+              }
             />
+
             </View>
-            <Card.Divider />
-            <Text style={{fontSize:10}}>Lieu :</Text>
-            <Text style={{fontSize:10}}>Date :</Text>
-          </View>
-        </Card>
-       
-        
-        <Card containerStyle={{width:180 , height:290}} wrapperStyle={{}}>
-          <Card.Title style={{ textAlign:'left' , fontSize:15}}>30 EUR</Card.Title>
-          <View
-            style={{
-              position: "relative",
-            }}
-          >
-              <View style={{ alignItems:'center' , alignContent:'center'}}>
-            <Image
-              style={{ width: 160, height: 190 }}
-              resizeMode="contain"
-              source={{
-                uri:
-                  "https://global-img.gamergen.com/razer-cynosa-test-note-avis-review-photo-gamergen-com-clint008-2_0190000000886876.jpg"
-              }}
-            />
-            </View>
-            <Card.Divider />
-            <Text style={{fontSize:10}}>Lieu :</Text>
-            <Text style={{fontSize:10}}>Date :</Text>
-          </View>
-        </Card>
-        </View>
+           
+      </View>
+  }
+    />
+    
+  </View>
         </View>
         ) : null}
-        <TouchableOpacity  onPress={() => setShouldShow(!shouldShow)}>
+        <TouchableOpacity  onPress={() => setShouldShow(!shouldShow)}  >
         <View style={{alignItems:'center' , alignContent:'center'}}>
-        <Text style={{textAlign:'center', color:'#0066CC' ,fontSize:15}}>Plus d'annonces</Text>
+        <Text style={{textAlign:'center', color:'#0066CC' ,fontSize:15} }>Plus d'annonces</Text>
         <Image
               style={{ width: 20, height: 20 , paddingTop:20}}
              
@@ -368,5 +456,63 @@ const styles = StyleSheet.create({
       height: 800,
      
     },
+    quizAttrContent:{
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center', 
+      flex: 1,
+      borderTopWidth: 1,
+      borderTopColor: '#e0e0e0',
+      height: 25,
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      margin: 5,
+      paddingTop: 3
+    },
+    quizAttrLeft:{
+      flexDirection: 'row',
+      alignItems: 'center', 
+      justifyContent: 'center',
+      marginLeft: 2
+    },
+    quizAttrMid:{
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center',
+      flexDirection: 'row',
+    },
+    quizAttrRight:{
+      flexDirection: 'row',
+      alignItems: 'center', 
+      justifyContent: 'center',
+      marginRight: 2
+    },
+    infoText:{
+      color: '#676767',
+      fontSize: 15
+    },
+    infoIcon:{
+      color: "#676767",
+      marginRight: 5
+    }
     
 });
+
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      fontSize: 16,
+      paddingTop: 13,
+      paddingHorizontal: 10,
+      paddingBottom: 12,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 4,
+      backgroundColor: 'white',
+      color: 'black',
+      width:50,  
+      height:10,
+  },
+});
+
+
