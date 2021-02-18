@@ -59,7 +59,7 @@ const AddAnnonceScreen = () => {
          
                </View>
 
-               <View style={{ borderColor: 'blue',borderWidth: 2, flex: 2, flexDirection:'column'}}>
+               <View style={{ flex: 2, flexDirection:'column'}}>
               
               
                 <View style={{flexDirection:'row'}}>
@@ -82,17 +82,33 @@ const AddAnnonceScreen = () => {
        
        
         <View style={{flexDirection:'row'}}>
-         <Text> Categorie: </Text> 
+         <Text> Sous-Categorie: </Text> 
         <RNPickerSelect
                 onValueChange={(value) => console.log(value)}
                 items={[
               {
-                label: 'Téléphonie',
-                value: 'Téléphonie',
+                label: 'Smartphone',
+                value: 'Smartphone',
             },
                 {
-                    label: 'Jeux',
-                    value: 'Jeux',
+                    label: 'Ecran',
+                    value: 'Ecran',
+                },
+                {
+                label: 'Chargeur',
+                value: 'Chargeur',
+            },
+                {
+                    label: 'Câble',
+                    value: 'Câble',
+                },
+                {
+                label: 'Console',
+                value: 'Console',
+            },
+                {
+                    label: 'Manettes',
+                    value: 'Manettes',
                 },
             ]}
             style={{ ...pickerSelectStyles }}
@@ -108,8 +124,7 @@ const AddAnnonceScreen = () => {
                </View>       
               
                 
-                 <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center',
-                  borderColor: 'yellow', borderWidth: 2 }}>
+                 <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
               
                  <Button style={styles.addButton} type="clear"
                         icon={
@@ -135,17 +150,13 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: 'white',
-        borderColor: 'red',
-        borderWidth: 2
+        backgroundColor: 'white'
     },
     image_container: {
     },
     body_container: {
         flex: -3,
-        marginTop: 30,
-        borderColor: 'green',
-        borderWidth: 2
+        marginTop: 30
     },
      container: {
         flex: 1,
