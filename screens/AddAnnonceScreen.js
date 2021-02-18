@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { View, Platform,Text, StyleSheet} from 'react-native';
+import { View, Platform, Text, TextInput, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 //import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
 
 
 const AddAnnonceScreen = () => {
- 
+
     const [image, setImage] = useState(null);
 
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync(); 
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
             }
-        })(); 
+        })();
     }, []);
 
     const pickImage = async () => {
@@ -38,8 +38,8 @@ const AddAnnonceScreen = () => {
             setImage(result.uri);
         }
     };
-    
-   
+
+
     return (
         <SafeAreaView style={styles.main_container}>
             <TouchableOpacity onPress={pickImage}>
@@ -48,95 +48,84 @@ const AddAnnonceScreen = () => {
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce"/>
-                <TextInput style={styles.input} placeholder="Référence"/>
-                <TextInput style={styles.input} placeholder="Lieu"/>
-                <TextInput style={styles.input}
-                 placeholder="Prix"
-                 keyboardType= 'numeric'
-                />
-         
-         
-               </View>
+                <TextInput style={styles.input} placeholder="Titre de l'annonce" />
+                <TextInput style={styles.input} placeholder="Référence" />
+                <TextInput style={styles.input} placeholder="Lieu" />
+                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' />
+            </View>
 
-               <View style={{ flex: 2, flexDirection:'column'}}>
-              
-              
-                <View style={{flexDirection:'row'}}>
-               <Text style={{fontSize:16 , fontWeight:'500' , color:'#000000'}}> Categorie: </Text>
-               <RNPickerSelect
-                onValueChange={(value) => console.log(value)}
-                items={[
-              {
-                label: 'Téléphonie',
-                value: 'Téléphonie',
-            },
-                {
-                    label: 'Jeux',
-                    value: 'Jeux',
-                },
-            ]}
-            style={{ ...pickerSelectStyles }}
-                />
-              </View>
-       
-       
-        <View style={{flexDirection:'row'}}>
-         <Text> Sous-Categorie: </Text> 
-        <RNPickerSelect
-                onValueChange={(value) => console.log(value)}
-                items={[
-              {
-                label: 'Smartphone',
-                value: 'Smartphone',
-            },
-                {
-                    label: 'Ecran',
-                    value: 'Ecran',
-                },
-                {
-                label: 'Chargeur',
-                value: 'Chargeur',
-            },
-                {
-                    label: 'Câble',
-                    value: 'Câble',
-                },
-                {
-                label: 'Console',
-                value: 'Console',
-            },
-                {
-                    label: 'Manettes',
-                    value: 'Manettes',
-                },
-            ]}
-            style={{ ...pickerSelectStyles }}
-        />
-        </View>
-      
-      
-        <View>
-            <TextInput style={styles.input} placeholder="Description" multiline= {true} numberOfLines = {6}
-
-            />
-        </View>
-               </View>       
-              
-                
-                 <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
-              
-                 <Button style={styles.addButton} type="clear"
-                        icon={
-                            <Icon
-                                name="add-circle"
-                                size={50}
-                                color="orange"
-                            />
-                        }
+            <View style={styles.picker_container}>
+                <View style={styles.categorie_picker}>
+                    <Text style={styles.label}> Categorie: </Text>
+                    <RNPickerSelect
+                        onValueChange={(value) => console.log(value)}
+                        items={[
+                            {
+                                label: 'Téléphonie',
+                                value: 'Téléphonie',
+                            },
+                            {
+                                label: 'Jeux',
+                                value: 'Jeux',
+                            },
+                        ]}
+                        style={{ ...pickerSelectStyles }}
                     />
                 </View>
-            
+
+                <View style={styles.sous_categ_picker}>
+                    <Text style={styles.label}> Sous-Categorie: </Text>
+                    <RNPickerSelect
+                        placeholder="sous-categ"
+                        onValueChange={(value) => console.log(value)}
+                        items={[
+                            {
+                                label: 'Smartphone',
+                                value: 'Smartphone',
+                            },
+                            {
+                                label: 'Ecran',
+                                value: 'Ecran',
+                            },
+                            {
+                                label: 'Chargeur',
+                                value: 'Chargeur',
+                            },
+                            {
+                                label: 'Câble',
+                                value: 'Câble',
+                            },
+                            {
+                                label: 'Console',
+                                value: 'Console',
+                            },
+                            {
+                                label: 'Manettes',
+                                value: 'Manettes',
+                            },
+                        ]}
+                        style={{ ...pickerSelectStyles }}
+                    />
+                </View>
+            </View>
+
+            <View>
+                <TextInput style={styles.input} placeholder="Description" multiline={true} numberOfLines={6} />
+            </View>
+
+            <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
+
+                <Button style={styles.addButton} type="clear"
+                    icon={
+                        <Icon
+                            name="add-circle"
+                            size={50}
+                            color="orange"
+                        />
+                    }
+                />
+            </View>
+
         </SafeAreaView>
     );
 }
@@ -158,12 +147,12 @@ const styles = StyleSheet.create({
         flex: -3,
         marginTop: 30
     },
-     container: {
+    container: {
         flex: 1,
         paddingTop: 25,
         alignItems: "center",
         flexDirection: 'row'
-      },
+    },
     image: {
         height: 200,
         borderWidth: 1,
@@ -181,21 +170,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: 100,
         justifyContent: 'center'
+    },
+    picker_container: {
+        flex: 1,
+        flexDirection: 'column',
+        marginTop: 10,
+    },
+    categorie_picker: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    sous_categ_picker: {
+        flexDirection: 'row',
+        marginTop: 10,
+        justifyContent: 'space-between'
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: 'black',
+        borderWidth: 1
     }
+
 })
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
-        paddingTop: 13,
-        paddingHorizontal: 10,
-        paddingLeft: 50,
-        paddingBottom: 12,
+        textAlign: 'center',
         borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
-        backgroundColor: 'white',
         color: 'black',
-        width:50,  
-        height:10,
-    },
-  });
+        width: 200,
+        height: 30,
+    }
+});
