@@ -20,7 +20,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
-const data = [1,2];
+const data = [1,2,3,4];
 
 const img ={
   images: [
@@ -154,14 +154,14 @@ function HomeScreen({ navigation }) {
                 <View style={{}}>
                   <View style={{flexDirection:'row'}}>
                 <Text style={{fontSize:20 , fontWeight:'500'}}>
-                PRIX
+                Titre XXXX
                 </Text>
 
                 
-                <ModalDropdown style={{fontSize:20}} options={['Consulter', 'Contacter','Favoris','Signaler']}>
+                <ModalDropdown  options={['Consulter', 'Contacter','Favoris','Signaler']}>
          
                 <View style={styles.quizAttrRight}>
-                  <View style={{paddingLeft:150}}>
+                  <View style={{paddingLeft:100}}>
                     <Icon name="ios-list" style={styles.infoIcon} size={20} />
                     <Text style={styles.infoText}>{item.NumberQuestions}</Text>
                   </View>
@@ -170,14 +170,17 @@ function HomeScreen({ navigation }) {
                </ModalDropdown>
                 
                 </View>
-                <Text style={{textAlign:'left'}}>
+                <Text style={{textAlign:'left' , color:'red'}}>
+                  X.XX EUR
+                </Text>
+                <Text>
                   Lieu :
                 </Text>
                 <Text>
                   Date :
                 </Text>
                 </View>
-                <View style={{paddingTop:40  ,flexDirection:'row'}}>
+                <View style={{paddingTop:20  ,flexDirection:'row'}}>
                   <View style={{flexDirection:'row'}}>
               <Button style={{ marginTop: 38 , paddingRight:-10   }}
               color="#7cd1e0" 
@@ -229,7 +232,22 @@ function DetailsAnnonce({ navigation }) {
       <View style={{ flex: 1, alignItems: 'center'}}>
      
       <Card containerStyle={{width:390 , height:700  }} wrapperStyle={{}}>
-      <Card.Title style={{ textAlign:'left' , fontSize:20}}>Titre Annonce</Card.Title>
+
+      <View style={{flexDirection:'row'}}>
+      <Card.Title style={{ textAlign:'left' , fontSize:20}}>Titre Annonce XXX</Card.Title>
+      <ModalDropdown  options={['Signaler']}>
+         
+                <View style={styles.quizAttrRight}>
+                  <View style={{paddingLeft:172 }}>
+                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                    <Text style={styles.infoText}></Text>
+                  </View>
+                </View>
+               
+               </ModalDropdown>
+               </View>
+      
+      
       <View
         style={{
           position: "relative",
@@ -249,9 +267,9 @@ function DetailsAnnonce({ navigation }) {
         </View>
         <Card.Divider />
        
-        
-        <Text style={{fontSize:20 , fontWeight:'700' ,color:'#FF6347', textAlign:'right'}}>100 EUR</Text>
-     
+        <View style={{}}>
+        <Text style={{fontSize:20 , fontWeight:'700' ,color:'red', textAlign:'right'}}>100 EUR</Text>
+     </View>
         <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Categorie :</Text>
       
         <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Reference :</Text>
@@ -274,117 +292,75 @@ function DetailsAnnonce({ navigation }) {
         
         </View>
        
-        <View style = {{borderWidth: 1, borderColor: 'grey', backgroundColor: '#FF6347', width:100,height:36,justifyContent:'center' , marginLeft:260}}>
-        <Button
-         title = 'Contacter'
-         color='#FFFFFF'
-      />
-      </View>
-
-    </Card>
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {/*Here we will return the view when state is true 
-        and will return false if state is false*/}
-        {shouldShow ? (
-          <View style={{padding:15}}>
-          <View>
-          <View>
-              <SliderBox
-                    images={img.images}
-                    onCurrentImagePressed={index =>
-                      console.warn(`image ${index} pressed`)
-                    }
-                  />
-          </View>
-        </View>
-        <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
-            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Plus d'annonces :</Text>
-          </View>
-        <Divider style={{ width: "80%", margin: 20 }} />
-        <View style={{ flex: 1, paddingTop: 5 , backgroundColor: 'rgba(242, 250, 250, 42)'}}>
-    <FlatList 
-    data={data}
-    renderItem ={(item) =>   
-    <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
-             <View style={{flexDirection:'row'}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
-             <Image
-          style={{ width: 160, height: 190 }}
-          resizeMode='cover'
-          source={{
-            uri:
-              "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
-          }}
-        />
-             </TouchableOpacity>
-              <List.Item              
-              title={""}
-              onPress={() => navigation.navigate('Annonce')}
-              left={props =>
-              <View style={{ justifyContent: 'center',
-              alignItems: 'center' }}> 
-             
-              </View>
-              }
-              right={props =>
-              <View>
-                <View style={{}}>
-                  <View style={{flexDirection:'row'}}>
-                <Text style={{fontSize:20 , fontWeight:'500'}}>
-                PRIX
-                </Text>
-                <View style={styles.quizAttrRight}>
-                  <View style={{paddingLeft:150}}>
-                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
-                    <Text style={styles.infoText}>{item.NumberQuestions}</Text>
-                  </View>
-                </View>
-                </View>
-                <Text style={{textAlign:'left'}}>
-                  Lieu :
-                </Text>
-                <Text>
-                  Date :
-                </Text>
-                </View>
-                <View style={{paddingTop:40  ,flexDirection:'row'}}>
-                  <View style={{flexDirection:'row'}}>
-              <Button style={{ marginTop: 38 , paddingRight:-10  }}
+        
+        <Button style={{   }}
               color="#7cd1e0" 
-              icon="call" 
+              icon="" 
               mode="contained" 
               onPress={() => navigation.navigate('Annonce')}>
               Contacter
               </Button>
-                <View style={{paddingLeft:7}}>
-              <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
-              color="#faff79"
-              icon="star" 
-              mode='contained' 
-              onPress={() => alert("favoris")}>
-              </Button>
-              </View>
-              </View>
-              </View>
-              </View>
-              }
-            />
+              
+      
 
-            </View>
-           
-      </View>
-  }
-    />
+    </Card>
+
     
-  </View>
-        </View>
+
+
+    <SafeAreaView style={{flex: 1 }}>
+      
+      <View style={styles.container}>
+        
+        {shouldShow ? (
+          <View>
+            <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Plus d'annonces :</Text>
+          </View>
+        <Divider style={{ width: "80%", margin: 20 }} />
+         <FlatList
+         horizontal
+         data={data}
+         renderItem={({ item: rowData }) => {
+           return (
+             <View style={{width:190}}>
+             <Card
+               title={null}
+               image={{ uri: rowData.imageUrl }}
+               containerStyle={{ padding: 0,alignItems:'center',height:212, width: 180 }}
+             >
+               <View style={{ marginBottom: 10,marginTop:10 }}>
+               <Text style={{ fontWeight:'700'}} >
+                 Titre XXX
+               </Text>
+               <Text style={{color:'red'}}>
+                 Prix EUR 
+               </Text>
+               </View>
+               <Image
+           style={{ width: 150, height: 150 }}
+           resizeMode='cover'
+           source={{
+             uri:
+               "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
+           }}
+         />
+             </Card>
+             </View>
+           );
+         }}
+         keyExtractor={(item, index) => index}
+       />
+       </View>
         ) : null}
+        
         <TouchableOpacity  onPress={() => setShouldShow(!shouldShow)}  >
         <View style={{alignItems:'center' , alignContent:'center'}}>
-        <Text style={{textAlign:'center', color:'#0066CC' ,fontSize:15} }>Plus d'annonces</Text>
+        <View style={{paddingBottom:5}}>
+
+        </View>
         <Image
-              style={{ width: 20, height: 20 , paddingTop:20}}
+              style={{ width: 20, height: 20 , paddingTop:20 }}
              
               source={{
                 uri:
@@ -393,10 +369,11 @@ function DetailsAnnonce({ navigation }) {
             />
             </View>
         </TouchableOpacity>
-
+        
+        
       </View>
     </SafeAreaView>
-    
+
     </View>
     </ScrollView>
     <View style={{height: 185}}>
@@ -453,8 +430,8 @@ const styles = StyleSheet.create({
       left: 0,
       right: 0,
       top: 0,
-      height: '100%',
-      width:'100%',     
+      height: 800,
+     
     },
     quizAttrContent:{
       flexDirection: 'row',
@@ -485,15 +462,17 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center', 
       justifyContent: 'center',
-      marginRight: 2
+      marginRight: 2,
     },
     infoText:{
       color: '#676767',
-      fontSize: 15
+      fontSize: 25,
+      
     },
     infoIcon:{
       color: "#676767",
-      marginRight: 5
+      marginRight: 5,
+      
     }
     
 });
