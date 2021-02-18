@@ -125,7 +125,7 @@ function Login({ navigation }) {
             </LinearGradient>
         </View>
     );
-    ); 
+   
 }
 
 
