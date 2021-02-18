@@ -4,6 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Row } from 'native-base';
 import { Directions } from 'react-native-gesture-handler';
+import { connecte } from './Login';
+
 const styles = {
     ico: {
     flexDirection: 'row',
@@ -58,7 +60,7 @@ const styles = {
 
 
 function  loginsucc(){
-
+    connecte = true;
     alert('inscrit');
     //navigation.navigate('Annonce');
 }
@@ -155,11 +157,12 @@ function  loginsucc(){
                         > Se connecter </Text>             
                     </Button> */}
 
-                    <Button  style={styles.btn}   >
-                        <Text style={{color:'white'}}
-                           onPress={loginsucc}
-                            // onPress={() => navigation.push('Edit')}  
-                        > S'inscrire</Text>             
+                    <Button  style={styles.btn}   
+                        //  onPress={loginsucc}
+                        //  onPress={() => navigation.push('Comptes')}  
+                        >
+
+                    <Text style={{color:'white'}} > S'inscrire</Text>             
                     </Button>
 
                 </View>

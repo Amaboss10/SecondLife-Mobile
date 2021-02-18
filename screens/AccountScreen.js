@@ -3,15 +3,15 @@ import { Text, View, Image, StyleSheet,TextInput, ScrollView } from 'react-nativ
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'native-base';
-
+import { connecte } from './Auth/Login'
 let sizee = 30;
 
 
-fetch('http://localhost:3000/utilisateur')
-.then(res => res. json())
-.then((out) => {
-console.log('Checkout this JSON! ', out);
-})
+// fetch('http://10.189.116.41:3000/utilisateur')
+// .then(res => res. json())
+// .then((out) => {
+// console.log('Checkout this JSON! ', out);
+// })
 
 
 const Perso = ({
@@ -25,10 +25,13 @@ const Perso = ({
 });
 
 function AccountScreen ({ navigation }) {
+  // alert('status '+  connecte)
+  if( connecte == true) {
+      
     return (
       
         <View>
-
+             
             <View >
               <Text style={styles.nomm} > {Perso.nom} {Perso.prenom} </Text>
 
@@ -90,9 +93,11 @@ function AccountScreen ({ navigation }) {
             </View>
             <View  style={styles.button}> 
 
-              <Button  style={styles.btn}   >
+              <Button  style={styles.btn} 
+               onPress={() => navigation.push('Edit')}    
+               >
                   <Text style={{color:'white'}}
-                      onPress={() => navigation.push('Edit')}  
+                     
                   > Modifier </Text>             
               </Button>
 
@@ -102,6 +107,18 @@ function AccountScreen ({ navigation }) {
           </View>
 
     );
+  }
+  else{
+    return(
+      <View>
+        <Text>teexxt </Text>
+        {navigation.push('Login')}
+        {/* {alert('veuillez vous connectez ! ')} */}
+        
+      </View>
+    );
+    
+  }
 }
 
 export default AccountScreen;

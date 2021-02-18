@@ -56,13 +56,7 @@ const styles = {
 }
 // const AuthContext = React.createContext();
 
-
-function  loginsucc(){
-    
-    // alert();
-    alert('connected');
-    //navigation.navigate('Annonce');
-}
+let connecte = true ;
 
 function Login({ navigation }) {
     
@@ -106,17 +100,18 @@ function Login({ navigation }) {
                     />
                 </View>
                 <View style={styles.buttons}>
-                    <Button  style={styles.btn}   >
-                        <Text style={{color:'white'}} 
-                        onPress={loginsucc}
-                        > Se connecter </Text>             
+                    <Button  style={styles.btn} 
+                        onPress={  
+                            // () =>navigation.push('Comptes'),
+                            () =>loginsucc
+                        }
+                          >
+                        <Text style={{color:'white'}}> Se connecter </Text>             
                     </Button>
 
-                    <Button  style={styles.btn}   >
-                        <Text style={{color:'white'}}
-                           
-                            // onPress={() => navigation.push('Edit')}  
-                        > S'inscrire</Text>             
+                    <Button  style={styles.btn} 
+                    onPress={() => navigation.push('Register')}    >
+                        <Text style={{color:'white'}} > S'inscrire</Text>             
                     </Button>
 
                 </View>
@@ -126,6 +121,15 @@ function Login({ navigation }) {
         </View>
     );
 }
+function  loginsucc(){
+    
+    // alert();
+    connecte = true;
+    alert('connected'+ connecte );
+    
+    // navigation.goBack('Compte');
+}
 
 
 export default Login;
+export  {connecte};
