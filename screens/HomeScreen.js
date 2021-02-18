@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 //import Component from 'react';
 //import SearchInput, { createFilter } from 'react-native-search-filter';
@@ -17,10 +15,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { List, Button } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import ModalDropdown from 'react-native-modal-dropdown';
+//import ImageView from 'react-native-image-view';
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
 const data = [1,2,3,4];
+
+
 
 const img ={
   images: [
@@ -131,6 +132,8 @@ function HomeScreen({ navigation }) {
     <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
              <View style={{flexDirection:'row'}}>
             <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+            
+            
              <Image
           style={{ width: 160, height: 190 }}
           resizeMode='cover'
@@ -211,6 +214,9 @@ function HomeScreen({ navigation }) {
     
   </View>
   
+
+  
+
     
     </ScrollView>
    <View style={{height: 177}}>
@@ -256,10 +262,10 @@ function DetailsAnnonce({ navigation }) {
           <View style={{ alignItems:'center' , alignContent:'center'}}>
           <Image
           style={{ width: 350, height: 200 }}
-          resizeMode="contain"
+          resizeMode="cover"
           source={{
             uri:
-              "https://www.numerama.com/content/uploads/2020/10/img_5310.jpg"
+              "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
           }}
         />
 
