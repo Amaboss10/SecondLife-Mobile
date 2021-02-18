@@ -120,6 +120,7 @@ function Login({ navigation }) {
             </LinearGradient>
         </View>
     );
+   
 }
 function  loginsucc(){
     

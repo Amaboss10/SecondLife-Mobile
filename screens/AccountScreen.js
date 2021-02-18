@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+
+import React, { useState } from "react";
 import { Text, View, Image, StyleSheet,TextInput, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { Ionicons as Icon } from '@expo/vector-icons';
 import { Button } from 'native-base';
-import { connecte } from './Auth/Login'
+import Dialog from "react-native-dialog";
+
 let sizee = 30;
 
 
@@ -25,14 +28,26 @@ const Perso = ({
 });
 
 function AccountScreen ({ navigation }) {
-  // alert('status '+  connecte)
-  if( connecte == true) {
-      
+  const [visible, setVisible] = useState(false);
+ 
+  const showDialog = () => {
+    setVisible(true);
+  };
+ 
+  const handleCancel = () => {
+    setVisible(false);
+  };
+ 
+  const handleDelete = () => {
+    // The user has pressed the "Delete" button, so here you can do your own logic.
+    // ...Your logic
+    setVisible(false);
+  };
     return (
       
         <View>
-             
             <View >
+              
               <Text style={styles.nomm} > {Perso.nom} {Perso.prenom} </Text>
 
 
@@ -46,9 +61,8 @@ function AccountScreen ({ navigation }) {
               style={styles.logo}
               source={require('../assets/Top_Background.png')} 
               />
-
+         
             </View>
-
             <View style={styles.cont}>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={styles.ico} >
@@ -103,23 +117,35 @@ function AccountScreen ({ navigation }) {
 
             </View>
 
+            <View style={{paddingTop:25 , paddingLeft:370}}>
+            <Icon name="log-out" style={styles.infoIcon} size={40} onPress={showDialog} />
+            <Dialog.Container visible={visible}>
+        <Dialog.Title>Deconnexion</Dialog.Title>
+        <Dialog.Description>
+          Etes-vous sur de vouloir se deconnecter ? :(
+        </Dialog.Description>
+        <Dialog.Button label="Annuler" onPress={handleCancel} />
+        <Dialog.Button label="Se deconnecter" onPress={handleDelete} />
+      </Dialog.Container>
+
+            </View>
 
           </View>
 
     );
   }
-  else{
-    return(
-      <View>
-        <Text>teexxt </Text>
-        {navigation.push('Login')}
-        {/* {alert('veuillez vous connectez ! ')} */}
+  // else{
+  //   return(
+  //     <View>
+  //       <Text>teexxt </Text>
+  //       {navigation.push('Login')}
+  //       {/* {alert('veuillez vous connectez ! ')} */}
         
-      </View>
-    );
+  //     </View>
+  //   );
     
-  }
-}
+//   }
+// }
 
 export default AccountScreen;
 
@@ -197,6 +223,44 @@ const styles = StyleSheet.create({
       shadowRadius: 16.00,
   
       elevation: 24,
+    },
+    infoText:{
+      color: '#676767',
+      fontSize: 25,
+      
+    },
+    infoIcon:{
+      
+      color: "#FFFFFF",
+      marginRight: 5,
+      
     }
   });
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
