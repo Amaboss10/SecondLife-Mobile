@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Platform, StyleSheet} from 'react-native';
+import { View, Platform,Text, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
+//import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput,Text, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
@@ -60,8 +60,10 @@ const AddAnnonceScreen = () => {
                </View>
 
                <View style={{ borderColor: 'blue',borderWidth: 2, flex: 2, flexDirection:'column'}}>
+              
+              
                 <View style={{flexDirection:'row'}}>
-               {/* <Text style={{fontSize:16 , fontWeight:'500' , color:'#000000'}}> Categorie: </Text> */}
+               <Text style={{fontSize:16 , fontWeight:'500' , color:'#000000'}}> Categorie: </Text>
                <RNPickerSelect
                 onValueChange={(value) => console.log(value)}
                 items={[
@@ -75,10 +77,12 @@ const AddAnnonceScreen = () => {
                 },
             ]}
             style={{ ...pickerSelectStyles }}
-        />
-        </View>
+                />
+              </View>
+       
+       
         <View style={{flexDirection:'row'}}>
-        {/* <Text> Categorie: </Text> */}
+         <Text> Categorie: </Text> 
         <RNPickerSelect
                 onValueChange={(value) => console.log(value)}
                 items={[
@@ -94,6 +98,8 @@ const AddAnnonceScreen = () => {
             style={{ ...pickerSelectStyles }}
         />
         </View>
+      
+      
         <View>
             <TextInput style={styles.input} placeholder="Description" multiline= {true} numberOfLines = {6}
 
