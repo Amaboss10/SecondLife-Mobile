@@ -10,11 +10,11 @@ import Dialog from "react-native-dialog";
 let sizee = 30;
 
 
-fetch('http://localhost:3000/utilisateur')
-.then(res => res. json())
-.then((out) => {
-console.log('Checkout this JSON! ', out);
-})
+// fetch('http://10.189.116.41:3000/utilisateur')
+// .then(res => res. json())
+// .then((out) => {
+// console.log('Checkout this JSON! ', out);
+// })
 
 
 const Perso = ({
@@ -107,9 +107,11 @@ function AccountScreen ({ navigation }) {
             </View>
             <View  style={styles.button}> 
 
-              <Button  style={styles.btn}   >
+              <Button  style={styles.btn} 
+               onPress={() => navigation.push('Edit')}    
+               >
                   <Text style={{color:'white'}}
-                      onPress={() => navigation.push('Edit')}  
+                     
                   > Modifier </Text>             
               </Button>
 
@@ -131,7 +133,19 @@ function AccountScreen ({ navigation }) {
           </View>
 
     );
-}
+  }
+  // else{
+  //   return(
+  //     <View>
+  //       <Text>teexxt </Text>
+  //       {navigation.push('Login')}
+  //       {/* {alert('veuillez vous connectez ! ')} */}
+        
+  //     </View>
+  //   );
+    
+//   }
+// }
 
 export default AccountScreen;
 
@@ -222,31 +236,3 @@ const styles = StyleSheet.create({
       
     }
   });
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -71,7 +71,7 @@ function EditProScreen({navigation}) {
            <TextInput 
                 style={styles.input} 
                 placeholder="Tel"  
-                value={Perso.email}
+                value={Perso.tel}
                 onChangeText={setMail}
             />
          </View>
@@ -111,10 +111,10 @@ function EditProScreen({navigation}) {
        </View>
        <View  style={styles.button}> 
          
-           <Button  style={styles.btn}   >
-             <Text style={{color:'white'}}
-                 onPress={() => navigation.goBack('Edit')}  
-             > Sauvegarder </Text>             
+           <Button  style={styles.btn}   
+               onPress={() => navigation.goBack('Edit')}  
+           >
+             <Text style={{color:'white'}} > Sauvegarder </Text>             
          </Button>
        </View>
            
@@ -198,13 +198,13 @@ const styles = StyleSheet.create({
   
       elevation: 24,
     }, 
-    input: {
-      height: 50,
-      width:290,
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: 'gray',
-      paddingLeft: 10,
-      marginTop: 10,
-  }
+  //   input: {
+  //     height: 50,
+  //     width:290,
+  //     borderWidth: 1,
+  //     borderRadius: 5,
+  //     borderColor: 'gray',
+  //     paddingLeft: 10,
+  //     marginTop: 10,
+  // }
   });
