@@ -244,8 +244,8 @@ function DetailsAnnonce({ navigation }) {
       <ModalDropdown  options={['Signaler']}>
          
                 <View style={styles.quizAttrRight}>
-                  <View style={{paddingLeft:172 }}>
-                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                  <View style={{paddingLeft:160  }}>
+                    <Icon name="information-circle" style={styles.infoIcon} size={27} />
                     <Text style={styles.infoText}></Text>
                   </View>
                 </View>
