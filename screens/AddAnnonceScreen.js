@@ -3,9 +3,10 @@ import { View, Platform, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TextInput,Text, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput,Text, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
+import RNPickerSelect from 'react-native-picker-select';
 
 
 const AddAnnonceScreen = () => {
@@ -15,7 +16,7 @@ const AddAnnonceScreen = () => {
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync(); 
                 if (status !== 'granted') {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
@@ -37,6 +38,7 @@ const AddAnnonceScreen = () => {
             setImage(result.uri);
         }
     };
+    
    
     return (
         <SafeAreaView style={styles.main_container}>
@@ -56,13 +58,49 @@ const AddAnnonceScreen = () => {
          
          
                </View>
-               <View style={{ borderColor: 'blue',borderWidth: 2, flex: 2, flexDirection:'row'}}>
-              
-               
-                  
-            
+
+               <View style={{ borderColor: 'blue',borderWidth: 2, flex: 2, flexDirection:'column'}}>
+                <View style={{flexDirection:'row'}}>
+               {/* <Text style={{fontSize:16 , fontWeight:'500' , color:'#000000'}}> Categorie: </Text> */}
+               <RNPickerSelect
+                onValueChange={(value) => console.log(value)}
+                items={[
+              {
+                label: 'Téléphonie',
+                value: 'Téléphonie',
+            },
+                {
+                    label: 'Jeux',
+                    value: 'Jeux',
+                },
+            ]}
+            style={{ ...pickerSelectStyles }}
+        />
+        </View>
+        <View style={{flexDirection:'row'}}>
+        {/* <Text> Categorie: </Text> */}
+        <RNPickerSelect
+                onValueChange={(value) => console.log(value)}
+                items={[
+              {
+                label: 'Téléphonie',
+                value: 'Téléphonie',
+            },
+                {
+                    label: 'Jeux',
+                    value: 'Jeux',
+                },
+            ]}
+            style={{ ...pickerSelectStyles }}
+        />
+        </View>
+        <View>
+            <TextInput style={styles.input} placeholder="Description" multiline= {true} numberOfLines = {6}
+
+            />
+        </View>
                </View>       
-        
+              
                 
                  <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center',
                   borderColor: 'yellow', borderWidth: 2 }}>
@@ -126,11 +164,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: 100,
         justifyContent: 'center'
-    },
+    }
+})
+const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
         paddingTop: 13,
         paddingHorizontal: 10,
+        paddingLeft: 50,
         paddingBottom: 12,
         borderWidth: 1,
         borderColor: 'gray',
@@ -139,5 +180,5 @@ const styles = StyleSheet.create({
         color: 'black',
         width:50,  
         height:10,
-    }
-})
+    },
+  });
