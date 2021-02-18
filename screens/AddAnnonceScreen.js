@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput,Text, TouchableOpacity } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
-import { PickerComponent} from '../components/Picker'
 
 
 const AddAnnonceScreen = () => {
@@ -21,7 +20,7 @@ const AddAnnonceScreen = () => {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
             }
-        })();
+        })(); 
     }, []);
 
     const pickImage = async () => {
@@ -38,8 +37,7 @@ const AddAnnonceScreen = () => {
             setImage(result.uri);
         }
     };
-    
-
+   
     return (
         <SafeAreaView style={styles.main_container}>
             <TouchableOpacity onPress={pickImage}>
@@ -50,23 +48,26 @@ const AddAnnonceScreen = () => {
             <View style={styles.body_container}>
                 <TextInput style={styles.input} placeholder="Titre de l'annonce"/>
                 <TextInput style={styles.input} placeholder="Référence"/>
-                <View>
-                    <PickerComponent/>
-                </View>
                 <TextInput style={styles.input} placeholder="Lieu"/>
                 <TextInput style={styles.input}
                  placeholder="Prix"
                  keyboardType= 'numeric'
-
-                 />
+                />
+         
+         
+               </View>
+               <View style={{ borderColor: 'blue',borderWidth: 2, flex: 2, flexDirection:'row'}}>
+              
                
-               
-
-                {/* <TextInput style={styles.input} placeholder=""> </TextInput> */}
-
-                {/* iconName = focused ? 'add-circle' : 'add-circle-outline'; */}
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Button style={styles.addButton} type="clear"
+                  
+            
+               </View>       
+        
+                
+                 <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center',
+                  borderColor: 'yellow', borderWidth: 2 }}>
+              
+                 <Button style={styles.addButton} type="clear"
                         icon={
                             <Icon
                                 name="add-circle"
@@ -76,7 +77,7 @@ const AddAnnonceScreen = () => {
                         }
                     />
                 </View>
-            </View>
+            
         </SafeAreaView>
     );
 }
@@ -90,14 +91,24 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderColor: 'red',
+        borderWidth: 2
     },
     image_container: {
     },
     body_container: {
-        flex: 1,
+        flex: -3,
         marginTop: 30,
+        borderColor: 'green',
+        borderWidth: 2
     },
+     container: {
+        flex: 1,
+        paddingTop: 25,
+        alignItems: "center",
+        flexDirection: 'row'
+      },
     image: {
         height: 200,
         borderWidth: 1,
@@ -115,5 +126,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: 100,
         justifyContent: 'center'
+    },
+    inputIOS: {
+        fontSize: 16,
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        backgroundColor: 'white',
+        color: 'black',
+        width:50,  
+        height:10,
     }
 })
