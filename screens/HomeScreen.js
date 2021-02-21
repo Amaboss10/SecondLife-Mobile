@@ -15,6 +15,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { List, Button } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Video, AVPlaybackStatus } from 'expo-av';
+
 //import ImageView from 'react-native-image-view';
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
@@ -417,8 +419,8 @@ function FaqScreen({ navigation }) {
               color="green" 
               icon="" 
               mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
-              Comment creer un compte ? 
+              onPress={() => navigation.navigate('Créer un compte')}>
+              Comment créer un compte ? 
               </Button>
               </View>
               <View style={{paddingBottom:10}}>
@@ -426,8 +428,8 @@ function FaqScreen({ navigation }) {
               color="green" 
               icon="" 
               mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
-              Comment creer une annonce ?
+              onPress={() => navigation.navigate('Créer une annonce')}>
+              Comment créer une annonce ?
               </Button>
               </View>
               <View style={{paddingBottom:10}}>
@@ -435,7 +437,7 @@ function FaqScreen({ navigation }) {
               color="green" 
               icon="" 
               mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
+              onPress={() => navigation.navigate('Contacter un vendeur')}>
               Comment contacter un vendeur ?
               </Button>
               </View>
@@ -444,8 +446,8 @@ function FaqScreen({ navigation }) {
               color="green" 
               icon="" 
               mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
-              Comment nodifier une annonce ?
+              onPress={() => navigation.navigate('Modifier une annonce')}>
+              Comment modifier une annonce ?
               </Button>
               </View>
               <View style={{paddingBottom:10}}>
@@ -453,7 +455,7 @@ function FaqScreen({ navigation }) {
               color="green" 
               icon="" 
               mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
+              onPress={() => navigation.navigate('Modifier son mot de passe')}>
               Comment modifier son mot de passe ? 
               </Button>
               </View>
@@ -492,7 +494,8 @@ function FaqScreen({ navigation }) {
 
 
 function ReponseUne({ navigation }) {
- 
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
   return (
     <LinearGradient
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
@@ -500,12 +503,33 @@ function ReponseUne({ navigation }) {
       >
          <ScrollView>
       <View style={{}}>
-     
-     
-    {/* code reponse 1  */}
-    <Text> hello reponse de la question 1 details</Text>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer un compte ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
 
-
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
 
     </View>
     </ScrollView>
@@ -516,6 +540,194 @@ function ReponseUne({ navigation }) {
   );
 }
 
+function ReponseDeux({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+    colors={['#ffffff', '#c6f6ff', '#ff6347']}
+    style={styles.background}
+   >
+      <ScrollView>
+   <View style={{}}>
+ <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer une annonce ?</Text>
+     <Card>
+       <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+     </Card>
+ <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+ <View style={styles.container}>
+   <Video
+     ref={video}
+     style={styles.video}
+     source={{
+       uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+     }}
+     useNativeControls
+     resizeMode="contain"
+     isLooping
+     onPlaybackStatusUpdate={status => setStatus(() => status)}
+   />
+   <View style={styles.buttons}>
+     <Button
+       title={status.isPlaying ? 'Pause' : 'Play'}
+       onPress={() =>
+         status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+       }
+     />
+   </View>
+ </View>
+
+ </View>
+ </ScrollView>
+ <View style={{height: 185}}>
+    {/* navbar  */}
+</View>
+ </LinearGradient>
+  );
+}
+
+function ReponseTrois({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+    colors={['#ffffff', '#c6f6ff', '#ff6347']}
+    style={styles.background}
+   >
+      <ScrollView>
+   <View style={{}}>
+ <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment contacter un vendeur ?</Text>
+     <Card>
+       <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+     </Card>
+ <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+ <View style={styles.container}>
+   <Video
+     ref={video}
+     style={styles.video}
+     source={{
+       uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+     }}
+     useNativeControls
+     resizeMode="contain"
+     isLooping
+     onPlaybackStatusUpdate={status => setStatus(() => status)}
+   />
+   <View style={styles.buttons}>
+     <Button
+       title={status.isPlaying ? 'Pause' : 'Play'}
+       onPress={() =>
+         status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+       }
+     />
+   </View>
+ </View>
+
+ </View>
+ </ScrollView>
+ <View style={{height: 185}}>
+    {/* navbar  */}
+</View>
+ </LinearGradient>
+  );
+}
+
+
+function ReponseQuatre({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier une annonce ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+function ReponseCinq({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier son mot de passe ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -529,7 +741,11 @@ function Home() {
         <Stack.Screen name="Accueil" component={HomeScreen} />
         <Stack.Screen name="Annonce" component={DetailsAnnonce} />
         <Stack.Screen name="FAQ / Aide" component={FaqScreen} />
-        <Stack.Screen name="Reponse1" component={ReponseUne} />
+        <Stack.Screen name="Créer un compte" component={ReponseUne} />
+        <Stack.Screen name="Créer une annonce" component={ReponseDeux} />
+        <Stack.Screen name="Contacter un vendeur" component={ReponseTrois} />
+        <Stack.Screen name="Modifier une annonce" component={ReponseQuatre} />
+        <Stack.Screen name="Modifier son mot de passe" component={ReponseCinq} />
       </Stack.Navigator>
    
   );
@@ -627,6 +843,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
     backgroundColor:'white',
     paddingLeft:10
+},
+video: {
+  alignSelf: 'center',
+  width: 360,
+  height: 220,
+},
+buttons: {
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
 },
     
 });
