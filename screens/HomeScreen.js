@@ -1,11 +1,9 @@
-
-
 import * as React from 'react';
 //import Component from 'react';
 //import SearchInput, { createFilter } from 'react-native-search-filter';
 import { useState } from 'react';
 import { Ionicons as Icon } from '@expo/vector-icons';
-import { Image,StyleSheet , FlatList, SafeAreaView,Text, View , ScrollView } from 'react-native';
+import { Image,StyleSheet , FlatList, SafeAreaView,Text, View , ScrollView , TextInput} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SearchBar} from "react-native-elements";
 import { SliderBox } from "react-native-image-slider-box";
@@ -17,10 +15,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { List, Button } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { Video, AVPlaybackStatus } from 'expo-av';
+
+//import ImageView from 'react-native-image-view';
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
 const data = [1,2,3,4];
+
+
 
 const img ={
   images: [
@@ -53,7 +56,10 @@ function HomeScreen({ navigation }) {
               style={{ width: 113, height: 60, justifyContent: 'center', margin: 17 }}
             />
           </View>
-          <View style={{ margin: -13, marginLeft: 1, padding: -29 }}>
+          
+
+            <View style={{flexDirection:'row'}}>
+          <View style={{ margin: -13, marginLeft: 1, width:375,padding: -29 , justifyContent:'center' }}>
             <SearchBar
               platform="android"
               containerStyle={{ paddingBottom: -10, paddingTop: -10 }}
@@ -71,6 +77,12 @@ function HomeScreen({ navigation }) {
               onCancel={() => console.log(onCancel())}
               value={value}
             />
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('FAQ / Aide')}>
+          <View style={{paddingLeft:15}}>
+            <Icon name="help-circle" style={styles.infoIcon} size={30} />
+            </View>
+            </TouchableOpacity>
           </View>
           <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 , height:7}}>
            
@@ -131,6 +143,8 @@ function HomeScreen({ navigation }) {
     <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
              <View style={{flexDirection:'row'}}>
             <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+            
+            
              <Image
           style={{ width: 160, height: 190 }}
           resizeMode='cover'
@@ -209,9 +223,7 @@ function HomeScreen({ navigation }) {
   }
     />
     
-  </View>
-  
-    
+  </View>    
     </ScrollView>
    <View style={{height: 177}}>
        {/* navbar  */}
@@ -238,8 +250,8 @@ function DetailsAnnonce({ navigation }) {
       <ModalDropdown  options={['Signaler']}>
          
                 <View style={styles.quizAttrRight}>
-                  <View style={{paddingLeft:172 }}>
-                    <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                  <View style={{paddingLeft:160  }}>
+                    <Icon name="information-circle" style={styles.infoIcon} size={27} />
                     <Text style={styles.infoText}></Text>
                   </View>
                 </View>
@@ -256,10 +268,10 @@ function DetailsAnnonce({ navigation }) {
           <View style={{ alignItems:'center' , alignContent:'center'}}>
           <Image
           style={{ width: 350, height: 200 }}
-          resizeMode="contain"
+          resizeMode="cover"
           source={{
             uri:
-              "https://www.numerama.com/content/uploads/2020/10/img_5310.jpg"
+              "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
           }}
         />
 
@@ -386,7 +398,339 @@ function DetailsAnnonce({ navigation }) {
 
 
 
+///////////////////////////////////////////////////////////////////////////
+function FaqScreen({ navigation }) {
+  
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+        <ScrollView>
+        <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Faire aux questions :</Text>
+        </View>
+          <Divider style={{ width: "80%", margin: 20  }} />
+        <View style={{ flex: 1, paddingTop: 5 }}>
+    
 
+              <View style={{paddingBottom:10}}>
+              <Button style={{ }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Créer un compte')}>
+              Comment créer un compte ? 
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Créer une annonce')}>
+              Comment créer une annonce ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Contacter un vendeur')}>
+              Comment contacter un vendeur ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Modifier une annonce')}>
+              Comment modifier une annonce ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Modifier son mot de passe')}>
+              Comment modifier son mot de passe ? 
+              </Button>
+              </View>
+              <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Nous contacter :</Text>
+        </View>
+          <Divider style={{ width: "80%", margin: 20  }} />
+    
+          <View style={{ paddingLeft:5}}>
+                <TextInput style={styles.input} placeholder="Nom" />
+                <TextInput style={styles.input} placeholder="Prénom" />
+                <TextInput style={styles.input} placeholder="E-mail" />
+                <TextInput style={styles.input} placeholder="Sujet" />
+                <TextInput style={styles.inputmess} placeholder="Message" multiline={true} numberOfLines={6} />
+            </View>
+
+            <View style={{paddingLeft:294 , paddingTop:5}}>
+            <Button style={{ width:110}}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Envoyer 
+              </Button>
+              </View>
+        </View>
+    </ScrollView>
+   <View style={{height: 179}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+    
+  );
+}
+
+
+
+function ReponseUne({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer un compte ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+function ReponseDeux({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+    colors={['#ffffff', '#c6f6ff', '#ff6347']}
+    style={styles.background}
+   >
+      <ScrollView>
+   <View style={{}}>
+ <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer une annonce ?</Text>
+     <Card>
+       <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+     </Card>
+ <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+ <View style={styles.container}>
+   <Video
+     ref={video}
+     style={styles.video}
+     source={{
+       uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+     }}
+     useNativeControls
+     resizeMode="contain"
+     isLooping
+     onPlaybackStatusUpdate={status => setStatus(() => status)}
+   />
+   <View style={styles.buttons}>
+     <Button
+       title={status.isPlaying ? 'Pause' : 'Play'}
+       onPress={() =>
+         status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+       }
+     />
+   </View>
+ </View>
+
+ </View>
+ </ScrollView>
+ <View style={{height: 185}}>
+    {/* navbar  */}
+</View>
+ </LinearGradient>
+  );
+}
+
+function ReponseTrois({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+    colors={['#ffffff', '#c6f6ff', '#ff6347']}
+    style={styles.background}
+   >
+      <ScrollView>
+   <View style={{}}>
+ <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment contacter un vendeur ?</Text>
+     <Card>
+       <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+     </Card>
+ <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+ <View style={styles.container}>
+   <Video
+     ref={video}
+     style={styles.video}
+     source={{
+       uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+     }}
+     useNativeControls
+     resizeMode="contain"
+     isLooping
+     onPlaybackStatusUpdate={status => setStatus(() => status)}
+   />
+   <View style={styles.buttons}>
+     <Button
+       title={status.isPlaying ? 'Pause' : 'Play'}
+       onPress={() =>
+         status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+       }
+     />
+   </View>
+ </View>
+
+ </View>
+ </ScrollView>
+ <View style={{height: 185}}>
+    {/* navbar  */}
+</View>
+ </LinearGradient>
+  );
+}
+
+
+function ReponseQuatre({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier une annonce ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+function ReponseCinq({ navigation }) {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+    <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier son mot de passe ?</Text>
+        <Card>
+          <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+        </Card>
+    <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+
+////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
 
@@ -396,6 +740,12 @@ function Home() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Accueil" component={HomeScreen} />
         <Stack.Screen name="Annonce" component={DetailsAnnonce} />
+        <Stack.Screen name="FAQ / Aide" component={FaqScreen} />
+        <Stack.Screen name="Créer un compte" component={ReponseUne} />
+        <Stack.Screen name="Créer une annonce" component={ReponseDeux} />
+        <Stack.Screen name="Contacter un vendeur" component={ReponseTrois} />
+        <Stack.Screen name="Modifier une annonce" component={ReponseQuatre} />
+        <Stack.Screen name="Modifier son mot de passe" component={ReponseCinq} />
       </Stack.Navigator>
    
   );
@@ -473,7 +823,37 @@ const styles = StyleSheet.create({
       color: "#676767",
       marginRight: 5,
       
-    }
+    },
+    input: {
+      height: 35,
+      width:400,
+      borderWidth: 1,
+      borderRadius: 5,
+      borderColor: 'gray',
+      marginTop: 5,
+      backgroundColor:'white',
+      paddingLeft:10
+  },
+  inputmess: {
+    height: 85,
+    width:400,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray',
+    marginTop: 5,
+    backgroundColor:'white',
+    paddingLeft:10
+},
+video: {
+  alignSelf: 'center',
+  width: 360,
+  height: 220,
+},
+buttons: {
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
     
 });
 
