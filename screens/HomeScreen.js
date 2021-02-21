@@ -3,7 +3,7 @@ import * as React from 'react';
 //import SearchInput, { createFilter } from 'react-native-search-filter';
 import { useState } from 'react';
 import { Ionicons as Icon } from '@expo/vector-icons';
-import { Image,StyleSheet , FlatList, SafeAreaView,Text, View , ScrollView } from 'react-native';
+import { Image,StyleSheet , FlatList, SafeAreaView,Text, View , ScrollView , TextInput} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SearchBar} from "react-native-elements";
 import { SliderBox } from "react-native-image-slider-box";
@@ -54,7 +54,10 @@ function HomeScreen({ navigation }) {
               style={{ width: 113, height: 60, justifyContent: 'center', margin: 17 }}
             />
           </View>
-          <View style={{ margin: -13, marginLeft: 1, padding: -29 }}>
+          
+
+            <View style={{flexDirection:'row'}}>
+          <View style={{ margin: -13, marginLeft: 1, width:375,padding: -29 , justifyContent:'center' }}>
             <SearchBar
               platform="android"
               containerStyle={{ paddingBottom: -10, paddingTop: -10 }}
@@ -72,6 +75,12 @@ function HomeScreen({ navigation }) {
               onCancel={() => console.log(onCancel())}
               value={value}
             />
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('FAQ / Aide')}>
+          <View style={{paddingLeft:15}}>
+            <Icon name="help-circle" style={styles.infoIcon} size={30} />
+            </View>
+            </TouchableOpacity>
           </View>
           <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 , height:7}}>
            
@@ -212,12 +221,7 @@ function HomeScreen({ navigation }) {
   }
     />
     
-  </View>
-  
-
-  
-
-    
+  </View>    
     </ScrollView>
    <View style={{height: 177}}>
        {/* navbar  */}
@@ -392,7 +396,129 @@ function DetailsAnnonce({ navigation }) {
 
 
 
+///////////////////////////////////////////////////////////////////////////
+function FaqScreen({ navigation }) {
+  
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+        <ScrollView>
+        <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Faire aux questions :</Text>
+        </View>
+          <Divider style={{ width: "80%", margin: 20  }} />
+        <View style={{ flex: 1, paddingTop: 5 }}>
+    
 
+              <View style={{paddingBottom:10}}>
+              <Button style={{ }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Comment creer un compte ? 
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Comment creer une annonce ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Comment contacter un vendeur ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Comment nodifier une annonce ?
+              </Button>
+              </View>
+              <View style={{paddingBottom:10}}>
+              <Button style={{   }}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Comment modifier son mot de passe ? 
+              </Button>
+              </View>
+              <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
+             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Nous contacter :</Text>
+        </View>
+          <Divider style={{ width: "80%", margin: 20  }} />
+    
+          <View style={{ paddingLeft:5}}>
+                <TextInput style={styles.input} placeholder="Nom" />
+                <TextInput style={styles.input} placeholder="Prénom" />
+                <TextInput style={styles.input} placeholder="E-mail" />
+                <TextInput style={styles.input} placeholder="Sujet" />
+                <TextInput style={styles.inputmess} placeholder="Message" multiline={true} numberOfLines={6} />
+            </View>
+
+            <View style={{paddingLeft:294 , paddingTop:5}}>
+            <Button style={{ width:110}}
+              color="green" 
+              icon="" 
+              mode="contained" 
+              onPress={() => navigation.navigate('Reponse1')}>
+              Envoyer 
+              </Button>
+              </View>
+        </View>
+    </ScrollView>
+   <View style={{height: 179}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+    
+  );
+}
+
+
+
+function ReponseUne({ navigation }) {
+ 
+  return (
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <ScrollView>
+      <View style={{}}>
+     
+     
+    {/* code reponse 1  */}
+    <Text> hello reponse de la question 1 details</Text>
+
+
+
+    </View>
+    </ScrollView>
+    <View style={{height: 185}}>
+       {/* navbar  */}
+   </View>
+    </LinearGradient>
+  );
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////
 
 const Stack = createStackNavigator();
 
@@ -402,6 +528,8 @@ function Home() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Accueil" component={HomeScreen} />
         <Stack.Screen name="Annonce" component={DetailsAnnonce} />
+        <Stack.Screen name="FAQ / Aide" component={FaqScreen} />
+        <Stack.Screen name="Reponse1" component={ReponseUne} />
       </Stack.Navigator>
    
   );
@@ -479,7 +607,27 @@ const styles = StyleSheet.create({
       color: "#676767",
       marginRight: 5,
       
-    }
+    },
+    input: {
+      height: 35,
+      width:400,
+      borderWidth: 1,
+      borderRadius: 5,
+      borderColor: 'gray',
+      marginTop: 5,
+      backgroundColor:'white',
+      paddingLeft:10
+  },
+  inputmess: {
+    height: 85,
+    width:400,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray',
+    marginTop: 5,
+    backgroundColor:'white',
+    paddingLeft:10
+},
     
 });
 
