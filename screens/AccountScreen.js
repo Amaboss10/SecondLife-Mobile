@@ -109,6 +109,7 @@ function AccountScreen ({ navigation }) {
             </View>
 
             </View>
+            <View style={{alignItems:'center'}}>
             <View  style={styles.button}> 
 
               <Button  style={styles.btn} 
@@ -120,6 +121,7 @@ function AccountScreen ({ navigation }) {
                   > Modifier </Text>             
               </Button>
 
+            </View>
             </View>
 
             <View style={{paddingTop:25 , paddingLeft:370}}>
@@ -198,14 +200,17 @@ const styles = StyleSheet.create({
      },
      button : { 
       position:'absolute',
-      top:700,
-      left:62,
+      paddingTop:620,
+      justifyContent:'center',
+      textAlign:'center',
+      alignItems:'center'
+      
      },
      btn : { 
       alignItems: 'center',
       textAlign: 'center',
-      width:300,
-      height:70,
+      width:200,
+      height:40,
       backgroundColor:'tomato',
       borderRadius: 40,
       textAlign: 'center',
