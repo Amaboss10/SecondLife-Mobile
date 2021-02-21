@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
+// const [data, setData] = useState(false);
+
+
 const connection = mysql.createPool({
   host     : '185.224.138.153',
   user     : 'u404269894_uSL',
@@ -26,20 +29,31 @@ app.get('/utilisateur', function (req, res) {
       if (error) throw error;
     // Getting the 'response' from the database and sending it to our route. This is were the data is.    
       res.send(results);
+    
     });
   });
 });
 
+
 // Starting our server.
 app.listen(3000, () => {
- console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
+ 
+  console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
 });
 
-// test(){
-//     fetch('http://yourPCip:3000/users')
-//       .then(response => response.json())
-//       .then(users => console.warn(users))
-//   }
+
+// inserer user 
+// modifier compte 
+// verifier authentif
+// supp user
 
 
-//test
+// inserer annonce
+// select 
+// delete
+// update
+
+// insert favoris
+// delete
+
+//

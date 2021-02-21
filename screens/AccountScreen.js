@@ -10,11 +10,6 @@ import Dialog from "react-native-dialog";
 let sizee = 30;
 
 
-// fetch('http://10.189.116.41:3000/utilisateur')
-// .then(res => res. json())
-// .then((out) => {
-// console.log('Checkout this JSON! ', out);
-// })
 
 
 const Perso = ({
@@ -26,6 +21,15 @@ const Perso = ({
     tel: "+3362552352 ",
     naiss:'01/01/1998'
 });
+
+fetchData = async() => {
+  // alert('test fetsh');
+  fetch('http://localhost:3000/utilisateur')
+  // fetch('10.189.116.41:3000/utilisateur')
+    .then(response => response.json())
+    .then(utilisateur => console.dir(utilisateur))
+    .then(alert(utilisateur))
+}
 
 function AccountScreen ({ navigation }) {
   const [visible, setVisible] = useState(false);
@@ -108,6 +112,7 @@ function AccountScreen ({ navigation }) {
             <View  style={styles.button}> 
 
               <Button  style={styles.btn} 
+              // onPress={fetchData}
                onPress={() => navigation.push('Edit')}    
                >
                   <Text style={{color:'white'}}
