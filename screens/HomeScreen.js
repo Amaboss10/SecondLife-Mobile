@@ -227,10 +227,10 @@ function DetailsAnnonce({ navigation }) {
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
        style={styles.background}
       >
-         <ScrollView>
+         <ScrollView >
       <View style={{ flex: 1, alignItems: 'center'}}>
      
-      <Card containerStyle={{width:390 , height:700  }} wrapperStyle={{}}>
+      <Card containerStyle={{width:390 , height:'100%'  }} wrapperStyle={{}}>
 
       <View style={{flexDirection:'row'}}>
       <Card.Title style={{ textAlign:'left' , fontSize:20}}>Titre Annonce XXX</Card.Title>
@@ -386,7 +386,7 @@ function DetailsAnnonce({ navigation }) {
     </View>
     </ScrollView>
     <View style={{height: 185}}>
-       {/* navbar  */}
+       {/* { navbar  } */}
    </View>
     </LinearGradient>
   );
@@ -754,6 +754,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
+    height:'100%',
       flex: 1,
       
   },
