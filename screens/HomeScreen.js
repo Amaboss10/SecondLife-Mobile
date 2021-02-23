@@ -90,14 +90,7 @@ function HomeScreen({ navigation }) {
         </View>
         <ScrollView>
           <View>
-            <View style={{marginTop:25}}>
-              <SliderBox
-                images={img.images}
-                onCurrentImagePressed={index =>
-                  console.warn(`image ${index} pressed`)
-                }
-              />
-      </View>
+            
     </View>
     
 
@@ -196,16 +189,10 @@ function HomeScreen({ navigation }) {
                 </View>
                 <View style={{paddingTop:20  ,flexDirection:'row'}}>
                   <View style={{flexDirection:'row'}}>
-              <Button style={{ marginTop: 38 , paddingRight:-10   }}
-              color="#7cd1e0" 
-              icon="eye" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Annonce')}>
-              Contacter
-              </Button>
-                <View style={{paddingLeft:7}}>
+              
+                <View style={{paddingLeft:155}}>
               <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
-              color="#faff79"
+              color="yellow"
               icon="star" 
               mode='contained' 
               onPress={() => alert("favoris")}>
@@ -247,7 +234,7 @@ function DetailsAnnonce({ navigation }) {
 
       <View style={{flexDirection:'row'}}>
       <Card.Title style={{ textAlign:'left' , fontSize:20}}>Titre Annonce XXX</Card.Title>
-      <ModalDropdown  options={['Signaler']}>
+      <ModalDropdown  options={['Favoriser','Signaler']}>
          
                 <View style={styles.quizAttrRight}>
                   <View style={{paddingLeft:160  }}>
@@ -305,13 +292,23 @@ function DetailsAnnonce({ navigation }) {
         </View>
        
         
-        <Button style={{   }}
-              color="#7cd1e0" 
+        <View style={{flexDirection:'row', justifyContent:'center'}}>
+              <Button style={{   }}
+              color="green" 
               icon="" 
               mode="contained" 
               onPress={() => navigation.navigate('Annonce')}>
               Contacter
               </Button>
+                <View style={{paddingLeft:7}}>
+              <Button style={{alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
+              color="yellow"
+              icon="star" 
+              mode='contained' 
+              onPress={() => alert("favoris")}>
+              </Button>
+              </View>
+              </View>
               
       
 
