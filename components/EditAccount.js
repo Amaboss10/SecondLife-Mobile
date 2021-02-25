@@ -15,6 +15,21 @@ const Perso = ({
     naiss:'01/01/1998'
 });
 
+
+let user ={
+  BookId:1,
+  Title: "coolBook",
+  Author: "Me"
+}
+function insert(){
+  fetch("localhost:3000/createU",
+  {
+    method: "post",
+    data: JSON.stringify(user)
+  })
+}
+
+
 function EditProScreen({navigation}) {
     const [nom, setNom] = React.useState('');
     const [prenom, setPrenom] = React.useState('');
@@ -109,16 +124,37 @@ function EditProScreen({navigation}) {
        </View>
          
        </View>
+       
+       <View style={{flexDirection:'row',justifyContent:'center'}}>
        <View  style={styles.button}> 
          
            <Button  style={styles.btn}   
-               onPress={() => navigation.goBack('Edit')}  
+               onPress={
+                 insert,
+                 () => navigation.goBack('Edit')
+                
+                }  
            >
              <Text style={{color:'white'}} > Sauvegarder </Text>             
          </Button>
        </View>
-           
-       
+       <View  style={{position:'relative',
+      paddingTop:620,
+      paddingLeft:10}}> 
+       <Button  style={{alignItems: 'center',
+      textAlign: 'center',
+      width:170,
+      height:40,
+      backgroundColor:'grey',
+      borderRadius: 40,
+      textAlign: 'center',
+      justifyContent: 'center'}}   
+               onPress={() => navigation.goBack('Edit')}  
+           >
+             <Text style={{color:'white'}} > Annuler </Text>             
+         </Button>
+         </View>
+       </View>
      </View >
    );
  }
@@ -159,22 +195,22 @@ const styles = StyleSheet.create({
      },
     cont : { 
       position:'absolute',
-      top:350,
+      top:300,
       paddingVertical: 8,
       paddingHorizontal: 45,
       fontSize: 30,
       fontWeight: "bold",
      },
      button : { 
-      position:'absolute',
-      top:700,
-      left:62,
+      position:'relative',
+      paddingTop:620,
+      
      },
      btn : { 
       alignItems: 'center',
       textAlign: 'center',
-      width:300,
-      height:70,
+      width:170,
+      height:40,
       backgroundColor:'tomato',
       borderRadius: 40,
       textAlign: 'center',

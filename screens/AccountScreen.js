@@ -9,12 +9,7 @@ import Dialog from "react-native-dialog";
 
 let sizee = 30;
 
-
-// fetch('http://10.189.116.41:3000/utilisateur')
-// .then(res => res. json())
-// .then((out) => {
-// console.log('Checkout this JSON! ', out);
-// })
+var connecter = false;
 
 
 const Perso = ({
@@ -26,6 +21,7 @@ const Perso = ({
     tel: "+3362552352 ",
     naiss:'01/01/1998'
 });
+
 
 function AccountScreen ({ navigation }) {
   const [visible, setVisible] = useState(false);
@@ -43,6 +39,7 @@ function AccountScreen ({ navigation }) {
     // ...Your logic
     setVisible(false);
   };
+  if (connecter){
     return (
       
         <View>
@@ -105,9 +102,11 @@ function AccountScreen ({ navigation }) {
             </View>
 
             </View>
+            <View style={{alignItems:'center'}}>
             <View  style={styles.button}> 
 
               <Button  style={styles.btn} 
+              // onPress={fetchData}
                onPress={() => navigation.push('Edit')}    
                >
                   <Text style={{color:'white'}}
@@ -116,8 +115,9 @@ function AccountScreen ({ navigation }) {
               </Button>
 
             </View>
+            </View>
 
-            <View style={{paddingTop:25 , paddingLeft:370}}>
+            <View style={{paddingLeft:370}}>
             <Icon name="log-out" style={styles.infoIcon} size={40} onPress={showDialog} />
             <Dialog.Container visible={visible}>
         <Dialog.Title>Deconnexion</Dialog.Title>
@@ -134,18 +134,18 @@ function AccountScreen ({ navigation }) {
 
     );
   }
-  // else{
-  //   return(
-  //     <View>
-  //       <Text>teexxt </Text>
-  //       {navigation.push('Login')}
-  //       {/* {alert('veuillez vous connectez ! ')} */}
+  else{
+    return(
+      <View>
+        <Text>teexxt </Text>
+        {navigation.push('Login')}
+        {/* {alert('veuillez vous connectez ! ')} */}
         
-  //     </View>
-  //   );
+      </View>
+    );
     
-//   }
-// }
+  }
+}
 
 export default AccountScreen;
 
@@ -192,15 +192,16 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
      },
      button : { 
-      position:'absolute',
-      top:700,
-      left:62,
+      position:'relative',
+      top:'1000%',
+      paddingTop:20,
+      justifyContent:'center'
      },
      btn : { 
       alignItems: 'center',
       textAlign: 'center',
-      width:300,
-      height:70,
+      width:200,
+      height:40,
       backgroundColor:'tomato',
       borderRadius: 40,
       textAlign: 'center',

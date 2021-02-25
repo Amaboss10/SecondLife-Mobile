@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
+// const [data, setData] = useState(false);
+
+
 const connection = mysql.createPool({
   host     : '185.224.138.153',
   user     : 'u404269894_uSL',
@@ -26,20 +29,74 @@ app.get('/utilisateur', function (req, res) {
       if (error) throw error;
     // Getting the 'response' from the database and sending it to our route. This is were the data is.    
       res.send(results);
+    
     });
   });
 });
-
-// Starting our server.
-app.listen(3000, () => {
- console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
+app.get('/annonce', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM annonce', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
 });
 
-// test(){
-//     fetch('http://yourPCip:3000/users')
-//       .then(response => response.json())
-//       .then(users => console.warn(users))
-//   }
+// app.post('/createU', function (req, res) {
+//   var newUser = JSON.parse(req.body.data)
+//   books.push(newUser)
+//   console.log(books);
+//   if (error) throw error;
+// })
+app.post('/create', function (req, res) {
+  var newBook = {
+      "BookID": req.body.BookID,
+      "Title": req.body.Title,
+      "Author": req.body.Author
+  }
+  books.push(newBook)
+  console.log(books);
+
+ res.status(201).json({"some":"response"})
 
 
-//test
+})
+
+app.get('/favoris', function (req, res) {
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+  // Executing the MySQL query (select all data from the 'users' table).
+  connection.query('SELECT * FROM favoris', function (error, results, fields) {
+   
+  // If some error occurs, we throw an error.
+    if (error) throw error;
+  // Getting the 'response' from the database and sending it to our route. This is were the data is.    
+    res.send(results);
+  
+  });
+});
+});
+// Starting our server.
+app.listen(3000, () => {
+ 
+  console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
+});
+
+
+// inserer user 
+// modifier compte 
+// verifier authentif
+// supp user
+
+
+// inserer annonce
+// select 
+// delete
+// update
+
+// insert favoris
+// delete
+
+//
