@@ -7,9 +7,19 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
+import { BASE_URL } from '../assets/constantes';
+import axios from 'axios';
 
 
 const AddAnnonceScreen = () => {
+
+    //Les states permettent de stoker tous les champs des textInput
+    const [titreAnnonce, setTittreAnnonce] = useState('');
+    const [refAnnonce, setRefAnnonce] = useState('');
+    const [lieu, setLieu] = useState('');
+    const [prixAnnonce, setPrixAnnonce] = useState(0);
+    const [poidsAnnonce, setPoidsAnnonce] = useState(0)
+    const [descriptionAnnonce, setDescriptionAnnonce] = useState('');
 
     const [image, setImage] = useState(null);
 
@@ -39,6 +49,32 @@ const AddAnnonceScreen = () => {
         }
     };
 
+    //Uploade des informations entrees par le client
+    const uploadAnnonce = () => {
+
+        console.log("Entrer")
+        axios({
+            method: 'post',
+            url: BASE_URL + '/api/annonces',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/ld+json'
+            },
+            data: {
+                "titre": titreAnnonce,
+                "description": descriptionAnnonce,
+                "prix": prixAnnonce,
+                "poids": poidsAnnonce,
+                "etat": "neuf",
+                "dateDePublication": "2021-02-25T02:01:08.597Z",
+                "isValid": true
+            }
+        }).then((response) => { console.log(response) })
+            .catch((error) => { console.log(error) })
+
+        console.log("Sortie")
+    }
+
 
     return (
         <SafeAreaView style={styles.main_container}>
@@ -48,10 +84,10 @@ const AddAnnonceScreen = () => {
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce" />
-                <TextInput style={styles.input} placeholder="Référence" />
-                <TextInput style={styles.input} placeholder="Lieu" />
-                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' />
+                <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={titre => setTittreAnnonce(titre)} />
+                <TextInput style={styles.input} placeholder="Référence" onChangeText={refA => setRefAnnonce(refA)} />
+                <TextInput style={styles.input} placeholder="Lieu" onChangeText={lieuA => setLieu(lieuA)} />
+                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' onChangeText={prixA => setPrixAnnonce(prixA)} />
             </View>
 
             <View style={styles.picker_container}>
@@ -110,7 +146,12 @@ const AddAnnonceScreen = () => {
             </View>
 
             <View>
-                <TextInput style={styles.input} placeholder="Description" multiline={true} numberOfLines={6} />
+                <TextInput style={styles.input}
+                    placeholder="Description"
+                    multiline={true}
+                    numberOfLines={6}
+                    onChangeText={desc => setDescriptionAnnonce(desc)}
+                />
             </View>
 
             <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
@@ -123,6 +164,7 @@ const AddAnnonceScreen = () => {
                             color="orange"
                         />
                     }
+                    onPress={uploadAnnonce}
                 />
             </View>
 
