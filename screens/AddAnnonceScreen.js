@@ -254,14 +254,14 @@ const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
         textAlign: 'left',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
         color: 'black',
-        width: 150,
-        height: 30,
-        // paddingRight: 150,
-        // paddingLeft: 50,
+        width: 200,
+        height: 20,
+        paddingRight: 20,
+        paddingLeft: 50,
         justifyContent: 'flex-start',
         marginLeft: 5
     }
