@@ -22,14 +22,6 @@ const Perso = ({
     naiss:'01/01/1998'
 });
 
-fetchData = async() => {
-  // alert('test fetsh');
-  fetch('http://localhost:3000/utilisateur')
-  // fetch('10.189.116.41:3000/utilisateur')
-    .then(response => response.json())
-    .then(utilisateur => console.dir(utilisateur))
-    .then(alert(utilisateur))
-}
 
 function AccountScreen ({ navigation }) {
   const [visible, setVisible] = useState(false);
@@ -200,11 +192,8 @@ const styles = StyleSheet.create({
      },
      button : { 
       position:'absolute',
-      paddingTop:620,
-      justifyContent:'center',
-      textAlign:'center',
-      alignItems:'center'
-      
+      top:'1000%',
+      left:'15%',
      },
      btn : { 
       alignItems: 'center',

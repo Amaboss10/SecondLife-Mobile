@@ -33,7 +33,36 @@ app.get('/utilisateur', function (req, res) {
     });
   });
 });
+app.get('/annonce', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM annonce', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
 
+// app.post('/createU', function (req, res) {
+//   var newUser = JSON.parse(req.body.data)
+//   books.push(newUser)
+//   console.log(books);
+//   if (error) throw error;
+// })
+app.post('/create', function (req, res) {
+  var newBook = {
+      "BookID": req.body.BookID,
+      "Title": req.body.Title,
+      "Author": req.body.Author
+  }
+  books.push(newBook)
+  console.log(books);
+
+ res.status(201).json({"some":"response"})
+
+
+})
 
 app.get('/favoris', function (req, res) {
   // Connecting to the database.
@@ -49,13 +78,10 @@ app.get('/favoris', function (req, res) {
   });
 });
 });
-
-
 // Starting our server.
 app.listen(3000, () => {
  
   console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
-  
 });
 
 

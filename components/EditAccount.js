@@ -15,6 +15,21 @@ const Perso = ({
     naiss:'01/01/1998'
 });
 
+
+let user ={
+  BookId:1,
+  Title: "coolBook",
+  Author: "Me"
+}
+function insert(){
+  fetch("localhost:3000/createU",
+  {
+    method: "post",
+    data: JSON.stringify(user)
+  })
+}
+
+
 function EditProScreen({navigation}) {
     const [nom, setNom] = React.useState('');
     const [prenom, setPrenom] = React.useState('');
@@ -114,7 +129,11 @@ function EditProScreen({navigation}) {
        <View  style={styles.button}> 
          
            <Button  style={styles.btn}   
-               onPress={() => navigation.goBack('Edit')}  
+               onPress={
+                 insert,
+                 () => navigation.goBack('Edit')
+                
+                }  
            >
              <Text style={{color:'white'}} > Sauvegarder </Text>             
          </Button>

@@ -11,6 +11,10 @@ import ComptesScreen from '../screens/AccountScreen';
 import EditProScreen from '../components/EditAccount';
 import CategorieScreen from '../screens/CategoryScreen';
 
+//test
+import Test from '../screens/Auth/test';
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -61,6 +65,7 @@ const BottomNavigation = () => {
                 component={ComptesScreen}
               />
               <Stack.Screen name="Edit" component={EditProScreen} />
+              {/* <Stack.Screen name="Edit" component={Test} /> */}
             </Stack.Navigator>
           )}
         </Tab.Screen>

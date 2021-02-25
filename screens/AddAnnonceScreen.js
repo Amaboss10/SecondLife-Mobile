@@ -52,6 +52,8 @@ const AddAnnonceScreen = () => {
                 <TextInput style={styles.input} placeholder="Référence" />
                 <TextInput style={styles.input} placeholder="Lieu" />
                 <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' />
+                <TextInput style={styles.input} placeholder="Etat" />
+                <TextInput style={styles.input} placeholder="Poids" keyboardType='numeric' />
             </View>
 
             <View style={styles.picker_container}>
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     },
     body_container: {
         flex: -3,
-        marginTop: 30
+        marginTop: 5
     },
     container: {
         flex: 1,
@@ -154,36 +156,38 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     image: {
-        height: 200,
+        height: 150,
         borderWidth: 1,
         borderRadius: 15,
     },
     input: {
         height: 50,
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 5,
         borderColor: 'gray',
         paddingLeft: 10,
-        marginTop: 5
+        marginTop: 3
     },
     addButton: {
         backgroundColor: 'white',
-        width: 100,
+        width: 75,
         justifyContent: 'center'
     },
     picker_container: {
         flex: 1,
         flexDirection: 'column',
-        marginTop: 10,
+        marginTop: 5,
     },
     categorie_picker: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-start',  
+        marginTop: 5,
     },
     sous_categ_picker: {
         flexDirection: 'row',
-        marginTop: 10,
-        justifyContent: 'space-between'
+        marginTop: 5,
+        justifyContent: 'flex-start',
+       
     },
     label: {
         fontSize: 16,
@@ -196,12 +200,16 @@ const styles = StyleSheet.create({
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
-        textAlign: 'center',
-        borderWidth: 1,
+        textAlign: 'left',
+        borderWidth: 2,
         borderColor: 'gray',
         borderRadius: 4,
         color: 'black',
-        width: 200,
-        height: 30,
+        width: 150,
+        height: 20,
+        paddingRight:150,
+        paddingLeft:50,
+        justifyContent:'flex-start',
+        marginLeft:5
     }
 });
