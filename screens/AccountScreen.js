@@ -116,7 +116,7 @@ function AccountScreen ({ navigation }) {
             </View>
             </View>
 
-            <View style={{paddingTop:25 , paddingLeft:370}}>
+            <View style={{paddingLeft:370}}>
             <Icon name="log-out" style={styles.infoIcon} size={40} onPress={showDialog} />
             <Dialog.Container visible={visible}>
         <Dialog.Title>Deconnexion</Dialog.Title>
@@ -191,9 +191,10 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
      },
      button : { 
-      position:'absolute',
+      position:'relative',
       top:'1000%',
-      left:'15%',
+      paddingTop:20,
+      justifyContent:'center'
      },
      btn : { 
       alignItems: 'center',
