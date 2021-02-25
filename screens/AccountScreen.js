@@ -9,7 +9,7 @@ import Dialog from "react-native-dialog";
 
 let sizee = 30;
 
-
+var connecter = false;
 
 
 const Perso = ({
@@ -39,6 +39,7 @@ function AccountScreen ({ navigation }) {
     // ...Your logic
     setVisible(false);
   };
+  if (connecter){
     return (
       
         <View>
@@ -133,18 +134,18 @@ function AccountScreen ({ navigation }) {
 
     );
   }
-  // else{
-  //   return(
-  //     <View>
-  //       <Text>teexxt </Text>
-  //       {navigation.push('Login')}
-  //       {/* {alert('veuillez vous connectez ! ')} */}
+  else{
+    return(
+      <View>
+        <Text>teexxt </Text>
+        {navigation.push('Login')}
+        {/* {alert('veuillez vous connectez ! ')} */}
         
-  //     </View>
-  //   );
+      </View>
+    );
     
-//   }
-// }
+  }
+}
 
 export default AccountScreen;
 
