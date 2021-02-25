@@ -56,11 +56,11 @@ const FavorisScreen = () => {
               placeholderTextColor="#888"
               cancelButtonTitle="Cancel"
               cancelButtonProps={{}}
-              onCancel={() => console.log(onCancel())}
+              onCancel={() => console.log()}
               value={value}
             />
           </View>
-          <View style={{ textAlign: 'left',margin: 20}}>
+          <View style={{ textAlign: 'left', margin: 20 }}>
             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }}>Les Favoris :</Text>
           </View>
         </View>

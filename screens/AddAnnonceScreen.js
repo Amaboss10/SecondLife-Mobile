@@ -24,7 +24,6 @@ const AddAnnonceScreen = () => {
     const [descriptionAnnonce, setDescriptionAnnonce] = useState('');
     const [selectCategorie, setSelectCategorie] = useState('');
     const [selectSousCategorie, setSelectSousCategorie] = useState('');
-
     const [image, setImage] = useState(null);
 
     useEffect(() => {
@@ -55,6 +54,15 @@ const AddAnnonceScreen = () => {
 
     //Uploade des informations entrees par le client
     const uploadAnnonce = () => {
+
+        console.log("-----------------------")
+        console.log(titreAnnonce)
+        console.log(descriptionAnnonce)
+        console.log(prixAnnonce)
+        console.log(image)
+        console.log(poidsAnnonce)
+        console.log(etatAnnonce)
+        console.log(selectCategorie)
 
         console.log("Entrer")
         axios({
@@ -118,7 +126,6 @@ const AddAnnonceScreen = () => {
                 <View style={styles.sous_categ_picker}>
                     <Text style={styles.label}> Sous-Categorie: </Text>
                     <RNPickerSelect
-                        placeholder="sous-categ"
                         onValueChange={(value) => setSelectSousCategorie(value)}
                         items={[
                             {
@@ -151,7 +158,7 @@ const AddAnnonceScreen = () => {
                 </View>
             </View>
 
-            <View>
+            <View style={{ marginTop: 40 }}>
                 <TextInput style={styles.input}
                     placeholder="Description"
                     multiline={true}
@@ -160,7 +167,7 @@ const AddAnnonceScreen = () => {
                 />
             </View>
 
-            <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
 
                 <Button style={styles.addButton} type="clear"
                     icon={
@@ -174,7 +181,7 @@ const AddAnnonceScreen = () => {
                 />
             </View>
 
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 
@@ -217,7 +224,7 @@ const styles = StyleSheet.create({
     addButton: {
         backgroundColor: 'white',
         width: 75,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     picker_container: {
         flex: 1,
@@ -252,9 +259,9 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 4,
         color: 'black',
         width: 150,
-        height: 20,
-        paddingRight: 150,
-        paddingLeft: 50,
+        height: 30,
+        // paddingRight: 150,
+        // paddingLeft: 50,
         justifyContent: 'flex-start',
         marginLeft: 5
     }
