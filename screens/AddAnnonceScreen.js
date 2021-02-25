@@ -78,7 +78,7 @@ const AddAnnonceScreen = () => {
                 <View style={styles.sous_categ_picker}>
                     <Text style={styles.label}> Sous-Categorie: </Text>
                     <RNPickerSelect
-                        placeholder="sous-categ"
+                
                         onValueChange={(value) => console.log(value)}
                         items={[
                             {
@@ -201,13 +201,13 @@ const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
         textAlign: 'left',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
         color: 'black',
-        width: 150,
+        width: 200,
         height: 20,
-        paddingRight:150,
+        paddingRight:20,
         paddingLeft:50,
         justifyContent:'flex-start',
         marginLeft:5
