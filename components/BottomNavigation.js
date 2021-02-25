@@ -65,7 +65,7 @@ const BottomNavigation = () => {
                 component={ComptesScreen}
               />
               <Stack.Screen name="Edit" component={EditProScreen} />
-              {/* <Stack.Screen name="Edit" component={Test} /> */}
+              <Stack.Screen name="Login" component={Test} />
             </Stack.Navigator>
           )}
         </Tab.Screen>
