@@ -191,9 +191,10 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
      },
      button : { 
-      position:'absolute',
+      position:'relative',
       top:'1000%',
-      left:'15%',
+      paddingTop:20,
+      justifyContent:'center'
      },
      btn : { 
       alignItems: 'center',
