@@ -7,10 +7,23 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
+import { BASE_URL } from '../assets/constantes';
+import axios from 'axios';
+
 
 
 const AddAnnonceScreen = () => {
 
+    //Les states permettent de stoker tous les champs des textInput
+    const [titreAnnonce, setTittreAnnonce] = useState('');
+    const [refAnnonce, setRefAnnonce] = useState('');
+    const [lieu, setLieu] = useState('');
+    const [prixAnnonce, setPrixAnnonce] = useState(0);
+    const [poidsAnnonce, setPoidsAnnonce] = useState(0);
+    const [etatAnnonce, setEtatAnnonce] = useState('');
+    const [descriptionAnnonce, setDescriptionAnnonce] = useState('');
+    const [selectCategorie, setSelectCategorie] = useState('');
+    const [selectSousCategorie, setSelectSousCategorie] = useState('');
     const [image, setImage] = useState(null);
 
     useEffect(() => {
@@ -39,6 +52,41 @@ const AddAnnonceScreen = () => {
         }
     };
 
+    //Uploade des informations entrees par le client
+    const uploadAnnonce = () => {
+
+        console.log("-----------------------")
+        console.log(titreAnnonce)
+        console.log(descriptionAnnonce)
+        console.log(prixAnnonce)
+        console.log(image)
+        console.log(poidsAnnonce)
+        console.log(etatAnnonce)
+        console.log(selectCategorie)
+
+        console.log("Entrer")
+        axios({
+            method: 'post',
+            url: BASE_URL + '/api/annonces',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/ld+json'
+            },
+            data: {
+                "titre": titreAnnonce,
+                "description": descriptionAnnonce,
+                "prix": prixAnnonce,
+                "poids": poidsAnnonce,
+                "etat": etatAnnonce,
+                "dateDePublication": "2021-02-25T02:01:08.597Z",
+                "isValid": true
+            }
+        }).then((response) => { console.log(response) })
+            .catch((error) => { console.log(error) })
+
+        console.log("Sortie")
+    }
+
 
     return (
         <SafeAreaView style={styles.main_container}>
@@ -48,19 +96,19 @@ const AddAnnonceScreen = () => {
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce" />
-                <TextInput style={styles.input} placeholder="Référence" />
-                <TextInput style={styles.input} placeholder="Lieu" />
-                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' />
-                <TextInput style={styles.input} placeholder="Etat" />
-                <TextInput style={styles.input} placeholder="Poids" keyboardType='numeric' />
+                <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Référence" onChangeText={value => setRefAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Lieu" onChangeText={value => setLieu(value)} />
+                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' onChangeText={value => setPrixAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Poids" keyboardType='numeric' onChangeText={value => setPoidsAnnonce(value)} />
             </View>
 
             <View style={styles.picker_container}>
                 <View style={styles.categorie_picker}>
                     <Text style={styles.label}> Categorie: </Text>
                     <RNPickerSelect
-                        onValueChange={(value) => console.log(value)}
+                        onValueChange={(value) => setSelectCategorie(value)}
                         items={[
                             {
                                 label: 'Téléphonie',
@@ -78,8 +126,7 @@ const AddAnnonceScreen = () => {
                 <View style={styles.sous_categ_picker}>
                     <Text style={styles.label}> Sous-Categorie: </Text>
                     <RNPickerSelect
-                        placeholder="sous-categ"
-                        onValueChange={(value) => console.log(value)}
+                        onValueChange={(value) => setSelectSousCategorie(value)}
                         items={[
                             {
                                 label: 'Smartphone',
@@ -111,11 +158,16 @@ const AddAnnonceScreen = () => {
                 </View>
             </View>
 
-            <View>
-                <TextInput style={styles.input} placeholder="Description" multiline={true} numberOfLines={6} />
+            <View style={{ marginTop: 40 }}>
+                <TextInput style={styles.input}
+                    placeholder="Description"
+                    multiline={true}
+                    numberOfLines={6}
+                    onChangeText={desc => setDescriptionAnnonce(desc)}
+                />
             </View>
 
-            <View style={{ flex: -3, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
 
                 <Button style={styles.addButton} type="clear"
                     icon={
@@ -125,10 +177,11 @@ const AddAnnonceScreen = () => {
                             color="orange"
                         />
                     }
+                    onPress={uploadAnnonce}
                 />
             </View>
 
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 
@@ -171,7 +224,7 @@ const styles = StyleSheet.create({
     addButton: {
         backgroundColor: 'white',
         width: 75,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     picker_container: {
         flex: 1,
@@ -180,14 +233,14 @@ const styles = StyleSheet.create({
     },
     categorie_picker: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',  
+        justifyContent: 'flex-start',
         marginTop: 5,
     },
     sous_categ_picker: {
         flexDirection: 'row',
         marginTop: 5,
         justifyContent: 'flex-start',
-       
+
     },
     label: {
         fontSize: 16,
@@ -201,15 +254,15 @@ const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
         textAlign: 'left',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
         color: 'black',
-        width: 150,
+        width: 200,
         height: 20,
-        paddingRight:150,
-        paddingLeft:50,
-        justifyContent:'flex-start',
-        marginLeft:5
+        paddingRight: 20,
+        paddingLeft: 50,
+        justifyContent: 'flex-start',
+        marginLeft: 5
     }
 });
