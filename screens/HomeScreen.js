@@ -15,24 +15,120 @@ import RNPickerSelect from 'react-native-picker-select';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { Textarea } from 'native-base';
+import '../global'
 
 
-const data = [1]
 
 export  class HomeScreen extends React.Component {
   state = {
     loading: true,
-    annonce: null,
+    // navigation : navigation,
+    person: null
   };
+  createTable = () => {
+  let table = []
+
+  // Outer loop to create parent
+  for (let i = 0; i < 3; i++) {
+    const data = [1]
+    let children = []
+    //Inner loop to create children
+
+    const { navigation } = this.props;
+      children.push(<FlatList 
+        data={data}
+        renderItem ={(item) =>   
+        <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
+                 <View style={{flexDirection:'row'}}>
+                <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+                
+                
+                 <Image
+              style={{ width: 160, height: 190 }}
+              resizeMode='cover'
+              source={{
+                uri:
+                  "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
+              }}
+            />
+                 </TouchableOpacity>
+                  <List.Item              
+                  title={""}
+                  onPress={() => navigation.navigate('Annonce')}
+                  left={props =>
+                  <View style={{ justifyContent: 'center',
+                  alignItems: 'center' }}> 
+                 
+                  </View>
+                  }
+                  right={props =>
+                  <View>
+                    <View style={{}}>
+                      <View style={{paddingLeft:95}}>
+                    <ModalDropdown  options={['Consulter', 'Contacter','Favoris','Signaler']}>
+             
+             <View style={styles.quizAttrRight}>
+               <View style={{paddingLeft:100}}>
+                 <Icon name="ios-list" style={styles.infoIcon} size={20} />
+                 <Text style={styles.infoText}>{item.NumberQuestions}</Text>
+               </View>
+             </View>
+            
+            </ModalDropdown>
+            </View>
+                      <View style={{paddingBottom:0}}>
+                    <Text style={{fontSize:20 , fontWeight:'500'}}>
+                    {global.users[i].titre_annonce}
+                    </Text>
+                    
+                    </View>
+                    <Text style={{textAlign:'left' , color:'red'}}>
+                    {global.users[i].prix_annonce} EUR
+                    </Text>
+                    <Text>
+                    Catégorie : {global.users[i].categorie}
+                    </Text>
+                    <Text>
+                      Marque : {global.users[i].marque} 
+                    </Text>
+                    </View>
+                    <View style={{flexDirection:'row'}}>
+                      
+                  
+                    <View style={{paddingLeft:155}}>
+                  <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
+                  color="yellow"
+                  icon="star" 
+                  mode='contained' 
+                  onPress={() => alert("favoris")}>
+                  </Button>
+                  </View>
+                  
+                  </View>
+                  </View>
+                  }
+                />
+    
+                </View>
+               
+          </View>
+      }
+        /> )
+      
+      
+      table.push(<View style={styles.container}>{children}</View>)
+  }
+  return table
+}
 
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/annonce";
+    const url = "http://10.212.156.25:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({ annonce: data, loading: false });
+    this.setState({ person: data, loading: false });
   }
 
   render() {
@@ -44,14 +140,15 @@ export  class HomeScreen extends React.Component {
       );
     }
 
-    if (!this.state.annonce) {
-      return (<View style={{justifyContent:'center',alignContent:'center',alignItems:'center', paddingTop:35}}>
-      <Icon name="sad" style={{color: "tomato"}} size={47} />
-      <Text style={{ fontSize:15,textAlign:'center'}}>Pas d'annonce pour le moment pour le moment</Text>
-      </View>);
+    if (!this.state.person) {
+      return <Text>Pas d'annonce pour le moment :(</Text>;
     }
-    const { navigation } = this.props;
+    
     return (
+      
+        <View style={styles.container}>
+
+
 <LinearGradient
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
        style={styles.background}
@@ -139,839 +236,198 @@ export  class HomeScreen extends React.Component {
     
     <View style={{ flex: 1, paddingTop: 5 , backgroundColor: 'rgba(242, 250, 250, 42)'}}>
     
-    <FlatList 
-    data={data}
-    renderItem ={(item) =>   
-    <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
-             <View style={{flexDirection:'row'}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
-            
-            
-             <Image
-          style={{ width: 160, height: 190 }}
-          resizeMode='cover'
-          source={{
-            uri:
-              "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
-          }}
-        />
-             </TouchableOpacity>
-              <List.Item              
-              title={""}
-              onPress={() => navigation.navigate('Annonce')}
-              left={props =>
-              <View style={{ justifyContent: 'center',
-              alignItems: 'center' }}> 
-             
-              </View>
-              }
-              right={props =>
-              <View>
-                <View style={{}}>
-                  <View style={{paddingLeft:95}}>
-                <ModalDropdown  options={['Consulter', 'Contacter','Favoris','Signaler']}>
-         
-         <View style={styles.quizAttrRight}>
-           <View style={{paddingLeft:100}}>
-             <Icon name="ios-list" style={styles.infoIcon} size={20} />
-             <Text style={styles.infoText}>{item.NumberQuestions}</Text>
-           </View>
-         </View>
-        
-        </ModalDropdown>
-        </View>
-                  <View style={{paddingBottom:0}}>
-                <Text style={{fontSize:20 , fontWeight:'500'}}>
-                {this.state.annonce[0].titre_annonce}
-                </Text>
-                
-                </View>
-                <Text style={{textAlign:'left' , color:'red'}}>
-                {this.state.annonce[0].prix_annonce} EUR
-                </Text>
-                <Text>
-                Catégorie : {this.state.annonce[0].categorie}
-                </Text>
-                <Text>
-                  Marque : {this.state.annonce[0].marque} 
-                </Text>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                  
-              
-                <View style={{paddingLeft:155}}>
-              <Button style={{ marginTop: 38 ,alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
-              color="yellow"
-              icon="star" 
-              mode='contained' 
-              onPress={() => alert("favoris")}>
-              </Button>
-              </View>
-              
-              </View>
-              </View>
-              }
-            />
-
-            </View>
-           
-      </View>
-  }
-    />
-    
+    {this.createTable()}
   </View>    
     </ScrollView>
-   <View style={{height: 300}}>
+   <View style={{height: 177}}>
        {/* navbar  */}
    </View>
     </LinearGradient>
-
-
-
-
+        </View>
+        
     );
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+                            //DETAILS ANNONCE
 
-export  class DetailsAnnonce extends React.Component {
-  
-  state = {
-    loading: true,
-    annonce: null,
-    personne: 'admin',
-    photo_annonce: 'admin' ,
-  };
-
-  async componentDidMount() {
-
-    // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/annonce";
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ annonce: data, loading: false });
-
-    const url_1 = "http://10.212.156.25:3000/personne";
-    const response_1 = await fetch(url_1);
-    const data_1 = await response_1.json();
-    this.setState({ personne: data_1, loading: false });
-
-    const url_2 = "http://10.212.156.25:3000/photo_annonce";
-    const response_2 = await fetch(url_2);
-    const data_2 = await response_2.json();
-    this.setState({ photo_annonce: data_2 });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return (
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="tomato" />
-        </View>
-      );
-    }
-
-    if (!this.state.annonce) {
-      return <Text>Pas d'annonce pour le moment</Text>;
-    }
-    return (
-<LinearGradient
-       colors={['#ffffff', '#c6f6ff', '#ff6347']}
-       style={styles.background}
-      >
-         <ScrollView >
-      <View style={{ flex: 1, alignItems: 'center'}}>
+                            export  class DetailsAnnonce extends React.Component {
+                              state = {
+                                loading: true,
+                                // navigation : navigation,
+                                person: null
+                              };
+                              createTable = () => {
+                              let table = []
+                            
+                              // Outer loop to create parent
+                              for (let i = 0; i < 3; i++) {
+                                const data = [1]
+                                let children = []
+                                //Inner loop to create children
+                            
+                                
+                                  children.push( <View style={{ flex: 1, alignItems: 'center'}}>
      
-      <Card containerStyle={{width:390 , height:'100%'  }} wrapperStyle={{}}>
-
-      <View style={{}}>
-        <View style={{paddingLeft:333}}>
-      <Icon name="information-circle" style={styles.infoIcon} size={22} />
-      </View>
-      <Card.Title style={{ textAlign:'left' , fontSize:20}}>{this.state.annonce[0].titre_annonce}</Card.Title>
-      <ModalDropdown  options={['Favoriser','Signaler']}>
-         
-                <View style={styles.quizAttrRight}>
-                  <View style={{paddingLeft:160  }}>
-                   
-                    <Text style={styles.infoText}></Text>
-                  </View>
-                </View>
-               
-               </ModalDropdown>
-               </View>
-      
-      
-      <View
-        style={{
-          position: "relative",
-        }}
-      >
-          <View style={{ alignItems:'center' , alignContent:'center'}}>
-          <Image
-          source={this.state.photo_annonce[0].lien_photo_annonce}
-          style={{width: 250, height: 250}}
-        />
-        
-        
-        
-        </View>
-        <Card.Divider />
-       
-        <View style={{}}>
-        <Text style={{fontSize:20 , fontWeight:'700' ,color:'red', textAlign:'right'}}>{this.state.annonce[0].prix_annonce} EUR</Text>
-     </View>
-        <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Catégorie : {this.state.annonce[0].categorie}</Text>
-      
-        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Sous catégorie : {this.state.annonce[0].sous_categorie}</Text>
-      
-        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Marque : {this.state.annonce[0].marque}</Text>
-      
-        <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Date : {this.state.annonce[0].date_publi_annonce}</Text>
-        <Card.Divider/>
-      <Card.Title  style={{ textAlign:'left' , fontSize:20}}>Information du vendeur</Card.Title>
-     
-     <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Nom : {this.state.personne[0].nom_personne}</Text>
-   
-     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Prenom : {this.state.personne[0].prenom_personne}</Text>
-   
-     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Pays - Ville :</Text>
-   
-     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Nombre d'annonces publiees :</Text>
+                                  <Card containerStyle={{width:390 , height:'100%'  }} wrapperStyle={{}}>
+                            
+                                  <View style={{}}>
+                                    <View style={{paddingLeft:333}}>
+                                  <Icon name="information-circle" style={styles.infoIcon} size={22} />
+                                  </View>
+                                  <Card.Title style={{ textAlign:'left' , fontSize:20}}>{global.users[i].titre_annonce}</Card.Title>
+                                  <ModalDropdown  options={['Favoriser','Signaler']}>
+                                     
+                                            <View style={styles.quizAttrRight}>
+                                              <View style={{paddingLeft:160  }}>
+                                               
+                                                <Text style={styles.infoText}></Text>
+                                              </View>
+                                            </View>
+                                           
+                                           </ModalDropdown>
+                                           </View>
+                                  
+                                  
+                                  <View
+                                    style={{
+                                      position: "relative",
+                                    }}
+                                  >
+                                      <View style={{ alignItems:'center' , alignContent:'center'}}>
+                                      <Image
+                                      style={{ width: 350, height: 200 }}
+                                      resizeMode="cover"
+                                      source={{
+                                        uri:
+                                          "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
+                                      }}
+                                    />
+                            
+                                    
+                                    </View>
+                                    <Card.Divider />
+                                   
+                                    <View style={{}}>
+                                    <Text style={{fontSize:20 , fontWeight:'700' ,color:'red', textAlign:'right'}}>{global.users[i].prix_annonce} EUR</Text>
+                                 </View>
+                                    <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Catégorie : {global.users[i].categorie}</Text>
+                                  
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Sous catégorie : {global.users[i].sous_categorie}</Text>
+                                  
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Marque : {global.users[i].marque}</Text>
+                                  
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Date : {global.users[i].date_publi_annonce}</Text>
+                                    <Card.Divider/>
+                                  <Card.Title  style={{ textAlign:'left' , fontSize:20}}>Information du vendeur</Card.Title>
+                                 
+                                 <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Nom :</Text>
+                               
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Prenom :</Text>
+                               
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Pays - Ville :</Text>
+                               
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Nombre d'annonces publiees :</Text>
+                                
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Moyens de contact :</Text>  
+                                    
+                                    </View>
+                                   
+                                    
+                                    <View style={{flexDirection:'row', justifyContent:'center'}}>
+                                          <Button style={{   }}
+                                          color="green" 
+                                          icon="" 
+                                          mode="contained" 
+                                          onPress={() => navigation.navigate('Annonce')}>
+                                          Contacter
+                                          </Button>
+                                            <View style={{paddingLeft:7}}>
+                                          <Button style={{alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
+                                          color="yellow"
+                                          icon="star" 
+                                          mode='contained' 
+                                          onPress={() => alert("favoris")}>
+                                          </Button>
+                                          </View>
+                                          </View>
+                                          
+                                  
+                            
+                                </Card>
+                                </View> )
+                                  
+                                  
+                                  table.push(<View style={styles.container}>{children}</View>)
+                              }
+                              return table
+                            }
+                            
+                              async componentDidMount() {
+                            
+                                // mettez  votre adresse IP
+                                const url = "http://10.212.156.25:3000/utilisateur";
+                            
+                                const response = await fetch(url);
+                                const data = await response.json();
+                                this.setState({ person: data, loading: false });
+                              }
+                            
+                              render() {
+                                if (this.state.loading) {
+                                  return (
+                                    <View style={[styles.container, styles.horizontal]}>
+                                      <ActivityIndicator size="large" color="tomato" />
+                                    </View>
+                                  );
+                                }
+                            
+                                if (!this.state.person) {
+                                  return <Text>Annonce introuvable :(</Text>;
+                                }
+                                
+                                return (
+                                  
+                                    <View style={styles.container}>
+                            
+                            
+                            <LinearGradient
+                             colors={['#ffffff', '#c6f6ff', '#ff6347']}
+                             style={styles.background}
+                            >
+                            <ScrollView >
     
-     <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Moyens de contact :</Text>  
-        
-        </View>
-       
-        
-        <View style={{flexDirection:'row', justifyContent:'center'}}>
-              <Button style={{   }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Annonce')}>
-              Contacter
-              </Button>
-                <View style={{paddingLeft:7}}>
-              <Button style={{alignItems:'center' ,paddingLeft:10 , alignContent:'center'  , height:35 , justifyContent:'center'  }}
-              color="yellow"
-              icon="star" 
-              mode='contained' 
-              onPress={() => alert("favoris")}>
-              </Button>
-              </View>
-              </View>
-              
-      
-
-    </Card>
-    </View>
-    <View>
-            <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
-            <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16,paddingTop:15 , paddingLeft:10 }} >Plus d'annonces :</Text>
-          </View>
-        <Divider style={{ width: "80%", margin: 10 }} />
-         <FlatList
-         horizontal
-         data={data}
-         renderItem={({ item: rowData }) => {
-           return (
-             <View style={{width:190}}>
-             <Card
-               title={null}
-               image={{ uri: rowData.imageUrl }}
-               containerStyle={{ padding: 0,alignItems:'center',height:212, width: 180 }}
-             >
-               <View style={{ marginBottom: 10,marginTop:10 }}>
-               <Text style={{ fontWeight:'700'}} >
-               {this.state.annonce[1].titre_annonce}
-               </Text>
-               <Text style={{color:'red'}}>
-               {this.state.annonce[1].prix_annonce} EUR 
-               </Text>
-               </View>
-               <Image
-           style={{ width: 150, height: 150 }}
-           resizeMode='cover'
-           source={{
-             uri:
-               "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
-           }}
-         />
-             </Card>
-             </View>
-           );
-         }}
-         keyExtractor={(item, index) => index}
-       />
-       </View>
+                            <View>
+                            {this.createTable()}
+                            </View>
+                  
     </ScrollView>
-    <View style={{height: 185}}>
+    
+    <View style={{height: 177}}>
        {/* { navbar  } */}
    </View>
     </LinearGradient>
-    );
-  }
-}
-
-
-
-export  class FaqScreen extends React.Component {
-  
-  state = {
-    loading: false,
-    Annonce: null,
-    
-  };
-
-  async componentDidMount() {
-
-    // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/annonce";
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ annonce: data, loading: false });
-
-    
-  }
-
-  render() {
-    if (this.state.loading) {
-      return (
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="tomato" />
-        </View>
-      );
-    }
-
-    if (!this.state.annonce) {
-      return(
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="tomato" />
-        </View>
-        );
-    }
-    return (
-<LinearGradient
-       colors={['#ffffff', '#c6f6ff', '#ff6347']}
-       style={styles.background}
-      >
-        <ScrollView>
-        <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
-             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Faire aux questions :</Text>
-        </View>
-          <Divider style={{ width: "80%", margin: 20  }} />
-        <View style={{ flex: 1, paddingTop: 5 }}>
-    
-
-              <View style={{paddingBottom:10}}>
-              <Button style={{ }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Créer un compte')}>
-              Comment créer un compte ? 
-              </Button>
-              </View>
-              <View style={{paddingBottom:10}}>
-              <Button style={{   }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Créer une annonce')}>
-              Comment créer une annonce ?
-              </Button>
-              </View>
-              <View style={{paddingBottom:10}}>
-              <Button style={{   }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Contacter un vendeur')}>
-              Comment contacter un vendeur ?
-              </Button>
-              </View>
-              <View style={{paddingBottom:10}}>
-              <Button style={{   }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Modifier une annonce')}>
-              Comment modifier une annonce ?
-              </Button>
-              </View>
-              <View style={{paddingBottom:10}}>
-              <Button style={{   }}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Modifier son mot de passe')}>
-              Comment modifier son mot de passe ? 
-              </Button>
-              </View>
-              <View style={{ textAlign: 'left', marginTop:10 , paddingLeft:10 }}>
-             <Text style={{ color: '#000000', fontWeight: '500', fontSize: 16 }} >Nous contacter :</Text>
-        </View>
-          <Divider style={{ width: "80%", margin: 20  }} />
-    
-          <View style={{ paddingLeft:5}}>
-                <TextInput style={styles.input} placeholder="Nom" />
-                <TextInput style={styles.input} placeholder="Prénom" />
-                <TextInput style={styles.input} placeholder="E-mail" />
-                <TextInput style={styles.input} placeholder="Sujet" />
-                <TextInput style={styles.inputmess} placeholder="Message" multiline={true} numberOfLines={6} />
-            </View>
-
-            <View style={{paddingLeft:294 , paddingTop:5}}>
-            <Button style={{ width:110}}
-              color="green" 
-              icon="" 
-              mode="contained" 
-              onPress={() => navigation.navigate('Reponse1')}>
-              Envoyer 
-              </Button>
-              </View>
-        </View>
-    </ScrollView>
-   <View style={{height: 179}}>
-       {/* navbar  */}
-   </View>
-    </LinearGradient>
-    );
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-                                  //FAQ
-
-                                  export  class ReponseUne extends React.Component {
-  
-                                    state = {
-                                      loading: false,
-                                      Annonce: null,
-                                      
-                                    };
-                                  
-                                    async componentDidMount() {
-                                  
-                                      // mettez  votre adresse IP
-                                      const url = "http://10.212.156.25:3000/annonce";
-                                      const response = await fetch(url);
-                                      const data = await response.json();
-                                      this.setState({ annonce: data, loading: false });
-                                  
-                                      
-                                    }
-                                  
-                                    render() {
-                                      if (this.state.loading) {
-                                        return (
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                        );
-                                      }
-                                  
-                                      if (!this.state.annonce) {
-                                        return(
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                          );
-                                      }
-                                      return (
-                                        <LinearGradient
-                                        colors={['#ffffff', '#c6f6ff', '#ff6347']}
-                                        style={styles.background}
-                                       >
-                                          <ScrollView>
-                                       <View style={{}}>
-                                     <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer un compte ?</Text>
-                                         <Card>
-                                           <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-                                         </Card>
-                                     <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
-                                 
-                                     <View style={styles.container}>
-                                       <Video
-                                         ref={video}
-                                         style={styles.video}
-                                         source={{
-                                           uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-                                         }}
-                                         useNativeControls
-                                         resizeMode="contain"
-                                         isLooping
-                                         onPlaybackStatusUpdate={status => setStatus(() => status)}
-                                       />
-                                       <View style={styles.buttons}>
-                                         <Button
-                                           title={status.isPlaying ? 'Pause' : 'Play'}
-                                           onPress={() =>
-                                             status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                                           }
-                                         />
-                                       </View>
-                                     </View>
-                                 
-                                     </View>
-                                     </ScrollView>
-                                     <View style={{height: 185}}>
-                                        {/* navbar  */}
                                     </View>
-                                     </LinearGradient>
-                                      );
-                                    }
-                                  }
-
-                                  export  class ReponseDeux extends React.Component {
-  
-                                    state = {
-                                      loading: false,
-                                      Annonce: null,
-                                      
-                                    };
-                                  
-                                    async componentDidMount() {
-                                  
-                                      // mettez  votre adresse IP
-                                      const url = "http://10.212.156.25:3000/annonce";
-                                      const response = await fetch(url);
-                                      const data = await response.json();
-                                      this.setState({ annonce: data, loading: false });
-                                  
-                                      
-                                    }
-                                  
-                                    render() {
-                                      if (this.state.loading) {
-                                        return (
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                        );
-                                      }
-                                  
-                                      if (!this.state.annonce) {
-                                        return(
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                          );
-                                      }
-                                      return (
-                                        <LinearGradient
-                                        colors={['#ffffff', '#c6f6ff', '#ff6347']}
-                                        style={styles.background}
-                                       >
-                                          <ScrollView>
-                                       <View style={{}}>
-                                     <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment créer une annonce ?</Text>
-                                         <Card>
-                                           <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-                                         </Card>
-                                     <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
                                     
-                                     <View style={styles.container}>
-                                       <Video
-                                         ref={video}
-                                         style={styles.video}
-                                         source={{
-                                           uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-                                         }}
-                                         useNativeControls
-                                         resizeMode="contain"
-                                         isLooping
-                                         onPlaybackStatusUpdate={status => setStatus(() => status)}
-                                       />
-                                       <View style={styles.buttons}>
-                                         <Button
-                                           title={status.isPlaying ? 'Pause' : 'Play'}
-                                           onPress={() =>
-                                             status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                                           }
-                                         />
-                                       </View>
-                                     </View>
-                                    
-                                     </View>
-                                     </ScrollView>
-                                     <View style={{height: 185}}>
-                                        {/* navbar  */}
-                                    </View>
-                                     </LinearGradient>
-                                      );
-                                    }
-                                  }
-                                  
-                                  export  class ReponseTrois extends React.Component {
-  
-                                    state = {
-                                      loading: false,
-                                      Annonce: null,
-                                      
-                                    };
-                                  
-                                    async componentDidMount() {
-                                  
-                                      // mettez  votre adresse IP
-                                      const url = "http://10.212.156.25:3000/annonce";
-                                      const response = await fetch(url);
-                                      const data = await response.json();
-                                      this.setState({ annonce: data, loading: false });
-                                  
-                                      
-                                    }
-                                  
-                                    render() {
-                                      if (this.state.loading) {
-                                        return (
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                        );
-                                      }
-                                  
-                                      if (!this.state.annonce) {
-                                        return(
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                          );
-                                      }
-                                      return (
-                                        <LinearGradient
-    colors={['#ffffff', '#c6f6ff', '#ff6347']}
-    style={styles.background}
-   >
-      <ScrollView>
-   <View style={{}}>
- <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment contacter un vendeur ?</Text>
-     <Card>
-       <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-     </Card>
- <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
+                                );
+                              }
+                            }
 
- <View style={styles.container}>
-   <Video
-     ref={video}
-     style={styles.video}
-     source={{
-       uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-     }}
-     useNativeControls
-     resizeMode="contain"
-     isLooping
-     onPlaybackStatusUpdate={status => setStatus(() => status)}
-   />
-   <View style={styles.buttons}>
-     <Button
-       title={status.isPlaying ? 'Pause' : 'Play'}
-       onPress={() =>
-         status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-       }
-     />
-   </View>
- </View>
+                            const Stack = createStackNavigator();
 
- </View>
- </ScrollView>
- <View style={{height: 185}}>
-    {/* navbar  */}
-</View>
- </LinearGradient>
-                                      );
-                                    }
-                                  }
-                                  
-                                  export  class ReponseQuatre extends React.Component {
-  
-                                    state = {
-                                      loading: false,
-                                      Annonce: null,
-                                      
-                                    };
-                                  
-                                    async componentDidMount() {
-                                  
-                                      // mettez  votre adresse IP
-                                      const url = "http://10.212.156.25:3000/annonce";
-                                      const response = await fetch(url);
-                                      const data = await response.json();
-                                      this.setState({ annonce: data, loading: false });
-                                  
-                                      
-                                    }
-                                  
-                                    render() {
-                                      if (this.state.loading) {
-                                        return (
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                        );
-                                      }
-                                  
-                                      if (!this.state.annonce) {
-                                        return(
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                          );
-                                      }
-                                      return (
-                                        <LinearGradient
-                                        colors={['#ffffff', '#c6f6ff', '#ff6347']}
-                                        style={styles.background}
-                                       >
-                                          <ScrollView>
-                                       <View style={{}}>
-                                     <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier une annonce ?</Text>
-                                         <Card>
-                                           <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-                                         </Card>
-                                     <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
-                                 
-                                     <View style={styles.container}>
-                                       <Video
-                                         ref={video}
-                                         style={styles.video}
-                                         source={{
-                                           uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-                                         }}
-                                         useNativeControls
-                                         resizeMode="contain"
-                                         isLooping
-                                         onPlaybackStatusUpdate={status => setStatus(() => status)}
-                                       />
-                                       <View style={styles.buttons}>
-                                         <Button
-                                           title={status.isPlaying ? 'Pause' : 'Play'}
-                                           onPress={() =>
-                                             status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                                           }
-                                         />
-                                       </View>
-                                     </View>
-                                 
-                                     </View>
-                                     </ScrollView>
-                                     <View style={{height: 185}}>
-                                        {/* navbar  */}
-                                    </View>
-                                     </LinearGradient>
-                                      );
-                                    }
-                                  }
-
-
-                                  export  class ReponseCinq extends React.Component {
-  
-                                    state = {
-                                      loading: false,
-                                      Annonce: null,
-                                      
-                                    };
-                                  
-                                    async componentDidMount() {
-                                  
-                                      // mettez  votre adresse IP
-                                      const url = "http://10.212.156.25:3000/annonce";
-                                      const response = await fetch(url);
-                                      const data = await response.json();
-                                      this.setState({ annonce: data, loading: false });
-                                  
-                                      
-                                    }
-                                  
-                                    render() {
-                                      if (this.state.loading) {
-                                        return (
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                        );
-                                      }
-                                  
-                                      if (!this.state.annonce) {
-                                        return(
-                                          <View style={[styles.container, styles.horizontal]}>
-                                            <ActivityIndicator size="large" color="tomato" />
-                                          </View>
-                                          );
-                                      }
-                                      return (
-                                        <LinearGradient
-                                        colors={['#ffffff', '#c6f6ff', '#ff6347']}
-                                        style={styles.background}
-                                       >
-                                          <ScrollView>
-                                       <View style={{}}>
-                                     <Text style={{fontSize:16, paddingTop:10 , paddingLeft:13}}>Comment modifier une annonce ?</Text>
-                                         <Card>
-                                           <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-                                         </Card>
-                                     <Text style={{fontSize:16, paddingTop:10,paddingBottom:10 , paddingLeft:13}}>Regarder le tutoriel :</Text>
-                                 
-                                     <View style={styles.container}>
-                                       <Video
-                                         ref={video}
-                                         style={styles.video}
-                                         source={{
-                                           uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-                                         }}
-                                         useNativeControls
-                                         resizeMode="contain"
-                                         isLooping
-                                         onPlaybackStatusUpdate={status => setStatus(() => status)}
-                                       />
-                                       <View style={styles.buttons}>
-                                         <Button
-                                           title={status.isPlaying ? 'Pause' : 'Play'}
-                                           onPress={() =>
-                                             status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                                           }
-                                         />
-                                       </View>
-                                     </View>
-                                 
-                                     </View>
-                                     </ScrollView>
-                                     <View style={{height: 185}}>
-                                        {/* navbar  */}
-                                    </View>
-                                     </LinearGradient>
-                                      );
-                                    }
-                                  }
-                                  
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-const Stack = createStackNavigator();
-
-function Home() {
-  return (
-   
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Accueil" component={HomeScreen} />
-        <Stack.Screen name="Annonce" component={DetailsAnnonce} />
-        <Stack.Screen name="FAQ / Aide" component={FaqScreen} />
-        <Stack.Screen name="Créer un compte" component={ReponseUne} />
-        <Stack.Screen name="Créer une annonce" component={ReponseDeux} />
-        <Stack.Screen name="Contacter un vendeur" component={ReponseTrois} />
-        <Stack.Screen name="Modifier une annonce" component={ReponseQuatre} />
-        <Stack.Screen name="Modifier son mot de passe" component={ReponseCinq} />
-      </Stack.Navigator>
-   
-  );
-}
-
-export default Home;
-
-
+                            function Home() {
+                              return (
+                               
+                                  <Stack.Navigator initialRouteName="Home">
+                                    <Stack.Screen name="Accueil" component={HomeScreen} />
+                                    <Stack.Screen name="Annonce" component={DetailsAnnonce} />
+                                  </Stack.Navigator>
+                               
+                              );
+                            }
+                            
+                            export default Home;
 
 const styles = StyleSheet.create({
   container: {

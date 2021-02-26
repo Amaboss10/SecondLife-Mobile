@@ -1,6 +1,6 @@
 
 global.connecter = false;
-global.users = null;
+global.users = 'null';
 
 global.perso = ({
     nom: "AZIZI",

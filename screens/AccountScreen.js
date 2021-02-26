@@ -25,7 +25,7 @@ const Perso = global.perso;
 
 //-----------------------------------------
 const getUsersFromApi = () => {
-  return fetch('http://10.189.116.41:3000/users')
+  return fetch('http://10.212.156.25:3000/annonce')
     .then((response) => response.json())
     .then((json) => {
       global.users = json;
