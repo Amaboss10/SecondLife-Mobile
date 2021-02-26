@@ -1,0 +1,47 @@
+[
+    {
+        "id_personne": 1,
+        "nom_personne": "gautier",
+        "prenom_personne": "Mechaussie",
+        "mail_personne": "gautier19160@gmail.com",
+        "mdp_personne": "$2y$13$xnwbn/Arp76IGRhhTHR4L.IR5SnVKoGwLDE0lnqQ/e5MIHydt.MNq",
+        "lien_image_personne": "logo_site.jpg",
+        "type": "utilisateur"
+    },
+    {
+        "id_personne": 2,
+        "nom_personne": "G",
+        "prenom_personne": "G",
+        "mail_personne": "g@g.g",
+        "mdp_personne": "$2y$13$BYkSqhI.x8mOOk2hcJvqQuYoTYlWjTW9E1YWHV7dTqmzu1aP7uXHO",
+        "lien_image_personne": "logo_site.jpg",
+        "type": "utilisateur"
+    },
+    {
+        "id_personne": 3,
+        "nom_personne": "admin",
+        "prenom_personne": "preadmin",
+        "mail_personne": "h@h.h",
+        "mdp_personne": "12345678",
+        "lien_image_personne": "admin",
+        "type": "administrateur"
+    },
+    {
+        "id_personne": 4,
+        "nom_personne": "Piette",
+        "prenom_personne": "Isaia",
+        "mail_personne": "i@i.i",
+        "mdp_personne": "$2y$13$RdUGrh9K0X.ju0BNqRHc3Og1NDhlZBJr9gdxBolnpuodvg335PT1q",
+        "lien_image_personne": "logo_site.jpg",
+        "type": "utilisateur"
+    },
+    {
+        "id_personne": 5,
+        "nom_personne": "g",
+        "prenom_personne": "g",
+        "mail_personne": "g@g.g",
+        "mdp_personne": "$2y$13$Z7.AVJWysxSUV6UbiwIzfuWH6hxRHoADMYrojT7InRxCkP1AXHjsy",
+        "lien_image_personne": "logo_site.jpg",
+        "type": "utilisateur"
+    }
+]

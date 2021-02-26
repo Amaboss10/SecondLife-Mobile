@@ -24,6 +24,21 @@ export  class HomeScreen extends React.Component {
     loading: true,
     annonce: null,
   };
+  createTable = () => {
+  let table = []
+
+  // Outer loop to create parent
+  for (let i = 0; i < 3; i++) {
+    let children = []
+    //Inner loop to create children
+      children.push(<Text>{global.users[i].nom_personne}</Text> )
+      children.push(<Text>{global.users[i].prenom_personne}</Text> )
+      children.push(<Text>{global.users[i].mail_personne}</Text> )
+      
+      table.push(<View style={styles.container}>{children}</View>)
+  }
+  return table
+}
 
   async componentDidMount() {
 

@@ -28,7 +28,7 @@ const TopBar = () => {
                         placeholderTextColor="#888"
                         cancelButtonTitle="Cancel"
                         cancelButtonProps={{}}
-                        onCancel={() => console.log(onCancel())}
+
                         value={value}
                     />
                 </View>

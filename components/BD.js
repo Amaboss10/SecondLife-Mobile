@@ -33,6 +33,7 @@ app.get('/utilisateur', function (req, res) {
     });
   });
 });
+
 app.get('/annonce', function (req, res) {
   connection.getConnection(function (err, connection) {
   connection.query('SELECT * FROM annonce', function (error, results, fields) {
@@ -118,6 +119,8 @@ app.listen(3000, () => {
  
   console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
 });
+
+
 
 
 // inserer user 

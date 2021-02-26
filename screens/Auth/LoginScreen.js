@@ -1,15 +1,34 @@
 import React, { useState } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
-import { theme } from '../core/theme'
+import Background from '../../components/log/Background'
+import Logo from '../../components/log/Logo'
+import Header from '../../components/log/Header'
+import Button from '../../components/log/Button'
+import TextInput from '../../components/log/TextInput'
+import BackButton from '../../components/log/BackButton'
+// import { theme } from '../core/theme'
+import '../../global'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+
+function verifConexion(mail,pswrd){
+  var conn =false;
+    for(i=0;i<5;i++)
+    {
+      if(mail==global.users[i].mail_personne && pswrd==global.users[i].mdp_personne)
+      {
+        
+        conn = true
+        global.perso.nom = global.users[i].nom_personne
+        global.perso.prenom = global.users[i].prenom_personne
+        global.perso.email = global.users[i].mail_personne
+      
+      }
+    }
+    return conn;
+    
+}
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -23,17 +42,23 @@ const LoginScreen = ({ navigation }) => {
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
+    
+    
+    // if (email.value=='azizi@gmail.com' && password.value=='admin'){
+    if (verifConexion(email.value,password.value)) {
+      alert('connecter en tant que : ' +email.value)
+      global.connecter = true;
+      navigation.replace('Compte')
+      navigation.navigate('Accueil') 
+    }
+   
   }
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
-      <Header>Welcome back.</Header>
+      <Header>Bienvenue.</Header>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -57,7 +82,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <View style={styles.forgotPassword}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('ForgotPasswordScreen')}
+          // onPress={() => navigation.navigate('ForgotPasswordScreen')}
         >
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
@@ -67,7 +92,7 @@ const LoginScreen = ({ navigation }) => {
       </Button>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+        <TouchableOpacity onPress={() => navigation.replace('Register')}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
@@ -87,11 +112,11 @@ const styles = StyleSheet.create({
   },
   forgot: {
     fontSize: 13,
-    color: theme.colors.secondary,
+    // color: theme.colors.secondary,
   },
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    // color: theme.colors.primary,
   },
 })
 
