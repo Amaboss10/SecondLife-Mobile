@@ -4,17 +4,19 @@ import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'native-base';
 
 let sizee = 30
+import '../global'
 
-const Perso = ({
-    nom: "AZIZI",
-    prenom: "Mohammed",
-    profile:'./assets/prf.jpg',
-    email: "AZIZI.mohammed@etu.unilim.fr",
-    adresse: "La Borie Limoges",
-    tel: "+3362552352 ",
-    naiss:'01/01/1998'
-});
+// const Perso = ({
+//     nom: "AZIZI",
+//     prenom: "Mohammed",
+//     profile:'./assets/prf.jpg',
+//     email: "AZIZI.mohammed@etu.unilim.fr",
+//     adresse: "La Borie Limoges",
+//     tel: "+3362552352 ",
+//     naiss:'01/01/1998'
+// });
 
+const Perso = global.perso;
 
 let user ={
   BookId:1,

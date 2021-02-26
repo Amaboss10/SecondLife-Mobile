@@ -2,8 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
-import Login from '../screens/Auth/Login';
-import Register from '../screens/Auth/Register';
+
+import LoginScreen from '../screens/Auth/LoginScreen';
+import RegisterScreen from '../screens/Auth/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
 import FavorisScreen from '../screens/FavorisScreen';
 import AjoutScreen from '../screens/AddAnnonceScreen';
@@ -65,7 +66,9 @@ const BottomNavigation = () => {
                 component={ComptesScreen}
               />
               <Stack.Screen name="Edit" component={EditProScreen} />
-              <Stack.Screen name="Login" component={Test} />
+              {/* <Stack.Screen name="Login" component={Test} /> */}
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={RegisterScreen} />
             </Stack.Navigator>
           )}
         </Tab.Screen>

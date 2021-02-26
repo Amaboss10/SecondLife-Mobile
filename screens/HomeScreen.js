@@ -74,7 +74,7 @@ function HomeScreen({ navigation }) {
               placeholderTextColor="#888"
               cancelButtonTitle="Cancel"
               cancelButtonProps={{}}
-              onCancel={() => console.log(onCancel())}
+              // onCancel={() => console.log(onCancel())} // ani gle3ha kanet thkourej erreur ta tweli tchufha 
               value={value}
             />
           </View>

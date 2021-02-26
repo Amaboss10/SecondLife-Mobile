@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
-import { theme } from '../core/theme'
+import Background from '../../components/log/Background'
+import Logo from '../../components/log/Logo'
+import Header from '../../components/log/Header'
+import Button from '../../components/log/Button'
+import TextInput from '../../components/log/TextInput'
+import BackButton from '../../components/log/BackButton'
+// import { theme } from '../core/theme'
+
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
@@ -27,15 +28,21 @@ const RegisterScreen = ({ navigation }) => {
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
-  }
 
+
+    alert('bienvenue :' +email.value)
+    global.connecter = true;
+    navigation.replace('Compte')
+    navigation.navigate('Accueil') 
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: 'Dashboard' }],
+    // })
+  }
+  
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
       <Header>Create Account</Header>
       <TextInput
@@ -63,6 +70,7 @@ const RegisterScreen = ({ navigation }) => {
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
+        onCancel={(text) => setPassword({ value: text, error: '' })}// hadi ??
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -76,7 +84,7 @@ const RegisterScreen = ({ navigation }) => {
       </Button>
       <View style={styles.row}>
         <Text>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
+        <TouchableOpacity onPress={() => navigation.replace('Login')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -91,7 +99,7 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    // color: theme.colors.primary,
   },
 })
 
