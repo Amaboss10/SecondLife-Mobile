@@ -44,6 +44,41 @@ app.get('/annonce', function (req, res) {
 });
 });
 
+app.get('/photo_annonce', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM photo_annonce', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
+
+app.get('/personne', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM personne', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
+
+app.get('/faq', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM faq', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
 // app.post('/createU', function (req, res) {
 //   var newUser = JSON.parse(req.body.data)
 //   books.push(newUser)
