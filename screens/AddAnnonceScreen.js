@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Platform, Text, TextInput, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-//import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
@@ -27,6 +26,7 @@ const AddAnnonceScreen = () => {
     const [image, setImage] = useState(null);
 
     useEffect(() => {
+        //requete pour la recuperation d'une image à partir du smartphone
         (async () => {
             if (Platform.OS !== 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -53,18 +53,8 @@ const AddAnnonceScreen = () => {
     };
 
     //Uploade des informations entrees par le client
+    //TODO::ajouter datetime
     const uploadAnnonce = () => {
-
-        console.log("-----------------------")
-        console.log(titreAnnonce)
-        console.log(descriptionAnnonce)
-        console.log(prixAnnonce)
-        console.log(image)
-        console.log(poidsAnnonce)
-        console.log(etatAnnonce)
-        console.log(selectCategorie)
-
-        console.log("Entrer")
         axios({
             method: 'post',
             url: BASE_URL + '/api/annonces',
@@ -83,8 +73,6 @@ const AddAnnonceScreen = () => {
             }
         }).then((response) => { console.log(response) })
             .catch((error) => { console.log(error) })
-
-        console.log("Sortie")
     }
 
 
