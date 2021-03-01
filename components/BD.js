@@ -33,9 +33,45 @@ app.get('/utilisateur', function (req, res) {
     });
   });
 });
+
 app.get('/annonce', function (req, res) {
   connection.getConnection(function (err, connection) {
   connection.query('SELECT * FROM annonce', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
+app.get('/photo_annonce', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM photo_annonce', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
+
+app.get('/personne', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM personne', function (error, results, fields) {
+   
+    if (error) throw error;
+    res.send(results);
+  
+  });
+});
+});
+
+
+app.get('/faq', function (req, res) {
+  connection.getConnection(function (err, connection) {
+  connection.query('SELECT * FROM faq', function (error, results, fields) {
    
     if (error) throw error;
     res.send(results);
@@ -83,6 +119,8 @@ app.listen(3000, () => {
  
   console.log('Go to http://localhost:3000/utilisateur so you can see the data.');
 });
+
+
 
 
 // inserer user 

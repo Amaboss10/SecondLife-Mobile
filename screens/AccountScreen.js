@@ -6,23 +6,36 @@ import { Ionicons } from '@expo/vector-icons';
 import { Ionicons as Icon } from '@expo/vector-icons';
 import { Button } from 'native-base';
 import Dialog from "react-native-dialog";
-
 let sizee = 30;
 
-var connecter = false;
+import '../global'
 
+// global.connecter = false;
 
-const Perso = ({
-    nom: "AZIZI",
-    prenom: "Mohammed",
-    profile:'./assets/prf.jpg',
-    email: "AZIZI.mohammed@etu.unilim.fr",
-    adresse: "La Borie Limoges",
-    tel: "+3362552352 ",
-    naiss:'01/01/1998'
-});
+// const Perso = ({
+//     nom: "AZIZI",
+//     prenom: "Mohammed",
+//     profile:'./assets/prf.jpg',
+//     email: "AZIZI.mohammed@etu.unilim.fr",
+//     adresse: "La Borie Limoges",
+//     tel: "+3362552352 ",
+//     naiss:'01/01/1998'
+// });
+const Perso = global.perso;
 
-
+//-----------------------------------------
+const getUsersFromApi = () => {
+  return fetch('http://10.212.156.25:3000/annonce')
+    .then((response) => response.json())
+    .then((json) => {
+      global.users = json;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+getUsersFromApi()
+//-----------------------------------------
 function AccountScreen ({ navigation }) {
   const [visible, setVisible] = useState(false);
  
@@ -35,8 +48,7 @@ function AccountScreen ({ navigation }) {
   };
  
   const handleDelete = () => {
-    // The user has pressed the "Delete" button, so here you can do your own logic.
-    // ...Your logic
+    global.connecter =false;
     setVisible(false);
   };
   if (connecter){
@@ -52,7 +64,7 @@ function AccountScreen ({ navigation }) {
                   style={styles.prf}
                   source={require('../assets/prf.jpg')} 
                 />
-                  {/* source={require(Perso.profile)} /> */}
+                  
 
               <Image
               style={styles.logo}
@@ -137,10 +149,9 @@ function AccountScreen ({ navigation }) {
   else{
     return(
       <View>
-        <Text>teexxt </Text>
+        {/* <Text>teexxt </Text> */}
+        {alert('veuillez vous connectez ! ')}
         {navigation.push('Login')}
-        {/* {alert('veuillez vous connectez ! ')} */}
-        
       </View>
     );
     
