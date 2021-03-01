@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SectionList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BASE_URL } from '../assets/constantes';
@@ -14,6 +14,10 @@ const list = [
 
 const CategoryScreen = ({ navigation }) => {
 
+    const [categorieList, setCategorieList] = useState(null)
+    const [sousCategorieList, setSousCategorieList] = useState(null)
+
+    //permet de charger les catégories à partir de l'API
     const loadCategories = () => {
         axios({
             method: 'get',
@@ -23,12 +27,13 @@ const CategoryScreen = ({ navigation }) => {
                 'Accept': 'application/ld+json'
             }
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response);
         }).catch((error) => {
             console.log(error)
         });
     }
 
+    // on charge les categories avant que le component se lance
     useEffect(() => {
         loadCategories()
     }, [])
