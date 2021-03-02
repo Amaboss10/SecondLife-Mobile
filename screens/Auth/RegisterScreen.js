@@ -13,11 +13,69 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
+    //Les states permettent de stoker tous les champs des textInput
+    
+   
+
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  
+  // const [id_personne, setId_personne] = useState('');
+  // const [nom_personne, setNom_personne] = useState('');
+  const [prenom_personne, setPrenom_personne] = useState('');
+  // const [mail_personne, setMail_personne] = useState(0);
+  // const  [mdp_personne, setMdp_personne] = useState(0);
+  const [lien_image_personne, setLien_image_personne] = useState('/assets/prf.jpg');
+  const [type, setType] = useState('utilisateur');
 
+  
+  const uploadUser = () => {
+     console.log("Entrer")
+    // axios({
+    //     method: 'post',
+    //     url: BASE_URL + '/api/annonces',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/ld+json'
+    //     },
+    //     data: {
+    //       // "id_personne": id_personne,
+    //       "nom_personne": name,
+    //       "prenom_personne": prenom_personne,
+    //       "mail_personne": email,
+    //       "mdp_personne":password,
+    //       "lien_image_personne": lien_image_personne,
+    //       "type": type
+    //     }
+    // }).then((response) => { console.log(response) })
+    //     .catch((error) => { console.log(error) })
+    try{
+       fetch('http://10.212.156.25:3000/create',{
+          method:'post',
+          mode: 'no-cors',
+          headers:{
+            'accept' : 'application/json',
+            'contenttype' : 'application/json', 
+          },
+          body:JSON.stringify({
+            'nom_personne':'test ',
+            'prenom_personne':'test',
+            'mail_personne':'test@test.com',
+            'mdp_personne':'test',
+            'lien_image_personne':'test',
+            'type':'test'
+          })
+      })
+    }catch(e){
+      console.log(e)
+    }
+
+
+
+     console.log("Sortie")
+}
   const onSignUpPressed = () => {
     const nameError = nameValidator(name.value)
     const emailError = emailValidator(email.value)
@@ -30,7 +88,7 @@ const RegisterScreen = ({ navigation }) => {
     }
 
 
-    alert('bienvenue :' +email.value)
+    alert('bienvenue :' + email.value)
     global.connecter = true;
     navigation.replace('Compte')
     navigation.navigate('Accueil') 
@@ -38,6 +96,7 @@ const RegisterScreen = ({ navigation }) => {
     //   index: 0,
     //   routes: [{ name: 'Dashboard' }],
     // })
+    uploadUser()
   }
   
   return (
@@ -46,12 +105,20 @@ const RegisterScreen = ({ navigation }) => {
       <Logo />
       <Header>Create Account</Header>
       <TextInput
-        label="Name"
+        label="Nom"
         returnKeyType="next"
         value={name.value}
         onChangeText={(text) => setName({ value: text, error: '' })}
         error={!!name.error}
         errorText={name.error}
+      />
+      <TextInput
+        label="Prenom"
+        returnKeyType="next"
+        value={name.value}
+        onChangeText={(text) => setPrenom_personne({ value: text, error: '' })}
+        // error={!!name.error}
+        // errorText={name.error}
       />
       <TextInput
         label="Email"
@@ -73,6 +140,7 @@ const RegisterScreen = ({ navigation }) => {
         onCancel={(text) => setPassword({ value: text, error: '' })}// hadi ??
         error={!!password.error}
         errorText={password.error}
+        autoCapitalize="none"
         secureTextEntry
       />
       <Button

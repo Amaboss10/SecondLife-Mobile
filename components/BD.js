@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // const [data, setData] = useState(false);
 
 
@@ -87,13 +89,25 @@ app.get('/faq', function (req, res) {
 //   if (error) throw error;
 // })
 app.post('/create', function (req, res) {
-  var newBook = {
-      "BookID": req.body.BookID,
-      "Title": req.body.Title,
-      "Author": req.body.Author
+  var newUser = {
+    "nom_personne":req.body.nom_personne,
+    "prenom_personne":req.body.prenom_personne,
+    "mail_personne":req.body.mail_personne,
+    "mdp_personne":req.body.mdp_personne,
+    "lien_image_personne":req.body.lien_image_personne,
+    "type":req.body.type
+    
   }
-  books.push(newBook)
-  console.log(books);
+
+    // connection.getConnection(function (err, connection) {
+    // connection.query('INSERT * FROM faq', function (error, results, fields) {
+     
+    //   if (error) throw error;
+    //   res.send(results);
+    
+    // });
+  personne.push(newUser)
+  console.log(newUser);
 
  res.status(201).json({"some":"response"})
 
