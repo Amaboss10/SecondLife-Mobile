@@ -61,13 +61,14 @@ const LoginScreen = ({ navigation }) => {
        colors={['#ffffff', '#c6f6ff', '#ff6347']}
        style={styles.background}
       >
+        <Background>
          
-           <View style={{paddingLeft:100}}>
+           <View style={{}}>
          <Logo />
          </View>
       <Text style={{textAlign:'center' , fontSize:20}}>Bienvenue</Text>
      
-      <View style={{paddingLeft:6}}>
+      <View style={{}}>
      
       <TextInput
       style={{width:400 , height:40 }}
@@ -84,7 +85,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <TextInput
       style={{width:400 , height:40 }}
-        label="Password"
+        label="mot de passe"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -103,7 +104,7 @@ const LoginScreen = ({ navigation }) => {
     textAlign:'center',
     alignContent:'center',
     alignItems:'center'}}>
-          <Text style={styles.forgot}>Forgot your password?</Text>
+          <Text style={styles.forgot}>Mot de passe oublié?</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -112,16 +113,16 @@ const LoginScreen = ({ navigation }) => {
               color="tomato" 
               icon="" 
               mode="contained" >
-              Login
+              Connexion
               </Button>
       </View>
       <View style={styles.row}>
-        <Text style={{textAlign:'center' }}>Don’t have an account? </Text>
+        <Text style={{textAlign:'center' }}>Je n'ai pas de compte? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
-          <Text style={styles.link}>Se connecter</Text>
+          <Text style={styles.link}>S'inscrire</Text>
         </TouchableOpacity>
       </View>
-  
+      </Background>
     </LinearGradient>
 
 
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   forgot: {
-    paddingRight:130,
+    paddingRight:85,
     textAlign:'center',
     fontSize: 13,
     // color: theme.colors.secondary,
