@@ -80,20 +80,20 @@ const LoginScreen = ({ navigation }) => {
         errorText={password.error}
         secureTextEntry
       />
-      <View style={styles.forgotPassword}>
+      {/* <View style={styles.forgotPassword}>
         <TouchableOpacity
           // onPress={() => navigation.navigate('ForgotPasswordScreen')}
         >
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <Button mode="contained" onPress={onLoginPressed}>
         Login
       </Button>
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text>Vous avez pas de compte ? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
-          <Text style={styles.link}>Sign up</Text>
+          <Text style={styles.link}>Se connecter</Text>
         </TouchableOpacity>
       </View>
     </Background>

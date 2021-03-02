@@ -151,9 +151,9 @@ const RegisterScreen = ({ navigation }) => {
         Sign Up
       </Button>
       <View style={styles.row}>
-        <Text>Already have an account? </Text>
+        <Text>Vous avez deja un compte ? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Login')}>
-          <Text style={styles.link}>Login</Text>
+          <Text style={styles.link}>Se connecter</Text>
         </TouchableOpacity>
       </View>
     </Background>

@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 // const [data, setData] = useState(false);
 
 
@@ -88,31 +88,24 @@ app.get('/faq', function (req, res) {
 //   console.log(books);
 //   if (error) throw error;
 // })
-app.post('/create', function (req, res) {
-  var newUser = {
-    "nom_personne":req.body.nom_personne,
-    "prenom_personne":req.body.prenom_personne,
-    "mail_personne":req.body.mail_personne,
-    "mdp_personne":req.body.mdp_personne,
-    "lien_image_personne":req.body.lien_image_personne,
-    "type":req.body.type
+// app.post('/create', function (req, res) {
+//   var newUser = {
+//     "nom_personne":req.body.nom_personne,
+//     "prenom_personne":req.body.prenom_personne,
+//     "mail_personne":req.body.mail_personne,
+//     "mdp_personne":req.body.mdp_personne,
+//     "lien_image_personne":req.body.lien_image_personne,
+//     "type":req.body.type
     
-  }
+//   }
 
-    // connection.getConnection(function (err, connection) {
-    // connection.query('INSERT * FROM faq', function (error, results, fields) {
-     
-    //   if (error) throw error;
-    //   res.send(results);
-    
-    // });
-  personne.push(newUser)
-  console.log(newUser);
+//   personne.push(newUser)
+//   console.log(newUser);
 
- res.status(201).json({"some":"response"})
+//  res.status(201).json({"some":"response"})
 
 
-})
+// })
 
 app.get('/favoris', function (req, res) {
   // Connecting to the database.
