@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet,ScrollView ,View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../../components/log/Background'
 import Logo from '../../components/log/Logo'
@@ -11,6 +11,7 @@ import BackButton from '../../components/log/BackButton'
 import '../../global'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import { LinearGradient } from 'expo-linear-gradient';
 
 function verifConexion(mail,pswrd){
   var conn =false;
@@ -55,11 +56,21 @@ const LoginScreen = ({ navigation }) => {
   }
 
   return (
-    <Background>
-      {/* <BackButton goBack={navigation.goBack} /> */}
-      <Logo />
-      <Header>Bienvenue.</Header>
+    
+<LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         
+           <View style={{paddingLeft:100}}>
+         <Logo />
+         </View>
+      <Text style={{textAlign:'center' , fontSize:20}}>Bienvenue</Text>
+     
+      <View style={{paddingLeft:6}}>
+     
       <TextInput
+      style={{width:400 , height:40 }}
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -72,6 +83,7 @@ const LoginScreen = ({ navigation }) => {
         keyboardType="email-address"
       />
       <TextInput
+      style={{width:400 , height:40 }}
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -80,23 +92,39 @@ const LoginScreen = ({ navigation }) => {
         errorText={password.error}
         secureTextEntry
       />
+
+      </View>
+
       <View style={styles.forgotPassword}>
         <TouchableOpacity
           // onPress={() => navigation.navigate('ForgotPasswordScreen')}
         >
+          <View style={{justifyContent:'center',
+    textAlign:'center',
+    alignContent:'center',
+    alignItems:'center'}}>
           <Text style={styles.forgot}>Forgot your password?</Text>
+          </View>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
-        Login
-      </Button>
+      <View style={{justifyContent:'center' }}>
+      <Button style={{   }}
+              color="tomato" 
+              icon="" 
+              mode="contained" >
+              Login
+              </Button>
+      </View>
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text style={{textAlign:'center' }}>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+  
+    </LinearGradient>
+
+
   )
 }
 
@@ -108,15 +136,27 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    justifyContent:'center',
+    alignContent:'center',
     marginTop: 4,
   },
   forgot: {
+    paddingRight:130,
+    textAlign:'center',
     fontSize: 13,
     // color: theme.colors.secondary,
   },
   link: {
     fontWeight: 'bold',
     // color: theme.colors.primary,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 700,
+   
   },
 })
 
