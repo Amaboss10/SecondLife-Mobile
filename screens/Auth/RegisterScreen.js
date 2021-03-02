@@ -6,6 +6,8 @@ import Logo from '../../components/log/Logo'
 import Header from '../../components/log/Header'
 import Button from '../../components/log/Button'
 import TextInput from '../../components/log/TextInput'
+import { LinearGradient } from 'expo-linear-gradient';
+
 import BackButton from '../../components/log/BackButton'
 // import { theme } from '../core/theme'
 
@@ -41,18 +43,35 @@ const RegisterScreen = ({ navigation }) => {
   }
   
   return (
-    <Background>
+    <LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+         <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
-      <Logo />
-      <Header>Create Account</Header>
+      <Logo  />
+      <Header>S'identifier</Header>
       <TextInput
-        label="Name"
+        label="Nom"
         returnKeyType="next"
         value={name.value}
         onChangeText={(text) => setName({ value: text, error: '' })}
         error={!!name.error}
         errorText={name.error}
+        style={{height:40}}
       />
+
+<TextInput
+        label="Prenom"
+        returnKeyType="next"
+        value={name.value}
+        onChangeText={(text) => setName({ value: text, error: '' })}
+        error={!!name.error}
+        errorText={name.error}
+        style={{height:40}}
+      />
+
+
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -64,9 +83,10 @@ const RegisterScreen = ({ navigation }) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        style={{height:40}}
       />
       <TextInput
-        label="Password"
+        label="Mot de passe"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -74,21 +94,28 @@ const RegisterScreen = ({ navigation }) => {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+        style={{height:40}}
       />
       <Button
         mode="contained"
+        color="tomato"
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >
-        Sign Up
+        S'inscrire
       </Button>
       <View style={styles.row}>
-        <Text>Already have an account? </Text>
+        <Text>Vous avez déjà un compte? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Login')}>
-          <Text style={styles.link}>Login</Text>
+          <Text style={styles.link}>Connexion</Text>
         </TouchableOpacity>
+
       </View>
     </Background>
+          
+  
+    </LinearGradient>
+
   )
 }
 
@@ -100,6 +127,14 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     // color: theme.colors.primary,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 700,
+   
   },
 })
 
