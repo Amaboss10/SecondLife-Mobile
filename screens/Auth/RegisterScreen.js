@@ -180,7 +180,9 @@ const RegisterScreen = ({ navigation }) => {
 
       </View>
     </Background>
-          
+    <View style={{height: 85}}>
+       {/* navbar  */}
+   </View>
   
     </LinearGradient>
 
