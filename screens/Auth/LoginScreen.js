@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet,ScrollView ,View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../../components/log/Background'
 import Logo from '../../components/log/Logo'
@@ -11,10 +11,11 @@ import BackButton from '../../components/log/BackButton'
 import '../../global'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import { LinearGradient } from 'expo-linear-gradient';
 
 function verifConexion(mail,pswrd){
   var conn =false;
-    for(i=0;i<5;i++)
+    for(let i=0;i<5;i++)
     {
       if(mail==global.users[i].mail_personne && pswrd==global.users[i].mdp_personne)
       {
@@ -55,11 +56,22 @@ const LoginScreen = ({ navigation }) => {
   }
 
   return (
-    <Background>
-      {/* <BackButton goBack={navigation.goBack} /> */}
-      <Logo />
-      <Header>Bienvenue.</Header>
+    
+<LinearGradient
+       colors={['#ffffff', '#c6f6ff', '#ff6347']}
+       style={styles.background}
+      >
+        <Background>
+         
+           <View style={{}}>
+         <Logo />
+         </View>
+      <Text style={{textAlign:'center' , fontSize:20}}>Bienvenue</Text>
+     
+      <View style={{}}>
+     
       <TextInput
+      style={{width:400 , height:40 }}
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -72,7 +84,8 @@ const LoginScreen = ({ navigation }) => {
         keyboardType="email-address"
       />
       <TextInput
-        label="Password"
+      style={{width:400 , height:40 }}
+        label="mot de passe"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -80,23 +93,41 @@ const LoginScreen = ({ navigation }) => {
         errorText={password.error}
         secureTextEntry
       />
+
+      </View>
+
       <View style={styles.forgotPassword}>
         <TouchableOpacity
           // onPress={() => navigation.navigate('ForgotPasswordScreen')}
         >
-          <Text style={styles.forgot}>Forgot your password?</Text>
+          <View style={{justifyContent:'center',
+    textAlign:'center',
+    alignContent:'center',
+    alignItems:'center'}}>
+          <Text style={styles.forgot}>Mot de passe oublié?</Text>
+          </View>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
-        Login
-      </Button>
+      <View style={{justifyContent:'center' }}>
+      <Button style={{   }}
+              color="tomato" 
+              icon="" 
+              mode="contained"
+              onPress={onLoginPressed}
+               >
+              Connexion
+              </Button>
+      </View>
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text style={{textAlign:'center' }}>Je n'ai pas de compte? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
-          <Text style={styles.link}>Sign up</Text>
+          <Text style={styles.link}>S'inscrire</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+      </Background>
+    </LinearGradient>
+
+
   )
 }
 
@@ -108,15 +139,27 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    justifyContent:'center',
+    alignContent:'center',
     marginTop: 4,
   },
   forgot: {
+    paddingRight:85,
+    textAlign:'center',
     fontSize: 13,
     // color: theme.colors.secondary,
   },
   link: {
     fontWeight: 'bold',
     // color: theme.colors.primary,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '100%',
+   
   },
 })
 
