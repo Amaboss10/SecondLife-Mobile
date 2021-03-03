@@ -943,7 +943,7 @@ const styles = StyleSheet.create({
       fontWeight: "bold" 
     },
     background: {
-      position: 'absolute',
+      position: 'relative',
       left: 0,
       right: 0,
       top: 0,

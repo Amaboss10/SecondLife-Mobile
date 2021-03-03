@@ -15,7 +15,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 function verifConexion(mail,pswrd){
   var conn =false;
-    for(i=0;i<5;i++)
+    for(let i=0;i<5;i++)
     {
       if(mail==global.users[i].mail_personne && pswrd==global.users[i].mdp_personne)
       {
@@ -112,7 +112,9 @@ const LoginScreen = ({ navigation }) => {
       <Button style={{   }}
               color="tomato" 
               icon="" 
-              mode="contained" >
+              mode="contained"
+              onPress={onLoginPressed}
+               >
               Connexion
               </Button>
       </View>
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 700,
+    height: '100%',
    
   },
 })
