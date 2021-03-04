@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Platform, Text, TextInput, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-//import Constants from 'expo-constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { Image, Button, Icon } from 'react-native-elements'
@@ -9,6 +8,8 @@ import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
 import { BASE_URL } from '../assets/constantes';
 import axios from 'axios';
+
+import API from '../assets/constantes'
 
 
 
@@ -25,8 +26,10 @@ const AddAnnonceScreen = () => {
     const [selectCategorie, setSelectCategorie] = useState('');
     const [selectSousCategorie, setSelectSousCategorie] = useState('');
     const [image, setImage] = useState(null);
+    const [data, setData] = useState()
 
     useEffect(() => {
+        //requete pour la recuperation d'une image à partir du smartphone
         (async () => {
             if (Platform.OS !== 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -39,10 +42,7 @@ const AddAnnonceScreen = () => {
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
         });
 
         console.log(result);
@@ -53,38 +53,33 @@ const AddAnnonceScreen = () => {
     };
 
     //Uploade des informations entrees par le client
+    //TODO::ajouter datetime
     const uploadAnnonce = () => {
 
-        console.log("-----------------------")
-        console.log(titreAnnonce)
-        console.log(descriptionAnnonce)
-        console.log(prixAnnonce)
-        console.log(image)
-        console.log(poidsAnnonce)
-        console.log(etatAnnonce)
-        console.log(selectCategorie)
+        //les données doivent être au format FormData
 
-        console.log("Entrer")
+        let uploadData = new FormData()
+        uploadData.append('title', titreAnnonce)
+        uploadData.append('description', descriptionAnnonce)
+        uploadData.append('price', prixAnnonce)
+        uploadData.append('weight', poidsAnnonce)
+        uploadData.append('state', etatAnnonce)
+        uploadData.append('isValid', true)
+        uploadData.append('imageURL', image)
+        uploadData.append('brand', "DORADE")
+        uploadData.append('image', { uri: image })
+
         axios({
             method: 'post',
-            url: BASE_URL + '/api/annonces',
+            url: BASE_URL + '/api/posts/post',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 'Accept': 'application/ld+json'
             },
-            data: {
-                "titre": titreAnnonce,
-                "description": descriptionAnnonce,
-                "prix": prixAnnonce,
-                "poids": poidsAnnonce,
-                "etat": etatAnnonce,
-                "dateDePublication": "2021-02-25T02:01:08.597Z",
-                "isValid": true
-            }
+            data: uploadData
+
         }).then((response) => { console.log(response) })
             .catch((error) => { console.log(error) })
-
-        console.log("Sortie")
     }
 
 
