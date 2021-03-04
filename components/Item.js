@@ -10,7 +10,7 @@ const ArticleItem = ({ result }) => {
     return (
         <View style={localStyles.container}>
             <View style={localStyles.img_container}>
-                <Image style={localStyles.img} PlaceholderContent={<ImagePlaceHolder />} source={{ uri: "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg" }} />
+                <Image style={localStyles.img} source={{ uri: "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg" }} />
             </View>
             <View style={localStyles.body}>
                 <View style={localStyles.textContent}>
@@ -47,10 +47,7 @@ const localStyles = {
         // backgroundColor: 'cyan',
         borderRadius: 5,
         height: '90%',
-        paddig: 50,
-        marginLeft: 25,
-        marginRight: 24
-
+        marginLeft: 40,
     },
     title: {
 
@@ -88,9 +85,8 @@ const localStyles = {
         width: '100%',
     },
     buyButton: {
-        // background: '#f0bd32',
         borderRadius: 20,
-        width: 200,
+        width: '100%',
         height: 60,
         position: 'relative',
 
