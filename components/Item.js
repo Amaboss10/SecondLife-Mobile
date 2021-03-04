@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Text, View } from 'native-base'
-import { Image } from 'react-native-elements'
+import { Button, Image } from 'react-native-elements'
 import ImagePlaceHolder from './ImagePlaceHolder'
 
 const ArticleItem = ({ result }) => {
@@ -13,14 +13,17 @@ const ArticleItem = ({ result }) => {
                 <Image style={localStyles.img} PlaceholderContent={<ImagePlaceHolder />} />
             </View>
             <View style={localStyles.body}>
-                <Text style={localStyles.title}>Titre annonce:{result.titre}</Text>
+                <Text style={localStyles.text}>Titre annonce: {result.titre}</Text>
                 <Text style={localStyles.text}>Marque: {result.marque}</Text>
                 <Text style={localStyles.text}>Ref: #12HFSFD</Text>
                 <Text style={localStyles.text}>Prix: {result.prix} €</Text>
                 <Text style={localStyles.text}>Etat: {result.etat}</Text>
                 <Text style={localStyles.text}>Description: {result.description}</Text>
+                <Button
+                    title="Acheter"
+                />
             </View>
-        </View>
+        </View >
     )
 }
 
@@ -28,6 +31,7 @@ const ArticleItem = ({ result }) => {
 export default ArticleItem
 
 const localStyles = {
+    fontSize: 15,
     container: {
         flex: 1,
         justifyContent: 'space-evenly',
@@ -43,7 +47,7 @@ const localStyles = {
 
     },
     text: {
-        fontSize: 30
+        fontSize: 15
     },
     img_container: {
         flex: 1,
