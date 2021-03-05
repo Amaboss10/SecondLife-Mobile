@@ -8,7 +8,7 @@ const Chargeur = () => {
     return (
         <SafeAreaView>
             <View>
-                <Text>Test screen</Text>
+                <Text>Test screen chargeur</Text>
             </View>
         </SafeAreaView>
     )
