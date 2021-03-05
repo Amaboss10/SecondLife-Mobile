@@ -10,6 +10,7 @@ import CategoryTitleItem from '../components/CategoryTitleItem';
 const list = [
     { title: 'Téléphonie', data: ['Smartphone', 'Ecran', 'Batterie', 'Chargeur', 'Câbles'] },
     { title: 'Jeux', data: ['Console', 'Câbles', 'Manettes'] },
+    { title: 'Autres', data: ['FAQ / Aide', 'Qui sommes-nous?'] },
 ]
 
 const CategoryScreen = ({ navigation }) => {

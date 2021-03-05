@@ -9,7 +9,7 @@ const Ecran = () => {
     return (
         <SafeAreaView>
             <View>
-                <Text>Ecran</Text>
+                <Text>Ecran test</Text>
             </View>
         </SafeAreaView>
     )
