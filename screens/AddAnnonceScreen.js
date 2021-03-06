@@ -17,7 +17,7 @@ const AddAnnonceScreen = () => {
 
     //Les states permettent de stoker tous les champs des textInput
     const [titreAnnonce, setTittreAnnonce] = useState('');
-    const [refAnnonce, setRefAnnonce] = useState('');
+    const [marqueAnnonce, setMarqueAnnonce] = useState('');
     const [lieu, setLieu] = useState('');
     const [prixAnnonce, setPrixAnnonce] = useState(0);
     const [poidsAnnonce, setPoidsAnnonce] = useState(0);
@@ -92,11 +92,17 @@ const AddAnnonceScreen = () => {
             </TouchableOpacity>
             <View style={styles.body_container}>
                 <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} />
-                <TextInput style={styles.input} placeholder="Référence" onChangeText={value => setRefAnnonce(value)} />
-                <TextInput style={styles.input} placeholder="Lieu" onChangeText={value => setLieu(value)} />
-                <TextInput style={styles.input} placeholder="Prix" keyboardType='numeric' onChangeText={value => setPrixAnnonce(value)} />
                 <TextInput style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} />
-                <TextInput style={styles.input} placeholder="Poids" keyboardType='numeric' onChangeText={value => setPoidsAnnonce(value)} />
+                <View>
+                <View style= {{flexDirection:'row'}}>
+                <TextInput style={styles.inputText} placeholder="Prix" keyboardType='numeric' onChangeText={value => setPrixAnnonce(value)} />
+                <Text style={styles.Text}>  € </Text>
+                </View>
+                <View style= {{flexDirection:'row'}}>
+                <TextInput style={styles.inputText} placeholder="Poids" keyboardType='numeric' onChangeText={value => setPoidsAnnonce(value)} />
+                <Text style={styles.Text}>  g </Text>
+                </View>
+                </View>
             </View>
 
             <View style={styles.picker_container}>
@@ -150,14 +156,16 @@ const AddAnnonceScreen = () => {
                         ]}
                         style={{ ...pickerSelectStyles }}
                     />
+                    
                 </View>
             </View>
 
-            <View style={{ marginTop: 40 }}>
-                <TextInput style={styles.input}
+            <View style={styles.desc}>
+            <TextInput style={styles.input} placeholder="Marque" onChangeText={value => setMarqueAnnonce(value)} />
+                <TextInput style={styles.inputDesc}
                     placeholder="Description"
                     multiline={true}
-                    numberOfLines={6}
+                    numberOfLines={10}
                     onChangeText={desc => setDescriptionAnnonce(desc)}
                 />
             </View>
@@ -211,10 +219,33 @@ const styles = StyleSheet.create({
     input: {
         height: 50,
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius:5,
         borderColor: 'gray',
         paddingLeft: 10,
         marginTop: 3
+    },
+    inputDesc: {
+        height: 94,
+        borderWidth: 2,
+        borderRadius:5,
+        borderColor: 'gray',
+        paddingLeft: 10,
+        marginTop: 3
+    },
+    inputText: {
+        height: 40,
+        borderWidth: 2,
+        borderRadius: 5,
+        borderColor: 'gray',
+        paddingLeft: 10,
+        marginTop: 3,
+        width: 100,
+        justifyContent:'flex-start'
+    },
+    Text: {
+        fontSize:30,
+        fontWeight:'400',
+        fontStyle: 'italic'   
     },
     addButton: {
         backgroundColor: 'white',
@@ -224,17 +255,19 @@ const styles = StyleSheet.create({
     picker_container: {
         flex: 1,
         flexDirection: 'column',
-        marginTop: 5,
+        marginTop: 5
     },
     categorie_picker: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginTop: 5,
+        marginTop: 10,
+        flex:-1
     },
     sous_categ_picker: {
         flexDirection: 'row',
-        marginTop: 5,
+        marginTop: 10,
         justifyContent: 'flex-start',
+        flex:-2
 
     },
     label: {
@@ -242,6 +275,10 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: 'black',
         borderWidth: 1
+    },
+    desc:{
+        marginTop: 5,
+        flex: 2
     }
 
 })
@@ -254,7 +291,7 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 4,
         color: 'black',
         width: 200,
-        height: 20,
+        height: 25,
         paddingRight: 20,
         paddingLeft: 50,
         justifyContent: 'flex-start',
