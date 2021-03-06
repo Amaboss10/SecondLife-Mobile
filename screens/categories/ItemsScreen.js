@@ -3,34 +3,33 @@ import { View } from 'native-base'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Carousel from 'react-native-snap-carousel'
-import { BASE_URL } from '../../assets/constantes'
+import { BASE_URL, getItemsFromApi } from '../../assets/constantes'
 import ArticleItem from '../../components/Item'
 import { ActivityIndicator } from 'react-native'
 
 
-const Smartphone = () => {
+/**
+ * KAMIL BEN
+ * 
+ * Represente la vue dans le quelle les items seront affichés
+ * On fait appelle à la fonction getItemsFromApi pour recupérer
+ * les données dans la BD ensuite, nous les affichons.
+ * Si la vue est en chargment on affiche en premier le spinner
+ * pour montrer le chargement
+ */
+const ItemsScreen = () => {
     const [activeIndex, setActiveIndex] = useState(0)
     const [carouselItems, setCarouselItems] = useState([])
     const [isLoading, setIsloading] = useState(true)
 
-    const loadItems = () => {
-        axios({
-            method: 'get',
-            url: BASE_URL + '/api/annonces',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/ld+json'
-            }
-        }).then((response) => {
-            //on met les données dans le carouselItems
-            setCarouselItems(response.data["hydra:member"])
+    let loadItems = () => {
+        getItemsFromApi().then(data => {
+            setCarouselItems(data["hydra:member"])
             setIsloading(false)
-        }).catch((error) => {
-            console.log(error)
-        });
+        })
     }
 
-
+    //Fonction s'executant avant le chargement de la vue ItemScreen
     useEffect(() => {
         loadItems()
     }, [])
@@ -47,7 +46,6 @@ const Smartphone = () => {
 
     return (
         <SafeAreaView style={localStyles.safeA} >
-            {/* {isLoading ? <ActivityIndicator size="large" color="tomato" /> : null} */}
             <View style={localStyles.container}>
                 <Carousel
                     layout={"default"}
@@ -64,7 +62,7 @@ const Smartphone = () => {
 
 
 
-export default Smartphone
+export default ItemsScreen
 
 const localStyles = {
     safeA: {

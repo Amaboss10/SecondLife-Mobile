@@ -43,18 +43,22 @@ const AddAnnonceScreen = () => {
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
-            setImage(result.uri);
+            console.log(result)
+            setImage(result);
         }
     };
 
     //Uploade des informations entrees par le client
     //TODO::ajouter datetime
     const uploadAnnonce = () => {
+        // console.log(image)
 
         //les données doivent être au format FormData
 
@@ -65,21 +69,21 @@ const AddAnnonceScreen = () => {
         uploadData.append('weight', poidsAnnonce)
         uploadData.append('state', etatAnnonce)
         uploadData.append('isValid', true)
-        uploadData.append('imageURL', image)
+        uploadData.append('image', { type: 'image/jpg', uri: image.uri, name: 'upload_file.jpg' })
+        // uploadData.append('imageURL', image)
         uploadData.append('brand', "DORADE")
-        uploadData.append('image', { uri: image })
 
         axios({
             method: 'post',
             url: BASE_URL + '/api/posts/post',
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Accept': 'application/ld+json'
+                // 'Accept': 'application/ld+json'
             },
             data: uploadData
 
-        }).then((response) => { console.log(response) })
-            .catch((error) => { console.log(error) })
+        }).then((response) => { console.log() })
+            .catch((error) => { console.log() })
     }
 
 
