@@ -25,6 +25,8 @@ const Perso = global.perso;
 
 //-----------------------------------------
 const getUsersFromApi = () => {
+
+  // mettez  votre adresse IP
   return fetch('http://10.189.116.41:3000/personne')
     .then((response) => response.json())
     .then((json) => {

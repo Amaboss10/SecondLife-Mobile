@@ -270,6 +270,14 @@ const styles = StyleSheet.create({
         flex:-2
 
     },
+    background: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 800,
+       
+      },
     label: {
         fontSize: 16,
         fontWeight: '600',

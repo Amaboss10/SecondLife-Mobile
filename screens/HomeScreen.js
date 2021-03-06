@@ -17,7 +17,19 @@ import { Video, AVPlaybackStatus } from 'expo-av';
 import { Textarea } from 'native-base';
 import '../global'
 
-
+//-----------------------------------------
+const getUsersFromApi = () => {
+  return fetch('http://10.212.156.25:3000/annonce')
+    .then((response) => response.json())
+    .then((json) => {
+      global.users = json;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+getUsersFromApi()
+//-----------------------------------------
 
 export  class HomeScreen extends React.Component {
   state = {
@@ -124,7 +136,7 @@ export  class HomeScreen extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.189.116.41:3000/utilisateur";
+    const url = "http://10.212.156.25:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -544,6 +556,13 @@ export  class FaqScreen extends React.Component {
               </Button>
               </View>
         </View>
+        <Divider style={{ width: "80%", margin: 20  }} />
+        <View style={{ textAlign: 'left', paddingBottom:20 , paddingLeft:10 }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Qui sommes-nous?')}>
+             <Text style={{ color: '#000000', fontWeight: '500', textDecorationLine:'underline' ,fontSize: 16 }} >Qui sommes-nous?</Text>
+             </TouchableOpacity>
+        </View>
+          
     </ScrollView>
    <View style={{height: 179}}>
        {/* navbar  */}
@@ -555,6 +574,70 @@ export  class FaqScreen extends React.Component {
   }
 }
 
+//////////////////////////////////////////////////////////////////
+export  class Quisommesnous extends React.Component {
+  state = {
+    loading: true,
+    // navigation : navigation,
+    person: null
+  };
+  
+  async componentDidMount() {
+
+    // mettez  votre adresse IP
+    const url = "http://10.212.156.25:3000/utilisateur";
+
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ person: data, loading: false });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <View style={[styles.container, styles.horizontal]}>
+          <ActivityIndicator size="large" color="tomato" />
+        </View>
+      );
+    }
+
+    if (!this.state.person) {
+      return <Text>FAQ non disponible pour le moment :(</Text>;
+    }
+    const { navigation } = this.props;
+   // const video = React.useRef(null);
+   
+    return (
+      
+      <LinearGradient
+      colors={['#ffffff', '#c6f6ff', '#ff6347']}
+      style={styles.background}
+     >
+        <ScrollView>
+     <View style={{}}>
+       <Card>
+         <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+       </Card>
+   </View>
+   <Divider style={{ width: "80%", margin: 20  }} />
+   <Card>
+         <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+       </Card>
+       <Divider style={{ width: "80%", margin: 20  }} />
+   <Card>
+         <Text >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+       </Card>
+   </ScrollView>
+   <View style={{height: 185}}>
+      {/* navbar  */}
+  </View>
+   </LinearGradient>
+        
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////////
 
 export  class ReponseUne extends React.Component {
   state = {
@@ -915,6 +998,7 @@ export  class ReponseCinq extends React.Component {
                                 <Stack.Screen name="Contacter un vendeur" component={ReponseTrois} />
                                 <Stack.Screen name="Modifier une annonce" component={ReponseQuatre} />
                                 <Stack.Screen name="Modifier son mot de passe" component={ReponseCinq} />
+                                <Stack.Screen name="Qui sommes-nous?" component={Quisommesnous} />
                               </Stack.Navigator>
                               );
                             }
