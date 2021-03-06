@@ -18,7 +18,19 @@ import { Textarea } from 'native-base';
 import '../global'
 import { MON_IP } from '../assets/constantes';
 
-
+//-----------------------------------------
+const getUsersFromApi = () => {
+  return fetch('http://10.212.156.25:3000/annonce')
+    .then((response) => response.json())
+    .then((json) => {
+      global.users = json;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+getUsersFromApi()
+//-----------------------------------------
 
 export class HomeScreen extends React.Component {
   state = {

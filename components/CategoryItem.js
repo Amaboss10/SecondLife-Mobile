@@ -46,6 +46,7 @@ const localStyles = StyleSheet.create({
     title: {
         paddingLeft: 5,
         flex: 1,
+        
     },
     icon: {
         color: '#d5d8e0'

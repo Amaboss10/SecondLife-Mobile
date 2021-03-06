@@ -259,6 +259,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
 
     },
+    background: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 800,
+       
+      },
     label: {
         fontSize: 16,
         fontWeight: '600',
