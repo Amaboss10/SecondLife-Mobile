@@ -8,7 +8,9 @@ import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
 import { BASE_URL } from '../assets/constantes';
 import axios from 'axios';
-
+import * as Permissions from 'expo-permissions';
+// import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import API from '../assets/constantes'
 
 
@@ -40,7 +42,12 @@ const AddAnnonceScreen = () => {
         })();
     }, []);
 
+
     const pickImage = async () => {
+        const {
+            status: cameraRollPerm
+        } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
@@ -50,17 +57,29 @@ const AddAnnonceScreen = () => {
         });
 
         if (!result.cancelled) {
-            console.log(result)
             setImage(result);
         }
+
     };
+
+
+
+
+
 
     //Uploade des informations entrees par le client
     //TODO::ajouter datetime
     const uploadAnnonce = () => {
-        // console.log(image)
+        console.log(image.split('/').pop())
 
         //les données doivent être au format FormData
+        // let localUri = image.uri;
+        let filename = image.split('/').pop()
+
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+        console.log(type)
+
 
         let uploadData = new FormData()
         uploadData.append('title', titreAnnonce)
@@ -69,21 +88,20 @@ const AddAnnonceScreen = () => {
         uploadData.append('weight', poidsAnnonce)
         uploadData.append('state', etatAnnonce)
         uploadData.append('isValid', true)
-        uploadData.append('image', { type: 'image/jpg', uri: image.uri, name: 'upload_file.jpg' })
-        // uploadData.append('imageURL', image)
+        uploadData.append('image', { uri: image.uri, name: filename, type: type });
         uploadData.append('brand', "DORADE")
 
         axios({
             method: 'post',
             url: BASE_URL + '/api/posts/post',
             headers: {
-                'Content-Type': 'multipart/form-data',
-                // 'Accept': 'application/ld+json'
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data'
             },
             data: uploadData
-
         }).then((response) => { console.log() })
             .catch((error) => { console.log() })
+
     }
 
 
