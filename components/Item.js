@@ -1,25 +1,37 @@
 import React from 'react'
 import { Text, View } from 'native-base'
 import { AirbnbRating, Button, Image } from 'react-native-elements'
-import ImagePlaceHolder from './ImagePlaceHolder'
+import { BASE_URL } from '../assets/constantes'
+// import { Image } from 'react-native'
 
+
+/**
+ * KAMIL BEN
+ * 
+ * @param {result} param0 
+ * ArticleItem retourne la vue que l'on va voir sur toutes les categories
+ * Si on choisie une categorie, c'est ce component qui être afficher
+ * dans toutes vues de chaque categories en affichant les informations 
+ * de chaque article de la categorie selectionnée
+ * 
+ */
 const ArticleItem = ({ result }) => {
+    // console.log(result.imageURL)
 
-    console.log("les items")
-    // console.log(props.result.description)
     return (
         <View style={localStyles.container}>
             <View style={localStyles.img_container}>
-                <Image style={localStyles.img} source={{ uri: "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg" }} />
+                <Image style={localStyles.img} source={{ uri: BASE_URL + result.imageURL }} />
+                {/* <Image style={localStyles.img} source={{ uri: BASE_URL + "/annonces/iphone_12.png" }} /> */}
             </View>
             <View style={localStyles.body}>
                 <View style={localStyles.textContent}>
-                    <Text style={localStyles.text}>Titre annonce: {result.titre}</Text>
-                    <Text style={localStyles.text}>Marque: {result.marque}</Text>
-                    <Text style={localStyles.text}>Ref: #12HFSFD</Text>
-                    <Text style={localStyles.text}>Prix: {result.prix} €</Text>
-                    <Text style={localStyles.text}>Etat: {result.etat}</Text>
+                    <Text style={localStyles.text}>Titre annonce: {result.title}</Text>
+                    <Text style={localStyles.text}>Marque: {result.brand}</Text>
+                    <Text style={localStyles.text}>Prix: {result.price} €</Text>
+                    <Text style={localStyles.text}>Etat: {result.state}</Text>
                     <Text style={localStyles.text}>Description: {result.description}</Text>
+                    <Text style={localStyles.text}>Marque: {result.brand}</Text>
                     <AirbnbRating
                         count={5}
                         reviews={["Terrible", "Meh", "OK", "Bien", "Très bien"]}
@@ -44,7 +56,6 @@ const localStyles = {
     container: {
         flex: 1,
         justifyContent: 'space-evenly',
-        // backgroundColor: 'cyan',
         borderRadius: 5,
         height: '90%',
         marginLeft: 40,
@@ -58,26 +69,18 @@ const localStyles = {
     img_container: {
         flex: 1,
         padding: 5,
-
-        // borderWidth: 1,
-        // borderColor: 'dark',
     },
     img: {
         width: '100%',
         height: '100%',
+        // width: 100,
+        // height: 100,
         borderRadius: 15,
-        // borderWidth: 1,
-        // borderColor: 'yellow'
     },
     body: {
         flex: 1,
-        // borderWidth: 1,
-        // borderColor: 'black',
-
     },
     buyButtonContainer: {
-        // borderWidth: 1,
-        // borderColor: 'red',
         alignItems: 'center',
         position: 'absolute',
         bottom: 0,
