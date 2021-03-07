@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const MON_IP = '176.181.109.96' //Mettre son IP aller à monip.org pour connaître son IP
+export const MON_IP = '10.212.156.25' //Mettre son IP aller à monip.org pour connaître son IP
 
 
 /**
