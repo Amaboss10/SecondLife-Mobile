@@ -21,7 +21,8 @@ Il faut installer le module expo via la commande: `npm install --global expo-cli
 > Etape 0: Installer expo sur votre smartphone.
 > Etape 1: Ouvrir l'invite de commande sur le repertoir du projet.
 > Etape 2: Executer: expo start.
-> Etape 3: Brancher le smartphone et scanner le code QR qui apparait sur le terminale.
+> Etape 3: Ouvrir un nouveau terminal et executer : node components/bd
+> Etape 4: Brancher le smartphone et scanner le code QR qui apparait sur le terminale.
 
 ***
 
