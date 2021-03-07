@@ -74,6 +74,7 @@ const AddAnnonceScreen = () => {
         setEtatAnnonce('')
         setSelectCategorie('')
         setSelectSousCategorie('')
+        setImage(null)
     }
 
 
@@ -129,7 +130,12 @@ const AddAnnonceScreen = () => {
         <SafeAreaView style={styles.main_container}>
             <TouchableOpacity onPress={pickImage}>
                 <View style={styles.image_container}>
-                    <Image style={styles.image} source={{ uri: image }} placeholderStyle={styles.main_container} PlaceholderContent={<ImagePlaceHolder />} />
+                    {image ? <Image style={styles.image} source={{ uri: image }} placeholderStyle={styles.main_container} PlaceholderContent={<ImagePlaceHolder />} />
+                        :
+                        <Image style={styles.image} placeholderStyle={styles.main_container} PlaceholderContent={<ImagePlaceHolder />} />
+                    }
+
+
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
