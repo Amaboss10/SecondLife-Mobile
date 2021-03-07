@@ -1,7 +1,7 @@
 
 global.connecter = false;
 global.users = 'null';
-
+global.vendeur = 'null';
 global.perso = ({
     nom: "AZIZI",
     prenom: "Mohammed",
