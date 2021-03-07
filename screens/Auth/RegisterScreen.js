@@ -54,7 +54,7 @@ const RegisterScreen = ({ navigation }) => {
     // }).then((response) => { console.log(response) })
     //     .catch((error) => { console.log(error) })
     try{
-       fetch('http://10.212.156.25:3000/create',{
+       fetch('http://'+ MON_IP+':3000/create',{
           method:'post',
           mode: 'no-cors',
           headers:{
