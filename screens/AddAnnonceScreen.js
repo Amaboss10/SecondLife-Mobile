@@ -3,15 +3,12 @@ import { View, Platform, Text, TextInput, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
-import { Image, Button, Icon } from 'react-native-elements'
+import { Image, Button, Icon, Input } from 'react-native-elements'
 import ImagePlaceHolder from '../components/ImagePlaceHolder';
 import RNPickerSelect from 'react-native-picker-select';
 import { BASE_URL } from '../assets/constantes';
 import axios from 'axios';
-import * as Permissions from 'expo-permissions';
-// import ImagePicker from 'react-native-image-picker';
-// import ImagePicker from 'react-native-image-crop-picker';
-import API from '../assets/constantes'
+import InputWithIcon from '../components/InputWithIcon'
 
 
 
@@ -44,9 +41,6 @@ const AddAnnonceScreen = () => {
 
 
     const pickImage = async () => {
-        const {
-            status: cameraRollPerm
-        } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -57,12 +51,23 @@ const AddAnnonceScreen = () => {
         });
 
         if (!result.cancelled) {
-            setImage(result);
+            setImage(result.uri);
         }
 
     };
 
+    const getPrixFromInput = (prix) => {
+        setPrixAnnonce(prix)
+    }
 
+    const getPoidsFromInput = (poids) => {
+        setPoidsAnnonce(poids)
+    }
+
+
+    const resetAction = () => {
+        setTittreAnnonce('')
+    }
 
 
 
@@ -70,15 +75,15 @@ const AddAnnonceScreen = () => {
     //Uploade des informations entrees par le client
     //TODO::ajouter datetime
     const uploadAnnonce = () => {
-        console.log(image.split('/').pop())
+        // console.log(image.split('/').pop())
 
         //les données doivent être au format FormData
-        // let localUri = image.uri;
-        let filename = image.split('/').pop()
+        // let localUri = new URL(image.uri);
+        // let filename = image.split('/').pop()
 
-        let match = /\.(\w+)$/.exec(filename);
-        let type = match ? `image/${match[1]}` : `image`;
-        console.log(type)
+        // let match = /\.(\w+)$/.exec(filename);
+        // let type = match ? `image/${match[1]}` : `image`;
+        // console.log(type)
 
 
         let uploadData = new FormData()
@@ -88,42 +93,46 @@ const AddAnnonceScreen = () => {
         uploadData.append('weight', poidsAnnonce)
         uploadData.append('state', etatAnnonce)
         uploadData.append('isValid', true)
-        uploadData.append('image', { uri: image.uri, name: filename, type: type });
-        uploadData.append('brand', "DORADE")
+        uploadData.append('image', { type: "image/jpg", uri: image.path, name: 'uploadedImg.jpg' });
+        uploadData.append('brand', marqueAnnonce)
+
+        console.log(prixAnnonce)
 
         axios({
             method: 'post',
             url: BASE_URL + '/api/posts/post',
             headers: {
-                'Accept': 'application/json',
+                // 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data'
             },
             data: uploadData
         }).then((response) => { console.log() })
             .catch((error) => { console.log() })
 
+
+        resetAction()
+
     }
+
 
 
     return (
         <SafeAreaView style={styles.main_container}>
             <TouchableOpacity onPress={pickImage}>
                 <View style={styles.image_container}>
-                    <Image style={styles.image} source={{ uri: image }} PlaceholderContent={<ImagePlaceHolder />} />
+                    <Image style={styles.image} source={{ uri: image }} placeholderStyle={styles.main_container} PlaceholderContent={<ImagePlaceHolder />} />
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} />
-                <TextInput style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} maxLength={25} />
+                <TextInput style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} maxLength={25} />
                 <View>
-                <View style= {{flexDirection:'row'}}>
-                <TextInput style={styles.inputText} placeholder="Prix" keyboardType='numeric' onChangeText={value => setPrixAnnonce(value)} />
-                <Text style={styles.Text}>  € </Text>
-                </View>
-                <View style= {{flexDirection:'row'}}>
-                <TextInput style={styles.inputText} placeholder="Poids" keyboardType='numeric' onChangeText={value => setPoidsAnnonce(value)} />
-                <Text style={styles.Text}>  g </Text>
-                </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <InputWithIcon inputStyle={styles.inputText} iconName="eur" iconType="font-awesome" placeHolder="Prix" length={4} getText={getPrixFromInput} />
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <InputWithIcon inputStyle={styles.inputText} iconName="balance-scale" iconType="font-awesome" placeHolder="Poids" length={4} getText={getPoidsFromInput} />
+                    </View>
                 </View>
             </View>
 
@@ -178,16 +187,17 @@ const AddAnnonceScreen = () => {
                         ]}
                         style={{ ...pickerSelectStyles }}
                     />
-                    
+
                 </View>
             </View>
 
             <View style={styles.desc}>
-            <TextInput style={styles.input} placeholder="Marque" onChangeText={value => setMarqueAnnonce(value)} />
+                <TextInput style={styles.input} placeholder="Marque" onChangeText={value => setMarqueAnnonce(value)} maxLength={25} />
                 <TextInput style={styles.inputDesc}
                     placeholder="Description"
                     multiline={true}
-                    numberOfLines={10}
+                    numberOfLines={5}
+                    maxLength={20}
                     onChangeText={desc => setDescriptionAnnonce(desc)}
                 />
             </View>
@@ -199,7 +209,7 @@ const AddAnnonceScreen = () => {
                         <Icon
                             name="add-circle"
                             size={50}
-                            color="orange"
+                            color="tomato"
                         />
                     }
                     onPress={uploadAnnonce}
@@ -222,6 +232,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     image_container: {
+        // backgroundColor: 'white'
     },
     body_container: {
         flex: -3,
@@ -237,37 +248,39 @@ const styles = StyleSheet.create({
         height: 150,
         borderWidth: 1,
         borderRadius: 15,
+        borderColor: 'tomato',
+        // backgroundColor: "white"
     },
     input: {
         height: 50,
-        borderWidth: 2,
-        borderRadius:5,
-        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#bfbfbf',
         paddingLeft: 10,
         marginTop: 3
     },
     inputDesc: {
         height: 94,
-        borderWidth: 2,
-        borderRadius:5,
-        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#bfbfbf',
         paddingLeft: 10,
         marginTop: 3
     },
     inputText: {
         height: 40,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 5,
-        borderColor: 'gray',
+        borderColor: '#e6e6e6',
         paddingLeft: 10,
         marginTop: 3,
         width: 100,
-        justifyContent:'flex-start'
+        justifyContent: 'flex-start'
     },
     Text: {
-        fontSize:30,
-        fontWeight:'400',
-        fontStyle: 'italic'   
+        fontSize: 30,
+        fontWeight: '400',
+        fontStyle: 'italic'
     },
     addButton: {
         backgroundColor: 'white',
@@ -283,13 +296,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         marginTop: 10,
-        flex:-1
+        flex: -1
     },
     sous_categ_picker: {
         flexDirection: 'row',
         marginTop: 10,
         justifyContent: 'flex-start',
-        flex:-2
+        flex: -2
 
     },
     background: {
@@ -298,15 +311,16 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         height: 800,
-       
-      },
+
+    },
     label: {
         fontSize: 16,
         fontWeight: '600',
         color: 'black',
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: '#e6e6e6'
     },
-    desc:{
+    desc: {
         marginTop: 5,
         flex: 2
     }
@@ -317,9 +331,10 @@ const pickerSelectStyles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'left',
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: '#e6e6e6',
         borderRadius: 4,
         color: 'black',
+        // backgroundColor: 'tomato',
         width: 200,
         height: 25,
         paddingRight: 20,

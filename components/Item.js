@@ -16,7 +16,7 @@ import { BASE_URL } from '../assets/constantes'
  * 
  */
 const ArticleItem = ({ result }) => {
-    console.log(result.imageURL)
+    // console.log(result.imageURL)
 
     return (
         <View style={localStyles.container}>
@@ -31,6 +31,7 @@ const ArticleItem = ({ result }) => {
                     <Text style={localStyles.text}>Prix: {result.price} €</Text>
                     <Text style={localStyles.text}>Etat: {result.state}</Text>
                     <Text style={localStyles.text}>Description: {result.description}</Text>
+                    <Text style={localStyles.text}>Marque: {result.brand}</Text>
                     <AirbnbRating
                         count={5}
                         reviews={["Terrible", "Meh", "OK", "Bien", "Très bien"]}

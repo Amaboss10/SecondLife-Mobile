@@ -36,7 +36,7 @@
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "16.13.1",
-    "react-icons": "^4.1.0",
+    "react-icons": "^4.2.0",
     "react-native": "^0.63.4",
     "react-native-dialog": "^6.1.2",
     "react-native-document-picker": "^5.0.0",
