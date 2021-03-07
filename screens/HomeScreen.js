@@ -139,7 +139,7 @@ export class HomeScreen extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://176.181.109.96:3000/utilisateur";
+    const url = "http://10.212.156.25:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
