@@ -1,6 +1,5 @@
 import { Image,StyleSheet,ActivityIndicator , FlatList, SafeAreaView,Text, View , ScrollView , TextInput} from 'react-native';
-import React from "react";
-import { useState } from 'react';
+import React , { useState }from "react";
 import { Ionicons as Icon } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SearchBar} from "react-native-elements";
@@ -15,14 +14,16 @@ import RNPickerSelect from 'react-native-picker-select';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { Textarea } from 'native-base';
-import '../global'
+import '../global';
+
+
 
 //-----------------------------------------
 const getUsersFromApi = () => {
-  return fetch('http://10.212.156.25:3000/annonce')
+  return fetch('http://10.189.116.41:3000/annonce')
     .then((response) => response.json())
     .then((json) => {
-      global.users = json;
+      global.annonce = json;
     })
     .catch((error) => {
       console.error(error);
@@ -46,13 +47,16 @@ export  class HomeScreen extends React.Component {
     let children = []
     //Inner loop to create children
 
-    const { navigation } = this.props;
+    const { navigation,route } = this.props;
       children.push(<FlatList 
         data={data}
         renderItem ={(item) =>   
         <View style={{ borderRadius: 5, borderWidth: 1, margin: 5, borderColor: '#e0e0e0' }} >
                  <View style={{flexDirection:'row'}}>
-                <TouchableOpacity onPress={() => navigation.navigate('Annonce')}>
+                <TouchableOpacity onPress={
+                    // () => alert(i)
+                    () => navigation.navigate('Annonce', { A: i })
+                  }>
                 
                 
                  <Image
@@ -66,7 +70,11 @@ export  class HomeScreen extends React.Component {
                  </TouchableOpacity>
                   <List.Item              
                   title={""}
-                  onPress={() => navigation.navigate('Annonce')}
+                  onPress={
+                    () => finduser(i),
+                    () => navigation.navigate('Annonce', { A: i })
+                    
+                  }
                   left={props =>
                   <View style={{ justifyContent: 'center',
                   alignItems: 'center' }}> 
@@ -90,18 +98,18 @@ export  class HomeScreen extends React.Component {
             </View>
                       <View style={{paddingBottom:0}}>
                     <Text style={{fontSize:20 , fontWeight:'500'}}>
-                    {global.users[i].titre_annonce}
+                    {global.annonce[i].titre_annonce}
                     </Text>
                     
                     </View>
                     <Text style={{textAlign:'left' , color:'red'}}>
-                    {global.users[i].prix_annonce} EUR
+                    {global.annonce[i].prix_annonce} EUR
                     </Text>
                     <Text>
-                    Catégorie : {global.users[i].categorie}
+                    Catégorie : {global.annonce[i].categorie}
                     </Text>
                     <Text>
-                      Marque : {global.users[i].marque} 
+                      Marque : {global.annonce[i].marque} 
                     </Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
@@ -136,7 +144,7 @@ export  class HomeScreen extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -155,7 +163,7 @@ export  class HomeScreen extends React.Component {
     if (!this.state.person) {
       return <Text>Pas d'annonce pour le moment :(</Text>;
     }
-    const { navigation } = this.props;
+    const { navigation,route } = this.props;
     return (
       
         <View style={styles.container}>
@@ -270,9 +278,10 @@ export  class HomeScreen extends React.Component {
                                 // navigation : navigation,
                                 person: null
                               };
+                              
                               createTable = () => {
+                              const { navigation,route } = this.props;
                               let table = []
-                            
                               // Outer loop to create parent
                               for (let i = 0; i < 1; i++) {
                                 const data = [1]
@@ -288,7 +297,7 @@ export  class HomeScreen extends React.Component {
                                     <View style={{paddingLeft:333}}>
                                   <Icon name="information-circle" style={styles.infoIcon} size={22} />
                                   </View>
-                                  <Card.Title style={{ textAlign:'left' , fontSize:20}}>{global.users[i].titre_annonce}</Card.Title>
+                                  <Card.Title style={{ textAlign:'left' , fontSize:20}}>{global.annonce[route.params?.A].titre_annonce}</Card.Title>
                                   <ModalDropdown  options={['Favoriser','Signaler']}>
                                      
                                             <View style={styles.quizAttrRight}>
@@ -322,27 +331,23 @@ export  class HomeScreen extends React.Component {
                                     <Card.Divider />
                                    
                                     <View style={{}}>
-                                    <Text style={{fontSize:20 , fontWeight:'700' ,color:'red', textAlign:'right'}}>{global.users[i].prix_annonce} EUR</Text>
+                                    <Text style={{fontSize:20 , fontWeight:'700' ,color:'red', textAlign:'right'}}>{global.annonce[route.params?.A].prix_annonce} EUR</Text>
                                  </View>
-                                    <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Catégorie : {global.users[i].categorie}</Text>
+                                    <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Catégorie : {global.annonce[route.params?.A].categorie}</Text>
                                   
-                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Sous catégorie : {global.users[i].sous_categorie}</Text>
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Sous catégorie : {global.annonce[route.params?.A].sous_categorie}</Text>
                                   
-                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Marque : {global.users[i].marque}</Text>
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Marque : {global.annonce[route.params?.A].marque}</Text>
                                   
-                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Date : {global.users[i].date_publi_annonce}</Text>
+                                    <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Date : {global.annonce[route.params?.A].date_publi_annonce}</Text>
                                     <Card.Divider/>
                                   <Card.Title  style={{ textAlign:'left' , fontSize:20}}>Information du vendeur</Card.Title>
-                                 
-                                 <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Nom :</Text>
+                                 {/* {let Ba = global.users[global.annonce[route.params?.A].utilisateur].nom_personne - 1 } */}
+                                 <Text style={{fontSize:15 , fontWeight:'700' , borderBottomWidth:15}}>Nom : {global.users[global.annonce[route.params?.A].utilisateur].nom_personne}</Text>
                                
-                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Prenom :</Text>
-                               
-                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Pays - Ville :</Text>
-                               
-                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Nombre d'annonces publiees :</Text>
-                                
-                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Moyens de contact :</Text>  
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Prenom : {global.users[global.annonce[route.params?.A].utilisateur].prenom_personne}</Text>
+                                                            
+                                 <Text style={{fontSize:15 , fontWeight:'700', borderBottomWidth:15}}>Moyens de contact : {global.users[global.annonce[route.params?.A].utilisateur].mail_personne}</Text>  
                                     
                                     </View>
                                    
@@ -379,7 +384,7 @@ export  class HomeScreen extends React.Component {
                               async componentDidMount() {
                             
                                 // mettez  votre adresse IP
-                                const url = "http://10.212.156.25:3000/utilisateur";
+                                const url = "http://10.189.116.41:3000/utilisateur";
                             
                                 const response = await fetch(url);
                                 const data = await response.json();
@@ -453,7 +458,7 @@ export  class FaqScreen extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -585,7 +590,7 @@ export  class Quisommesnous extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -649,7 +654,7 @@ export  class ReponseUne extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -719,7 +724,7 @@ export  class ReponseDeux extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -787,7 +792,7 @@ export  class ReponseTrois extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -855,7 +860,7 @@ export  class ReponseQuatre extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -923,7 +928,7 @@ export  class ReponseCinq extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.212.156.25:3000/utilisateur";
+    const url = "http://10.189.116.41:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -991,7 +996,7 @@ export  class ReponseCinq extends React.Component {
                                
                                 <Stack.Navigator initialRouteName="Home">
                                 <Stack.Screen name="Accueil" component={HomeScreen} />
-                                <Stack.Screen name="Annonce" component={DetailsAnnonce} />
+                                <Stack.Screen name="Annonce" component={DetailsAnnonce} initialParams={{ A: 0 }} />
                                 <Stack.Screen name="FAQ / Aide" component={FaqScreen} />
                                 <Stack.Screen name="Créer un compte" component={ReponseUne} />
                                 <Stack.Screen name="Créer une annonce" component={ReponseDeux} />
