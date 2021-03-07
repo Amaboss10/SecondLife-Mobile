@@ -67,7 +67,16 @@ const AddAnnonceScreen = () => {
 
     const resetAction = () => {
         setTittreAnnonce('')
+        setPrixAnnonce(0)
+        setPoidsAnnonce(0)
+        setDescriptionAnnonce('')
+        setMarqueAnnonce('')
+        setEtatAnnonce('')
+        setSelectCategorie('')
+        setSelectSousCategorie('')
     }
+
+
 
 
 
@@ -124,14 +133,14 @@ const AddAnnonceScreen = () => {
                 </View>
             </TouchableOpacity>
             <View style={styles.body_container}>
-                <TextInput style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} maxLength={25} />
-                <TextInput style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} maxLength={25} />
+                <TextInput value={titreAnnonce} style={styles.input} placeholder="Titre de l'annonce" onChangeText={value => setTittreAnnonce(value)} maxLength={25} />
+                <TextInput value={etatAnnonce} style={styles.input} placeholder="Etat" onChangeText={value => setEtatAnnonce(value)} maxLength={25} />
                 <View>
                     <View style={{ flexDirection: 'row' }}>
-                        <InputWithIcon inputStyle={styles.inputText} iconName="eur" iconType="font-awesome" placeHolder="Prix" length={4} getText={getPrixFromInput} />
+                        <InputWithIcon value={prixAnnonce} inputStyle={styles.inputText} iconName="eur" iconType="font-awesome" placeHolder="Prix" length={4} getText={getPrixFromInput} />
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <InputWithIcon inputStyle={styles.inputText} iconName="balance-scale" iconType="font-awesome" placeHolder="Poids" length={4} getText={getPoidsFromInput} />
+                        <InputWithIcon value={poidsAnnonce} inputStyle={styles.inputText} iconName="balance-scale" iconType="font-awesome" placeHolder="Poids" length={4} getText={getPoidsFromInput} />
                     </View>
                 </View>
             </View>
@@ -140,6 +149,7 @@ const AddAnnonceScreen = () => {
                 <View style={styles.categorie_picker}>
                     <Text style={styles.label}> Categorie: </Text>
                     <RNPickerSelect
+                        value={selectCategorie}
                         onValueChange={(value) => setSelectCategorie(value)}
                         items={[
                             {
@@ -158,6 +168,7 @@ const AddAnnonceScreen = () => {
                 <View style={styles.sous_categ_picker}>
                     <Text style={styles.label}> Sous-Categorie: </Text>
                     <RNPickerSelect
+                        value={selectSousCategorie}
                         onValueChange={(value) => setSelectSousCategorie(value)}
                         items={[
                             {
@@ -192,8 +203,9 @@ const AddAnnonceScreen = () => {
             </View>
 
             <View style={styles.desc}>
-                <TextInput style={styles.input} placeholder="Marque" onChangeText={value => setMarqueAnnonce(value)} maxLength={25} />
+                <TextInput value={marqueAnnonce} style={styles.input} placeholder="Marque" onChangeText={value => setMarqueAnnonce(value)} maxLength={25} />
                 <TextInput style={styles.inputDesc}
+                    value={descriptionAnnonce}
                     placeholder="Description"
                     multiline={true}
                     numberOfLines={5}
