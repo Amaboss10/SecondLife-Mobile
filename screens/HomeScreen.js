@@ -101,12 +101,6 @@ export class HomeScreen extends React.Component {
                     <Text style={{fontSize:20 , fontWeight:'500'}}>
                     {global.annonce[i].titre_annonce}
                     </Text>
-                      <Text>
-                        Catégorie : {global.users[i].categorie}
-                      </Text>
-                      <Text>
-                        Marque : {global.users[i].marque}
-                      </Text>
                     </View>
                     <Text style={{textAlign:'left' , color:'red'}}>
                     {global.annonce[i].prix_annonce} EUR
