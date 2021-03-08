@@ -19,7 +19,7 @@ import { MON_IP } from '../assets/constantes';
 
 //-----------------------------------------
 const getUsersFromApi = () => {
-  return fetch('http://10.189.116.41:3000/annonce')
+  return fetch('http://10.212.156.25:3000/annonce')
     .then((response) => response.json())
     .then((json) => {
       global.annonce = json;
@@ -99,12 +99,6 @@ export class HomeScreen extends React.Component {
                     <Text style={{fontSize:20 , fontWeight:'500'}}>
                     {global.annonce[i].titre_annonce}
                     </Text>
-                      <Text>
-                        Catégorie : {global.users[i].categorie}
-                      </Text>
-                      <Text>
-                        Marque : {global.users[i].marque}
-                      </Text>
                     </View>
                     <Text style={{textAlign:'left' , color:'red'}}>
                     {global.annonce[i].prix_annonce} EUR
@@ -135,7 +129,7 @@ export class HomeScreen extends React.Component {
   async componentDidMount() {
 
     // mettez  votre adresse IP
-    const url = "http://10.189.116.41:3000/utilisateur";
+    const url = "http://10.212.156.25:3000/utilisateur";
 
     const response = await fetch(url);
     const data = await response.json();
@@ -261,169 +255,7 @@ export class HomeScreen extends React.Component {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-//DETAILS ANNONCE
 
-export class DetailsAnnonce extends React.Component {
-  state = {
-    loading: true,
-    // navigation : navigation,
-    person: null
-  };
-  createTable = () => {
-    let table = []
-
-    // Outer loop to create parent
-    for (let i = 0; i < 1; i++) {
-      const data = [1]
-      let children = []
-      //Inner loop to create children
-
-
-      children.push(<View style={{ flex: 1, alignItems: 'center' }}>
-
-        <Card containerStyle={{ width: 390, height: '100%' }} wrapperStyle={{}}>
-
-          <View style={{}}>
-            <View style={{ paddingLeft: 333 }}>
-              <Icon name="information-circle" style={styles.infoIcon} size={22} />
-            </View>
-            <Card.Title style={{ textAlign: 'left', fontSize: 20 }}>{global.users[i].titre_annonce}</Card.Title>
-            <ModalDropdown options={['Favoriser', 'Signaler']}>
-
-              <View style={styles.quizAttrRight}>
-                <View style={{ paddingLeft: 160 }}>
-
-                  <Text style={styles.infoText}></Text>
-                </View>
-              </View>
-
-            </ModalDropdown>
-          </View>
-
-
-          <View
-            style={{
-              position: "relative",
-            }}
-          >
-            <View style={{ alignItems: 'center', alignContent: 'center' }}>
-              <Image
-                style={{ width: 350, height: 200 }}
-                resizeMode="cover"
-                source={{
-                  uri:
-                    "https://i.ebayimg.com/images/g/1YgAAOSwy~JfzAGN/s-l300.jpg"
-                }}
-              />
-
-
-            </View>
-            <Card.Divider />
-
-            <View style={{}}>
-              <Text style={{ fontSize: 20, fontWeight: '700', color: 'red', textAlign: 'right' }}>{global.users[i].prix_annonce} EUR</Text>
-            </View>
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Catégorie : {global.users[i].categorie}</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Sous catégorie : {global.users[i].sous_categorie}</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Marque : {global.users[i].marque}</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Date : {global.users[i].date_publi_annonce}</Text>
-            <Card.Divider />
-            <Card.Title style={{ textAlign: 'left', fontSize: 20 }}>Information du vendeur</Card.Title>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Nom :</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Prenom :</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Pays - Ville :</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Nombre d'annonces publiees :</Text>
-
-            <Text style={{ fontSize: 15, fontWeight: '700', borderBottomWidth: 15 }}>Moyens de contact :</Text>
-
-          </View>
-
-
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Button style={{}}
-              color="green"
-              icon=""
-              mode="contained"
-              onPress={() => navigation.navigate('Annonce')}>
-              Contacter
-                                          </Button>
-            <View style={{ paddingLeft: 7 }}>
-              <Button style={{ alignItems: 'center', paddingLeft: 10, alignContent: 'center', height: 35, justifyContent: 'center' }}
-                color="yellow"
-                icon="star"
-                mode='contained'
-                onPress={() => alert("favoris")}>
-              </Button>
-            </View>
-          </View>
-
-
-
-        </Card>
-      </View>)
-
-
-      table.push(<View style={styles.container}>{children}</View>)
-    }
-    return table
-  }
-
-  async componentDidMount() {
-
-    // mettez  votre adresse IP
-    const url = "http://" + MON_IP + ":3000/utilisateur";
-
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ person: data, loading: false });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return (
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="tomato" />
-        </View>
-      );
-    }
-
-    if (!this.state.person) {
-      return <Text>Annonce introuvable :(</Text>;
-    }
-
-    return (
-
-      <View style={styles.container}>
-
-
-        <LinearGradient
-          colors={['#ffffff', '#c6f6ff', '#ff6347']}
-          style={styles.background}
-        >
-          <ScrollView >
-
-            <View>
-              {this.createTable()}
-            </View>
-
-          </ScrollView>
-
-          <View style={{ height: 177 }}>
-            {/* { navbar  } */}
-          </View>
-        </LinearGradient>
-      </View>
-
-    );
-  }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
                             //DETAILS ANNONCE
@@ -540,7 +372,7 @@ export class DetailsAnnonce extends React.Component {
                               async componentDidMount() {
                             
                                 // mettez  votre adresse IP
-                                const url = "http://10.189.116.41:3000/utilisateur";
+                                const url = "http://10.212.156.25:3000/utilisateur";
                             
                                 const response = await fetch(url);
                                 const data = await response.json();
