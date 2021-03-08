@@ -131,14 +131,7 @@ const RegisterScreen = ({ navigation }) => {
       />
 
 
-      <TextInput
-        label="Prenom"
-        returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setPrenom_personne({ value: text, error: '' })}
-        // error={!!name.error}
-        // errorText={name.error}
-      />
+      
       <TextInput
         label="Email"
         returnKeyType="next"
