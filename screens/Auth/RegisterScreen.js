@@ -14,6 +14,7 @@ import BackButton from '../../components/log/BackButton'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import { MON_IP } from '../../assets/constantes';
 
     //Les states permettent de stoker tous les champs des textInput
     
@@ -21,6 +22,7 @@ import { nameValidator } from '../helpers/nameValidator'
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState({ value: '', error: '' })
+  const [prenom, setPrenom] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   
@@ -53,26 +55,26 @@ const RegisterScreen = ({ navigation }) => {
     //     }
     // }).then((response) => { console.log(response) })
     //     .catch((error) => { console.log(error) })
-    try{
-       fetch('http://'+ MON_IP+':3000/create',{
-          method:'post',
-          mode: 'no-cors',
-          headers:{
-            'accept' : 'application/json',
-            'contenttype' : 'application/json', 
-          },
-          body:JSON.stringify({
-            'nom_personne':'test ',
-            'prenom_personne':'test',
-            'mail_personne':'test@test.com',
-            'mdp_personne':'test',
-            'lien_image_personne':'test',
-            'type':'test'
-          })
-      })
-    }catch(e){
-      console.log(e)
-    }
+    // try{
+    //    fetch('http://'+ MON_IP+':3000/create',{
+    //       method:'post',
+    //       mode: 'no-cors',
+    //       headers:{
+    //         'accept' : 'application/json',
+    //         'contenttype' : 'application/json', 
+    //       },
+    //       body:JSON.stringify({
+    //         'nom_personne':'test ',
+    //         'prenom_personne':'test',
+    //         'mail_personne':'test@test.com',
+    //         'mdp_personne':'test',
+    //         'lien_image_personne':'test',
+    //         'type':'test'
+    //       })
+    //   })
+    // }catch(e){
+    //   console.log(e)
+    // }
 
 
 
@@ -91,14 +93,16 @@ const RegisterScreen = ({ navigation }) => {
 
 
     alert('bienvenue :' + email.value)
-    global.connecter = true;
+    global.connecter = true
+
+    global.perso.nom = name.value
+    global.perso.prenom = prenom.value
+    global.perso.email = email.value
+    
     navigation.replace('Compte')
     navigation.navigate('Accueil') 
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{ name: 'Dashboard' }],
-    // })
-    uploadUser()
+    
+    // uploadUser()
   }
   
   return (
@@ -107,7 +111,7 @@ const RegisterScreen = ({ navigation }) => {
        style={styles.background}
       >
          <Background>
-      {/* <BackButton goBack={navigation.goBack} /> */}
+      <BackButton goBack={navigation.goBack} />
       <Logo  />
       <Header>S'identifier</Header>
       <TextInput
@@ -120,25 +124,18 @@ const RegisterScreen = ({ navigation }) => {
         style={{height:40}}
       />
 
-<TextInput
+      <TextInput
         label="Prenom"
         returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={name.error}
+        value={prenom.value}
+        onChangeText={(text) => setPrenom({ value: text, error: '' })}
+        error={!!prenom.error}
+        errorText={prenom.error}
         style={{height:40}}
       />
 
 
-      <TextInput
-        label="Prenom"
-        returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setPrenom_personne({ value: text, error: '' })}
-        // error={!!name.error}
-        // errorText={name.error}
-      />
+      
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -164,7 +161,8 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         style={{height:40}}
       />
-      <Button
+      <View style={{justifyContent:'center' }}>
+      <Button style={{   }}
         mode="contained"
         color="tomato"
         onPress={onSignUpPressed}
@@ -172,6 +170,7 @@ const RegisterScreen = ({ navigation }) => {
       >
         S'inscrire
       </Button>
+      </View>
       <View style={styles.row}>
         <Text>Vous avez déjà un compte? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Login')}>
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 700,
+    height: '100%',
    
   },
 })
